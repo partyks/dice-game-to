@@ -36,7 +36,7 @@ public class LineInputReader {
     }
 
     public static List<Integer> readFreezeIndexes(DiceBox diceBox) throws ReadingUserInputException, FreezeIndexesReadingException {
-        String frozeDicesDescription = LineInputReader.readSingleLine("Freeze dices: ");
+        String frozeDicesDescription = LineInputReader.readSingleLine("Freeze dices: (Provide number separated with whitespace");
         String[] frozeThatDices = frozeDicesDescription.split("\\s");
         List<Integer> dicesToFrozeIndexes = new ArrayList<Integer>();
         try {

@@ -17,11 +17,11 @@ public class DiceBoxTest {
 
         //when
         diceBox.roll();
-        int amount = diceBox.getDices().size();
+        int amount = diceBox.size();
         diceBox.setFreeze(2);
 
         //then
-        assertThat(amount).isEqualTo(diceBox.getDices().size() + 1);
+        assertThat(amount).isEqualTo(diceBox.size() + 1);
     }
 
     @Test
@@ -35,13 +35,13 @@ public class DiceBoxTest {
         diceBox.setFreeze(1);
         diceBox.setFreeze(2);
 
-        int amount = diceBox.getDices().size();
+        int amount = diceBox.size();
 
         diceBox.roll();
 
         //then
         assertThat(amount).isEqualTo(3);
-        assertThat(diceBox.getDices().size()).isEqualTo(5);
+        assertThat(diceBox.size()).isEqualTo(5);
     }
 
     @Test
@@ -51,11 +51,11 @@ public class DiceBoxTest {
 
         diceBox.roll();
         diceBox.freeze(Arrays.asList(1,2));
-        int amount = diceBox.getDices().size();
+        int amount = diceBox.size();
         diceBox.roll();
 
         assertThat(amount).isEqualTo(3);
-        assertThat(diceBox.getDices().size()).isEqualTo(5);
+        assertThat(diceBox.size()).isEqualTo(5);
     }
 
 }

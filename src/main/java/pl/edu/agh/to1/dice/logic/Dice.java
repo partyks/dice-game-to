@@ -10,6 +10,9 @@ public class Dice implements Comparable<Dice> {
     private static Random random = new Random();
     private Integer score = 0;
 
+    /**
+     * random next dice score
+     */
     public void roll() {
         //set score for random number from [1..6]
         score = random.nextInt(6) + 1;
@@ -21,7 +24,6 @@ public class Dice implements Comparable<Dice> {
         }
         return score;
     }
-
 
     @Override
     public int compareTo(Dice o) {

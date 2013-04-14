@@ -3,6 +3,7 @@ package pl.edu.agh.to1.dice;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 import pl.edu.agh.to1.dice.logic.DiceGame;
+import pl.edu.agh.to1.dice.logic.Player;
 import pl.edu.agh.to1.dice.logic.User;
 
 import java.util.Arrays;
@@ -23,7 +24,7 @@ public class App {
             System.exit(1);
         }
         try {
-            new DiceGame(Arrays.asList(new User(firstUserName), new User(secondUserName))).play();
+            new DiceGame(Arrays.asList((Player) new User(firstUserName),(Player) new User(secondUserName))).play();
         } catch (ReadingUserInputException e) {
             LOGGER.log(Level.SEVERE, "Reading input problems, application will exit", e);
             System.out.println("Unpredictable problems with input occured, application will exit. We are sorry");

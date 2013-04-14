@@ -1,6 +1,7 @@
 package pl.edu.agh.to1.dice.logic;
 
 /**
+ * Class store the Dice Game result of one user, his normal points and bonus
  * @author Michal Partyka
  */
 public class Result {

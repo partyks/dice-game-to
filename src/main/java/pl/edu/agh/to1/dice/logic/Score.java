@@ -5,12 +5,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Score class agregates the points for every figure
  * @author Michal Partyka
  */
 public class Score {
     private final Map<Figure, Integer> points = new HashMap<Figure, Integer>(16);
     final static List<Figure> countForBonus = Figure.countForBonus();
 
+    /**
+     * Assign points for the figure with givenDiceBox
+     * @param figure figure for which points will be assigned
+     * @param diceBox diceBox for which points will be counted
+     * @return score which was assigned
+     */
     public int add(Figure figure, DiceBox diceBox) {
         if (points.containsKey(figure)) {
             throw new IllegalStateException("Trying assign points for the already filled figure");
@@ -20,6 +27,10 @@ public class Score {
         return score;
     }
 
+    /**
+     * Count user result with bonus points
+     * @return Result
+     */
     public Result getResult() {
         int sum=0, bonusPoints=0, bonus=0;
         for (Map.Entry<Figure, Integer> figureIntegerEntry : points.entrySet()) {
@@ -35,6 +46,11 @@ public class Score {
         return new Result(sum, bonus);
     }
 
+    /**
+     * Returning stream with currentStock of the user showing how many points he/she will obtain for provided diceBox
+      * @param diceBox diceBox for which calculation would be performed
+     * @return String with the description of currentStock
+     */
     public String currentStock(DiceBox diceBox) {
         String defualt = "                   |  ";
         final StringBuilder stringBuilder = new StringBuilder();
@@ -49,6 +65,11 @@ public class Score {
         return stringBuilder.toString();
     }
 
+    /**
+     * get currently assigned score for the provided figure
+     * @param figure for which score would be counted
+     * @return integer - the score
+     */
     public int getScore(Figure figure) {
         Integer ret = points.get(figure);
         return ret == null ? 0 : ret;

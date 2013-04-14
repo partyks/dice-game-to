@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  * User class, in real system it would be annotated would be an entity
  * @author Michal Partyka
  */
-public class User {
+public class User implements Player {
     private final String name;
     private final Score score = new Score();
     private static final Logger LOGGER = Logger.getLogger(User.class.getName());
@@ -37,26 +37,21 @@ public class User {
             LOGGER.log(Level.SEVERE, "Given input is not proper, figure.valueOf :(", e);
             System.out.println("Unfortunetly, given input is not proper, please specify correct figure...");
             sparePoints(diceBox);
-            return;
         } catch (IllegalStateException e) {
             LOGGER.log(Level.WARNING, "Given figure by user was already filled in score");
             System.out.println("This figure was filled, please choose another one...");
             sparePoints(diceBox);
-            return;
         }
     }
 
-    public void freezeDices(DiceBox diceBox) throws ReadingUserInputException {
+    public void manageDices(DiceBox diceBox) throws ReadingUserInputException {
         int failures=0;
         try {
             diceBox.freeze(LineInputReader.readFreezeIndexes(diceBox));
         } catch (FreezeIndexesReadingException e) {
-            //read till it have been retrieved or 5 times input wasn't proper
-            // It is specific User implemetation, this could be configured in some configuration for example for
-            // specific user. It is why it is here ;-).
             failures++;
             if (failures < 5) {
-                freezeDices(diceBox);
+                manageDices(diceBox);
             } else {
                 throw new ReadingUserInputException("Reading freeze indexes wasn't possible!");
             }

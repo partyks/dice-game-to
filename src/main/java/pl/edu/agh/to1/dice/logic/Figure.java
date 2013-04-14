@@ -4,34 +4,35 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * Enum type for the figures in DiceGame
  * @author Michal Partyka
  */
 public enum Figure {
-    ONES("1") {
+    ONES {
         public Integer getScore(DiceBox diceBox) {
             return diceBox.sum(1);
         }
-    }, TWOES("2") {
+    }, TWOES {
         public Integer getScore(DiceBox diceBox) {
             return diceBox.sum(2);
         }
-    }, THREES("3") {
+    }, THREES {
         public Integer getScore(DiceBox diceBox) {
             return diceBox.sum(3);
         }
-    }, FOURS("4") {
+    }, FOURS {
         public Integer getScore(DiceBox diceBox) {
             return diceBox.sum(4);
         }
-    }, FITHS("5") {
+    }, FITHS {
         public Integer getScore(DiceBox diceBox) {
             return diceBox.sum(5);
         }
-    }, SIXES("6") {
+    }, SIXES {
         public Integer getScore(DiceBox diceBox) {
             return diceBox.sum(6);
         }
-    }, THREE_EQUALS("3-eq") {
+    }, THREE_EQUALS {
         public Integer getScore(DiceBox diceBox) {
             int[] count = diceBox.getMapCount();
             for (int i : count) {
@@ -41,7 +42,7 @@ public enum Figure {
             }
             return 0;
         }
-    }, FOUR_EQUALS("4-eq") {
+    }, FOUR_EQUALS {
         public Integer getScore(DiceBox diceBox) {
             int[] count = diceBox.getMapCount();
             for (int i : count) {
@@ -52,7 +53,7 @@ public enum Figure {
             return 0;
         }
     },
-    FULL("ful") {
+    FULL {
         public Integer getScore(DiceBox diceBox) {
             int[] count = diceBox.getMapCount();
             for (int i : count) {
@@ -62,7 +63,7 @@ public enum Figure {
             }
             return 25;
         }
-    }, SMALL_STRIT("ms") {
+    }, SMALL_STRIT {
         public Integer getScore(DiceBox diceBox) {
             int[] map1 = new int[] {0, 1, 1, 1, 1, 0, 0};
             int[] map2 = new int[] {0, 0, 1, 1, 1, 1, 0};
@@ -75,7 +76,7 @@ public enum Figure {
             }
             return 0;
         }
-    }, BIG_STRIT("ds") {
+    }, BIG_STRIT {
         public Integer getScore(DiceBox diceBox) {
             int[] map1 = new int[] {0, 1, 1, 1, 1, 1, 0};
             int[] map2 = new int[] {0, 0, 1, 1, 1, 1, 1};
@@ -87,7 +88,7 @@ public enum Figure {
             return 0;
         }
 
-    }, GENERAL("g") {
+    }, GENERAL {
         public Integer getScore(DiceBox diceBox) {
             int[] mapCount = diceBox.getMapCount();
             for (int i : mapCount) {
@@ -97,11 +98,19 @@ public enum Figure {
             }
             return 50;
         }
-    }, CHANCE("sz") {
+    }, CHANCE {
         public Integer getScore(DiceBox diceBox) {
             return diceBox.sum();
         }
     };
+
+    /**
+     * @param diceBox user diceBox
+     * @return score of this figure with given diceBox
+     */
+    public Integer getScore(DiceBox diceBox) {
+        return 0;
+    }
 
     private static boolean matches(int[] count, int[] map1) {
         for (int i = 0; i < count.length; i++) {
@@ -110,13 +119,6 @@ public enum Figure {
             }
         }
         return true;
-    }
-
-    public Integer getScore(DiceBox diceBox) {
-        return 0;
-    }
-
-    Figure(String abr) {
     }
 
     public static List<Figure> countForBonus() {
