@@ -13,7 +13,7 @@ public class Result {
         this.bonus = bonus;
     }
 
-    public int result() {
+    public Integer result() {
         return sum+bonus;
     }
 

@@ -2,6 +2,8 @@ package pl.edu.agh.to1.dice.logic;
 
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -34,6 +36,19 @@ public class DiceGame {
                 nextRound(user);
                 printScore();
             }
+        }
+
+        //Print result
+        Collections.sort(users, new Comparator<Player>() {
+            @Override
+            public int compare(Player o1, Player o2) {
+                return Integer.compare(o2.getResult().result(), o1.getResult().result());
+            }
+        });
+        int position = 1;
+        for (Player user : users) {
+            System.out.println(position + ". " + user);
+            position++;
         }
     }
 
