@@ -15,11 +15,7 @@ public class DiceGame {
     private final DiceBox diceBox =  new DiceBox(5);
 
     public DiceGame(List<Player> users) {
-        if (users.size() != 2) {
-            throw new IllegalStateException("Wrong number of users");
-        }
         this.users = users;
-
     }
 
     public void play() throws ReadingUserInputException {
@@ -37,6 +33,7 @@ public class DiceGame {
                 printScore();
             }
         }
+
 
         //Print result
         Collections.sort(users, new Comparator<Player>() {

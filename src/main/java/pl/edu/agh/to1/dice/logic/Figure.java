@@ -102,6 +102,14 @@ public enum Figure {
         public Integer getScore(DiceBox diceBox) {
             return diceBox.sum();
         }
+    }, EVEN {
+        public Integer getScore(DiceBox diceBox) {
+            return diceBox.sum(2) + diceBox.sum(4) + diceBox.sum(6);
+        }
+    }, ODD {
+        public Integer getScore(DiceBox diceBox) {
+            return diceBox.sum(1) + diceBox.sum(3) + diceBox.sum(6);
+        }
     };
 
     /**
