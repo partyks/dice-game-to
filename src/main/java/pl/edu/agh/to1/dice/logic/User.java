@@ -4,6 +4,8 @@ import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +16,10 @@ import java.util.logging.Logger;
  */
 @Entity
 public class User implements Player {
+    @GeneratedValue
+    @Id
+    private Integer Id;
+
     private final String name;
 
     @Transient

@@ -7,7 +7,7 @@ import java.util.List;
  * Enum type for the figures in DiceGame
  * @author Michal Partyka
  */
-public enum Figure {
+public enum Figure implements IFigure {
     ONES {
         public Integer getScore(DiceBox diceBox) {
             return diceBox.sum(1);
