@@ -3,6 +3,8 @@ package pl.edu.agh.to1.dice.logic;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -10,9 +12,13 @@ import java.util.logging.Logger;
  * User class, in real system it would be annotated would be an entity
  * @author Michal Partyka
  */
+@Entity
 public class User implements Player {
     private final String name;
+
+    @Transient
     private final Score score = new Score();
+    @Transient
     private static final Logger LOGGER = Logger.getLogger(User.class.getName());
 
     public User(String name) {
