@@ -1,5 +1,9 @@
 package pl.edu.agh.to1.dice;
 
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 import pl.edu.agh.to1.dice.logic.DiceGame;
@@ -11,10 +15,16 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Component
 public class App {
+
+    @Autowired
+    static DiceGame diceGame;
+
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     public static void main(String[] args) {
+        BeanFactory beanFactory = new ClassPathXmlApplicationContext("applicationConfig.xml");
         String firstUserName = null;
         String secondUserName = null;
         String amountOfPlayers = null;
@@ -29,7 +39,11 @@ public class App {
             System.exit(1);
         }
         try {
-            new DiceGame(players).play();
+//            new DiceGame(players).play();
+            DiceGame diceGame1 = (DiceGame) beanFactory.getBean("diceGame");
+            diceGame1.setUsers(players);
+            diceGame1.play();
+
         } catch (ReadingUserInputException e) {
             LOGGER.log(Level.SEVERE, "Reading input problems, application will exit", e);
             System.out.println("Unpredictable problems with input occured, application will exit. We are sorry");

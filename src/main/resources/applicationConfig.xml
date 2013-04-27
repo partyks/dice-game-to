@@ -1,0 +1,42 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:annotation-config />
+    <context:component-scan base-package="pl.edu.agh.to1.dice" />
+
+    <bean id="diceBox" class="pl.edu.agh.to1.dice.logic.DiceBox" autowire="byType">
+        <constructor-arg value="5"/>
+    </bean>
+
+    <!--<i>rt resource="classpath:database/DataSource.xml"/>-->
+
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+
+    <!--<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
+        <!--<property name="entityManagerFactory" ref="entityManagerFactory" />-->
+        <!--&lt;!&ndash;<property name="dataSource" ref="dataSource"/>&ndash;&gt;-->
+    <!--</bean>-->
+
+    <!--<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
+        <!--&lt;!&ndash;<property name="dataSource" ref="dataSource"/>&ndash;&gt;-->
+        <!--<property name="jpaVendorAdapter">-->
+            <!--<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>-->
+        <!--</property>-->
+        <!--<property name="jpaProperties">-->
+            <!--<props>-->
+                <!--<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</prop>-->
+                <!--<prop key="hibernate.show_sql">false</prop>-->
+                <!--&lt;!&ndash; change this to 'verify' before running as a production app &ndash;&gt;-->
+                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+</beans>

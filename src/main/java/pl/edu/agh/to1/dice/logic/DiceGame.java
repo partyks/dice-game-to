@@ -1,6 +1,7 @@
 package pl.edu.agh.to1.dice.logic;
 
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 
 import java.util.Collections;
@@ -11,13 +12,15 @@ import java.util.List;
  * @author Michał Partyka
  * Class provides an implementation for the game flow and result displaying
  */
-@Service
+@Component
 public class DiceGame {
-    private final List<Player> users;
-    private final DiceBox diceBox =  new DiceBox(5);
+    @Autowired
+    private DiceBox diceBox;
 
-    public DiceGame(List<Player> users) {
-        this.users = users;
+    private List<Player> users;
+
+    public DiceGame() {
+
     }
 
     public void play() throws ReadingUserInputException {
@@ -35,8 +38,6 @@ public class DiceGame {
                 printScore();
             }
         }
-
-
         //Print result
         Collections.sort(users, new Comparator<Player>() {
             @Override
@@ -88,5 +89,13 @@ public class DiceGame {
         }
         System.out.println();
         System.out.println();
+    }
+
+    public void setUsers(List<Player> users) {
+        this.users = users;
+    }
+
+    public List<Player> getUsers() {
+        return users;
     }
 }
