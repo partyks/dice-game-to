@@ -1,5 +1,6 @@
 package pl.edu.agh.to1.dice.logic;
 
+import org.springframework.stereotype.Service;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 
 import java.util.Collections;
@@ -10,6 +11,7 @@ import java.util.List;
  * @author Michał Partyka
  * Class provides an implementation for the game flow and result displaying
  */
+@Service
 public class DiceGame {
     private final List<Player> users;
     private final DiceBox diceBox =  new DiceBox(5);
