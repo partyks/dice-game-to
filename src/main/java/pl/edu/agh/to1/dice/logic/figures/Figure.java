@@ -110,7 +110,7 @@ public enum Figure implements IFigure {
         }
     }, ODD {
         public Integer getScore(DiceBox diceBox) {
-            return diceBox.sum(1) + diceBox.sum(3) + diceBox.sum(6);
+            return diceBox.sum(1) + diceBox.sum(3) + diceBox.sum(5);
         }
     };
 
