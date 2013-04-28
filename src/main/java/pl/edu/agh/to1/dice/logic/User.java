@@ -1,12 +1,10 @@
 package pl.edu.agh.to1.dice.logic;
 
+import pl.edu.agh.to1.dice.StatisticsModel.GlobalStatistics;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +18,11 @@ public class User implements Player {
     @Id
     private Integer Id;
 
+    @Column(unique = true)
     private final String name;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private GlobalStatistics globalStatistics;
 
     @Transient
     private final Score score = new Score();

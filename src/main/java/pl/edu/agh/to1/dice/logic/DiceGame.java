@@ -2,8 +2,11 @@ package pl.edu.agh.to1.dice.logic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pl.edu.agh.to1.dice.StatisticsModel.GameInfo;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -13,14 +16,17 @@ import java.util.List;
  * Class provides an implementation for the game flow and result displaying
  */
 @Component
-public class DiceGame {
+@Entity
+public class DiceGame extends AbstractGame {
+    @Transient
     @Autowired
     private DiceBox diceBox;
 
+    @Transient
     private List<Player> users;
 
     public DiceGame() {
-
+        super(new GameInfo("DiceGame", "None", 4));
     }
 
     public void play() throws ReadingUserInputException {
@@ -92,6 +98,9 @@ public class DiceGame {
     }
 
     public void setUsers(List<Player> users) {
+        if(users.size() > 4) {
+            throw new IllegalStateException("Maximum 4 players can play dices!");
+        }
         this.users = users;
     }
 
