@@ -1,7 +1,7 @@
 package pl.edu.agh.to1.dice.logic.players.ai.figurechoosing;
 
 import pl.edu.agh.to1.dice.logic.DiceBox;
-import pl.edu.agh.to1.dice.logic.IFigure;
+import pl.edu.agh.to1.dice.logic.figures.IFigure;
 import pl.edu.agh.to1.dice.logic.Score;
 
 /**

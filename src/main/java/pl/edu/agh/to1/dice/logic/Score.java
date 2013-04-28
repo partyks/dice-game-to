@@ -1,5 +1,8 @@
 package pl.edu.agh.to1.dice.logic;
 
+import pl.edu.agh.to1.dice.logic.figures.Figure;
+import pl.edu.agh.to1.dice.logic.figures.IFigure;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +12,8 @@ import java.util.Map;
  * @author Michal Partyka
  */
 public class Score {
-    private final Map<Figure, Integer> points = new HashMap<Figure, Integer>(16);
-    final static List<Figure> countForBonus = Figure.countForBonus();
+    private final Map<IFigure, Integer> points = new HashMap<IFigure, Integer>(16);
+    final static List<IFigure> countForBonus = Figure.countForBonus();
 
     /**
      * Assign points for the figure with givenDiceBox

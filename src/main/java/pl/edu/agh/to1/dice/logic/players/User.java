@@ -3,6 +3,7 @@ package pl.edu.agh.to1.dice.logic.players;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 import pl.edu.agh.to1.dice.logic.*;
+import pl.edu.agh.to1.dice.logic.figures.Figure;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

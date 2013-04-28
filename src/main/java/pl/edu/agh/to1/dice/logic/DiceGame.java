@@ -3,6 +3,7 @@ package pl.edu.agh.to1.dice.logic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
+import pl.edu.agh.to1.dice.logic.figures.Figure;
 import pl.edu.agh.to1.dice.logic.players.Player;
 
 import java.util.Collections;
