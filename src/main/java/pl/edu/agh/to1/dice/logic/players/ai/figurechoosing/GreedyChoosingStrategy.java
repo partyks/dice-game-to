@@ -16,7 +16,7 @@ import java.util.*;
 
 /**
  * Greedy figure choosing strategy, which will always (with a given probability) choose figure that seems
- * optimal in the current point of time,
+ * optimal in the current point of time.
  *
  * Author: Piotr Turek
  */
@@ -29,6 +29,9 @@ public class GreedyChoosingStrategy implements IFigureChoosingStrategy {
     private IFigureManager figureManager;
 
     private double willTakeBest;
+
+    public GreedyChoosingStrategy() {
+    }
 
     /**
      *
