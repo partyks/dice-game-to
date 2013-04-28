@@ -1,8 +1,9 @@
-package pl.edu.agh.to1.dice.logic;
+package pl.edu.agh.to1.dice.logic.players;
 
 import pl.edu.agh.to1.dice.StatisticsModel.GlobalStatistics;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
+import pl.edu.agh.to1.dice.logic.*;
 
 import javax.persistence.*;
 import java.util.logging.Level;
@@ -28,6 +29,7 @@ public class User implements Player {
     private final Score score = new Score();
     @Transient
     private static final Logger LOGGER = Logger.getLogger(User.class.getName());
+
 
     public User(String name) {
         this.name = name;
