@@ -1,7 +1,6 @@
 package pl.edu.agh.to1.dice.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.to1.dice.repositoryInterfaces.IGenericDAO;
 
