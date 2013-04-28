@@ -74,4 +74,13 @@ public class Score {
         Integer ret = points.get(figure);
         return ret == null ? 0 : ret;
     }
+
+    /**
+     * check whether given figure was already used or not
+     * @param figure
+     * @return true if used, false otherwise
+     */
+    public boolean isUsed(Figure figure) {
+        return points.containsKey(figure);
+    }
 }

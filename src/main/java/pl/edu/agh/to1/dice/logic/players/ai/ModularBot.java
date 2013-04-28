@@ -1,0 +1,96 @@
+package pl.edu.agh.to1.dice.logic.players.ai;
+
+import pl.edu.agh.to1.dice.TUI.LineInputReader;
+import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
+import pl.edu.agh.to1.dice.logic.*;
+import pl.edu.agh.to1.dice.logic.players.Player;
+import pl.edu.agh.to1.dice.logic.players.User;
+import pl.edu.agh.to1.dice.logic.players.ai.figurechoosing.IFigureChoosingStrategy;
+import pl.edu.agh.to1.dice.logic.players.ai.freezing.IFreezingStrategy;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Author: Piotr Turek
+ */
+public class ModularBot implements Player {
+    private static final Logger LOGGER = Logger.getLogger(User.class.getName());
+    private final String name;
+    private final Score score = new Score();
+
+    private IFreezingStrategy freezingStrategy;
+    private IFigureChoosingStrategy figureChoosingStrategy;
+
+
+    public ModularBot(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return "user " + name;
+    }
+
+    public void sparePoints(DiceBox diceBox) throws ReadingUserInputException {
+        String figureSignature = LineInputReader.readSingleLine("Choose figure: ");
+        try {
+            score.add(Figure.valueOf(figureSignature), diceBox);
+        } catch (IllegalArgumentException e) {
+            LOGGER.log(Level.SEVERE, "Given input is not proper, figure.valueOf :(", e);
+            System.out.println("Unfortunetly, given input is not proper, please specify correct figure...");
+            sparePoints(diceBox);
+        } catch (IllegalStateException e) {
+            LOGGER.log(Level.WARNING, "Given figure by user was already filled in score");
+            System.out.println("This figure was filled, please choose another one...");
+            sparePoints(diceBox);
+        }
+    }
+
+    public void manageDices(DiceBox diceBox) throws ReadingUserInputException {
+        int failures=0;
+        try {
+            diceBox.freeze(LineInputReader.readFreezeIndexes(diceBox));
+        } catch (FreezeIndexesReadingException e) {
+            failures++;
+            if (failures < 5) {
+                manageDices(diceBox);
+            } else {
+                throw new ReadingUserInputException("Reading freeze indexes wasn't possible!");
+            }
+        }
+    }
+
+    public Integer getScore(Figure figure) {
+        return score.getScore(figure);
+    }
+
+
+    public String getCurrentStock(DiceBox diceBox) {
+        return score.currentStock(diceBox);
+    }
+
+    public Result getResult() {
+        return score.getResult();
+    }
+
+    public IFreezingStrategy getFreezingStrategy() {
+        return freezingStrategy;
+    }
+
+    public void setFreezingStrategy(IFreezingStrategy freezingStrategy) {
+        this.freezingStrategy = freezingStrategy;
+    }
+
+    public IFigureChoosingStrategy getFigureChoosingStrategy() {
+        return figureChoosingStrategy;
+    }
+
+    public void setFigureChoosingStrategy(IFigureChoosingStrategy figureChoosingStrategy) {
+        this.figureChoosingStrategy = figureChoosingStrategy;
+    }
+}
