@@ -16,8 +16,7 @@ import java.util.logging.Logger;
 
 /**
  * @author Michal Partyka
- */
-@Repository
+*/
 public class GenericDAO <T> implements IGenericDAO<T> {
 
     private static final Logger LOGGER = Logger.getLogger(GenericDAO.class.getName());
