@@ -8,7 +8,6 @@ import pl.edu.agh.to1.dice.logic.Result;
 /**
  * @author Michal Partyka
  */
-//TODO: extract all methods bar sparePoints and manageDices to a separate interface of even better, to an abstract class
 public interface Player {
     void sparePoints(DiceBox diceBox) throws ReadingUserInputException;
     void manageDices(DiceBox diceBox) throws ReadingUserInputException;
