@@ -14,43 +14,30 @@ import java.util.logging.Logger;
  * @author Michal Partyka
  */
 @Entity
-public class User implements Player {
+public class User extends AbstractPlayer {
     @GeneratedValue
     @Id
     private Integer Id;
-
-    @Column(unique = true)
-    private String name;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private GlobalStatistics globalStatistics;
 
     @Transient
-    private final Score score = new Score();
-    @Transient
     private static final Logger LOGGER = Logger.getLogger(User.class.getName());
 
-    public User() {
+
+    public User(){
+        super();
     }
 
     public User(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-
-        return name;
-    }
-
-    @Override
-    public String toString() {
-        return "user " + name;
+        super(name);
     }
 
     public void sparePoints(DiceBox diceBox) throws ReadingUserInputException {
         String figureSignature = LineInputReader.readSingleLine("Choose figure: ");
         try {
-            score.add(Figure.valueOf(figureSignature), diceBox);
+            score.add(Figure.valueOf(figureSignature), diceBox); //TODO: use figureManager and getSignature method of IFigure here
         } catch (IllegalArgumentException e) {
             LOGGER.log(Level.SEVERE, "Given input is not proper, figure.valueOf :(", e);
             System.out.println("Unfortunetly, given input is not proper, please specify correct figure...");
@@ -74,18 +61,5 @@ public class User implements Player {
                 throw new ReadingUserInputException("Reading freeze indexes wasn't possible!");
             }
         }
-    }
-
-    public Integer getScore(Figure figure) {
-        return score.getScore(figure);
-    }
-
-
-    public String getCurrentStock(DiceBox diceBox) {
-        return score.currentStock(diceBox);
-    }
-
-    public Result getResult() {
-        return score.getResult();
     }
 }

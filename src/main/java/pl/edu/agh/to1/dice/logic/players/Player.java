@@ -2,7 +2,7 @@ package pl.edu.agh.to1.dice.logic.players;
 
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 import pl.edu.agh.to1.dice.logic.DiceBox;
-import pl.edu.agh.to1.dice.logic.Figure;
+import pl.edu.agh.to1.dice.logic.figures.IFigure;
 import pl.edu.agh.to1.dice.logic.Result;
 
 /**
@@ -13,6 +13,6 @@ public interface Player {
     void manageDices(DiceBox diceBox) throws ReadingUserInputException;
     String getCurrentStock(DiceBox diceBox);
     String getName();
-    Integer getScore(Figure figure);
+    Integer getScore(IFigure figure);
     Result getResult();
 }
