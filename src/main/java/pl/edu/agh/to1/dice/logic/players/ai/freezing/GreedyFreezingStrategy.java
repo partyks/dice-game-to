@@ -58,7 +58,7 @@ public class GreedyFreezingStrategy implements IFreezingStrategy {
 
         for (IFigure figure : figureManager.values()) {
             if (!score.isUsed(figure)) {
-                final String specMethodSignature = figure.toString() + "SpecMethod"; //TODO: maybe it would be better if IFigure had getSignature method
+                final String specMethodSignature = figure.getSignature() + "SpecMethod";
                 if (!applicationContext.containsBean(specMethodSignature)) {
                     throw new SpecMethodMissingException("Spec Method " + specMethodSignature + " is missing from the" +
                             " application context!");

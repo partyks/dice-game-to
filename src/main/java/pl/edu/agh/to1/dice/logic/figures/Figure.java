@@ -122,6 +122,10 @@ public enum Figure implements IFigure {
         return 0;
     }
 
+    public String getSignature() {
+        return toString();
+    }
+
     private static boolean matches(int[] count, int[] map1) {
         for (int i = 0; i < count.length; i++) {
             if ( count[i] < map1[i] ) {

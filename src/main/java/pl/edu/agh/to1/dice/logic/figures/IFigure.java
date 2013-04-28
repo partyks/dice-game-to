@@ -7,4 +7,5 @@ import pl.edu.agh.to1.dice.logic.DiceBox;
  */
 public interface IFigure {
     Integer getScore(DiceBox diceBox);
+    String getSignature();
 }
