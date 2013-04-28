@@ -11,6 +11,9 @@ import pl.edu.agh.to1.dice.logic.players.ai.figurechoosing.IFigureChoosingStrate
 import pl.edu.agh.to1.dice.logic.players.ai.freezing.IFreezingStrategy;
 
 /**
+ * This is a basic modular bot that utilizes strategy pattern to change it's behaviour. There are two kinds of
+ * strategies: freezing strategies and figure-choosing strategies. Both can be adjusted during runtime
+ *
  * Author: Piotr Turek
  */
 public class ModularBot extends AbstractPlayer {
