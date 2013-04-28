@@ -20,7 +20,7 @@ public class User implements Player {
     private Integer Id;
 
     @Column(unique = true)
-    private final String name;
+    private String name;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private GlobalStatistics globalStatistics;
@@ -30,6 +30,8 @@ public class User implements Player {
     @Transient
     private static final Logger LOGGER = Logger.getLogger(User.class.getName());
 
+    public User() {
+    }
 
     public User(String name) {
         this.name = name;
