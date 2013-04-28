@@ -4,6 +4,7 @@ import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 import pl.edu.agh.to1.dice.logic.*;
 import pl.edu.agh.to1.dice.logic.figures.Figure;
+import pl.edu.agh.to1.dice.logic.figures.IFigure;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -73,7 +74,7 @@ public class User implements Player {
         }
     }
 
-    public Integer getScore(Figure figure) {
+    public Integer getScore(IFigure figure) {
         return score.getScore(figure);
     }
 

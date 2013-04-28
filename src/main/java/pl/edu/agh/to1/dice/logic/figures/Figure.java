@@ -131,6 +131,7 @@ public enum Figure implements IFigure {
         return true;
     }
 
+    //TODO: this cant be a static list
     public static List<Figure> countForBonus() {
         return Arrays.asList(ONES, TWOES, THREES, FOURS, FITHS, SIXES);
     }
