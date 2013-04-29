@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,12 @@ public class Score {
     private IFigureManager figureManager;
 
     private final Map<IFigure, Integer> points = new HashMap<IFigure, Integer>(16);
-    private final List<IFigure> countForBonus = figureManager.countForBonus();
+    private List<IFigure> countForBonus;
+
+    @PostConstruct
+    private void initialize() {
+        countForBonus = figureManager.countForBonus();
+    }
 
     /**
      * Assign points for the figure with givenDiceBox
