@@ -18,6 +18,9 @@ abstract class AbstractGame {
     private GameInfo gameInfo;
 
 
+    protected AbstractGame() {
+    }
+
     protected AbstractGame(GameInfo gameInfo) {
         this.gameInfo = gameInfo;
     }

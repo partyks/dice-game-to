@@ -6,13 +6,18 @@ import pl.edu.agh.to1.dice.logic.DiceBox;
  * @author: Michal Partyka
  */
 public class FigureDecorator implements IFigure {
-    private IFigure figure;
+    private final IFigure figure;
+    private final Integer multiplication;
+
+    public FigureDecorator(IFigure figure, Integer multiplication) {
+        this.figure = figure;
+        this.multiplication = multiplication;
+    }
 
 
     @Override
     public Integer getScore(DiceBox diceBox) {
-        //TODO
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return multiplication*figure.getScore(diceBox);
     }
 
     @Override

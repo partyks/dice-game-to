@@ -2,10 +2,8 @@ package pl.edu.agh.to1.dice.logic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import pl.edu.agh.to1.dice.logic.figures.Figure;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
 
@@ -24,9 +22,7 @@ public class Score {
     private IFigureManager figureManager;
 
     private final Map<IFigure, Integer> points = new HashMap<IFigure, Integer>(16);
-
-    //TODO: this cant be a static property, also must use figureManager.countForBonus() instead of Figure
-    final static List<IFigure> countForBonus = Figure.countForBonus();
+    private final List<IFigure> countForBonus = figureManager.countForBonus();
 
     /**
      * Assign points for the figure with givenDiceBox

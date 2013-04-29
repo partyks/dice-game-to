@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.StatisticsModel.GameInfo;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
-import pl.edu.agh.to1.dice.logic.figures.Figure;
+import pl.edu.agh.to1.dice.logic.figures.IFigure;
+import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
 import pl.edu.agh.to1.dice.logic.players.Player;
 
 import javax.persistence.Entity;
@@ -25,6 +26,10 @@ public class DiceGame extends AbstractGame {
     private DiceBox diceBox;
 
     @Transient
+    @Autowired
+    private IFigureManager figureManager;
+
+    @Transient
     private List<Player> users;
 
     public DiceGame() {
@@ -37,7 +42,7 @@ public class DiceGame extends AbstractGame {
             System.out.println(user);
         }
 
-        final int roundAmount = Figure.values().length;
+        final int roundAmount = figureManager.values().size();
         printScore();
         for (int i = 0; i < roundAmount; i++) {
             for (Player user : users) {
@@ -82,7 +87,7 @@ public class DiceGame extends AbstractGame {
         }
         System.out.println();
         System.out.println("--------------------------------------------------");
-        for (Figure figure : Figure.values()) {
+        for (IFigure figure : figureManager.values()) {
             System.out.print(figure + defaultStr.substring(figure.toString().length()));
             for (Player user : users) {
                 System.out.print(user.getScore(figure) + defaultStr.substring(user.getScore(figure).toString().length()));

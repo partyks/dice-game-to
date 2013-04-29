@@ -1,9 +1,12 @@
 package pl.edu.agh.to1.dice.logic.players;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import pl.edu.agh.to1.dice.StatisticsModel.GlobalStatistics;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
-import pl.edu.agh.to1.dice.logic.*;
+import pl.edu.agh.to1.dice.logic.DiceBox;
+import pl.edu.agh.to1.dice.logic.FreezeIndexesReadingException;
+import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
 
 import javax.persistence.*;
 import java.util.logging.Level;
@@ -25,6 +28,10 @@ public class User extends AbstractPlayer {
     @Transient
     private static final Logger LOGGER = Logger.getLogger(User.class.getName());
 
+    @Transient
+    @Autowired
+    IFigureManager figureManager;
+
 
     public User(){
         super();
@@ -37,7 +44,7 @@ public class User extends AbstractPlayer {
     public void sparePoints(DiceBox diceBox) throws ReadingUserInputException {
         String figureSignature = LineInputReader.readSingleLine("Choose figure: ");
         try {
-            score.add(Figure.valueOf(figureSignature), diceBox); //TODO: use figureManager and getSignature method of IFigure here
+            score.add(figureManager.getFigureBySignature(figureSignature), diceBox);
         } catch (IllegalArgumentException e) {
             LOGGER.log(Level.SEVERE, "Given input is not proper, figure.valueOf :(", e);
             System.out.println("Unfortunetly, given input is not proper, please specify correct figure...");
