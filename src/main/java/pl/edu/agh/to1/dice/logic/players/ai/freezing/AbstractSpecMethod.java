@@ -20,8 +20,10 @@ public abstract class AbstractSpecMethod implements ISpecMethod {
         double probability = 1.;
         int nonZero = 0;
         for (Integer count : possibleValueCounts) {
-            if (count != 0) nonZero++;
-            probability *= (double) count / 6.;
+            if (count != 0) {
+                nonZero++;
+                probability *= (double) count / 6.;
+            }
         }
         probability *= (double) factorial(nonZero);
 

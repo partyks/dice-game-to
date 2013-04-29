@@ -22,7 +22,7 @@ public class ModularBot extends AbstractPlayer {
 
 
     public ModularBot(String name) {
-        this.name = name;
+        super(name);
     }
 
     public void sparePoints(DiceBox diceBox) throws ReadingUserInputException {
