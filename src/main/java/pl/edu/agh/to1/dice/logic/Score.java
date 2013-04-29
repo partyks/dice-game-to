@@ -1,5 +1,14 @@
 package pl.edu.agh.to1.dice.logic;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import pl.edu.agh.to1.dice.logic.figures.Figure;
+import pl.edu.agh.to1.dice.logic.figures.IFigure;
+import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,9 +17,16 @@ import java.util.Map;
  * Score class agregates the points for every figure
  * @author Michal Partyka
  */
+@Component
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class Score {
-    private final Map<Figure, Integer> points = new HashMap<Figure, Integer>(16);
-    final static List<Figure> countForBonus = Figure.countForBonus();
+    @Autowired
+    private IFigureManager figureManager;
+
+    private final Map<IFigure, Integer> points = new HashMap<IFigure, Integer>(16);
+
+    //TODO: this cant be a static property, also must use figureManager.countForBonus() instead of Figure
+    final static List<IFigure> countForBonus = Figure.countForBonus();
 
     /**
      * Assign points for the figure with givenDiceBox
@@ -18,7 +34,7 @@ public class Score {
      * @param diceBox diceBox for which points will be counted
      * @return score which was assigned
      */
-    public int add(Figure figure, DiceBox diceBox) {
+    public int add(IFigure figure, DiceBox diceBox) {
         if (points.containsKey(figure)) {
             throw new IllegalStateException("Trying assign points for the already filled figure");
         }
@@ -33,7 +49,7 @@ public class Score {
      */
     public Result getResult() {
         int sum=0, bonusPoints=0, bonus=0;
-        for (Map.Entry<Figure, Integer> figureIntegerEntry : points.entrySet()) {
+        for (Map.Entry<IFigure, Integer> figureIntegerEntry : points.entrySet()) {
             sum += figureIntegerEntry.getValue();
             if (countForBonus.contains(figureIntegerEntry.getKey())) {
                 bonusPoints += figureIntegerEntry.getValue();
@@ -54,7 +70,7 @@ public class Score {
     public String currentStock(DiceBox diceBox) {
         String defualt = "                   |  ";
         final StringBuilder stringBuilder = new StringBuilder();
-        for (Figure figure : Figure.values()) {
+        for (IFigure figure : figureManager.values()) {
             stringBuilder.append(figure).append(defualt.substring(figure.toString().length()));
             if(!points.containsKey(figure)) {
                 stringBuilder.append(figure.getScore(diceBox)).append("\n");
@@ -70,8 +86,17 @@ public class Score {
      * @param figure for which score would be counted
      * @return integer - the score
      */
-    public int getScore(Figure figure) {
+    public int getScore(IFigure figure) {
         Integer ret = points.get(figure);
         return ret == null ? 0 : ret;
+    }
+
+    /**
+     * check whether given figure was already used or not
+     * @param figure
+     * @return true if used, false otherwise
+     */
+    public boolean isUsed(IFigure figure) {
+        return points.containsKey(figure);
     }
 }
