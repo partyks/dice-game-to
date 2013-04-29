@@ -3,7 +3,7 @@ package pl.edu.agh.to1.dice.logic.figures;
 import pl.edu.agh.to1.dice.logic.DiceBox;
 
 /**
- * @author: Michal Partyka
+ * @author Michal Partyka
  */
 public class FigureDecorator implements IFigure {
     private final IFigure figure;

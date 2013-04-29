@@ -25,9 +25,7 @@ public class App {
 
     public static void main(String[] args) {
         BeanFactory beanFactory = new ClassPathXmlApplicationContext("applicationConfig.xml");
-        String firstUserName = null;
-        String secondUserName = null;
-        String amountOfPlayers = null;
+        String amountOfPlayers;
         final List<Player> players = new ArrayList<Player>();
         try {
             amountOfPlayers = LineInputReader.readSingleLine("Amount of players");

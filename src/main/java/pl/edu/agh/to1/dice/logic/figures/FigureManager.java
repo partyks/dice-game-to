@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author: Michal Partyka
+ * @author Michal Partyka
  */
 @Component
 @Scope(BeanDefinition.SCOPE_SINGLETON)  //TODO: change scope to session once app is web based

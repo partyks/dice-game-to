@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author: Michal Partyka
+ * @author Michal Partyka
  */
 public abstract class AbstractConfigurationFactory {
     protected List<IFigure> figures = new ArrayList<IFigure>(10);

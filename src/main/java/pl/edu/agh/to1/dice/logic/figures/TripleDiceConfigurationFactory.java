@@ -3,7 +3,7 @@ package pl.edu.agh.to1.dice.logic.figures;
 import java.util.List;
 
 /**
- * @author: Michal Partyka
+ * @author Michal Partyka
  */
 public class TripleDiceConfigurationFactory extends AbstractConfigurationFactory {
     @Override
