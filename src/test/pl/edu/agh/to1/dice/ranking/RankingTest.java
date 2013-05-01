@@ -43,7 +43,7 @@ public class RankingTest {
     @Test
     public void displayTest() {
         ranking.sort(new SortUsersByWonGames());
-        assertThat(ranking.getRanking()).isEqualTo("Ranking sorted by amount of winning games " +
-                "comparator0. 2 11. 0 22. 1 23. 4 24. 3 8");
+        assertThat(ranking.getRanking()).isEqualTo("Ranking sorted by " + new SortUsersByWonGames().toString() +
+                "0. 2 11. 0 22. 1 23. 4 24. 3 8");
     }
 }
