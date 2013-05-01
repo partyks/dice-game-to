@@ -69,4 +69,12 @@ public class User extends AbstractPlayer {
             }
         }
     }
+
+    public GlobalStatistics getGlobalStatistics() {
+        return globalStatistics;
+    }
+
+    public void setGlobalStatistics(GlobalStatistics globalStatistics) {
+        this.globalStatistics = globalStatistics;
+    }
 }
