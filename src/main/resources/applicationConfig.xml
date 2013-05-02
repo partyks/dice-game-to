@@ -14,6 +14,31 @@
         <constructor-arg value="5"/>
     </bean>
 
+    <bean id="ONESSpecMethod" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.KeyValueSpecMethod">
+        <constructor-arg value="1"/>
+    </bean>
+
+    <bean id="TWOESSpecMethod" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.KeyValueSpecMethod">
+        <constructor-arg value="2"/>
+    </bean>
+
+    <bean id="THREESSpecMethod" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.KeyValueSpecMethod">
+        <constructor-arg value="3"/>
+    </bean>
+
+    <bean id="FOURSSpecMethod" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.KeyValueSpecMethod">
+        <constructor-arg value="4"/>
+    </bean>
+
+    <bean id="FIVESSpecMethod" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.KeyValueSpecMethod">
+        <constructor-arg value="5"/>
+    </bean>
+
+    <bean id="SIXESSpecMethod" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.KeyValueSpecMethod">
+        <constructor-arg value="6"/>
+    </bean>
+
+
     <import resource="classpath:database/DataSource.xml"/>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
