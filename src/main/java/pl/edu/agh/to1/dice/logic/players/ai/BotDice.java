@@ -1,6 +1,6 @@
 package pl.edu.agh.to1.dice.logic.players.ai;
 
-import pl.edu.agh.to1.dice.logic.Dice;
+import pl.edu.agh.to1.dice.logic.dices.Dice;
 
 /**
  * Class inheriting from Dice, provides simple api for ai methods

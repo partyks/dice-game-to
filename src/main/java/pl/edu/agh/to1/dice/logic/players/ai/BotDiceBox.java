@@ -1,7 +1,7 @@
 package pl.edu.agh.to1.dice.logic.players.ai;
 
-import pl.edu.agh.to1.dice.logic.Dice;
-import pl.edu.agh.to1.dice.logic.DiceBox;
+import pl.edu.agh.to1.dice.logic.dices.Dice;
+import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 
 import java.util.List;
 

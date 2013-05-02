@@ -1,13 +1,12 @@
 package pl.edu.agh.to1.dice.logic.players.ai.freezing;
 
-import pl.edu.agh.to1.dice.logic.Dice;
-import pl.edu.agh.to1.dice.logic.DiceBox;
+import pl.edu.agh.to1.dice.logic.dices.Dice;
+import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
 import pl.edu.agh.to1.dice.logic.players.ai.BotDice;
 import pl.edu.agh.to1.dice.logic.players.ai.BotDiceBox;
 import pl.edu.agh.to1.dice.utils.Pair;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
