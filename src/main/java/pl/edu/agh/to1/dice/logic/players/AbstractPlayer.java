@@ -3,30 +3,18 @@ package pl.edu.agh.to1.dice.logic.players;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
-
-import javax.persistence.Column;
-import javax.persistence.Transient;
 
 /**
  * Author: Piotr Turek
  */
 public abstract class AbstractPlayer implements Player {
-    @Transient
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractPlayer.class);
-
-    @Transient
     private static final BeanFactory beanFactory = new ClassPathXmlApplicationContext("applicationConfig.xml");
-
-
-    @Column(unique = true)
+    protected Score score = (Score) beanFactory.getBean("score");
     private String name;
-
-    @Transient
-    protected Score score = new Score();
 
     protected AbstractPlayer() {
     }

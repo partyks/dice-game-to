@@ -1,14 +1,13 @@
 package pl.edu.agh.to1.dice.logic.players;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import pl.edu.agh.to1.dice.StatisticsModel.GlobalStatistics;
+import pl.edu.agh.to1.dice.App;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.dices.FreezeIndexesReadingException;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
+import pl.edu.agh.to1.dice.playermodel.UserModel;
 
-import javax.persistence.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,29 +15,17 @@ import java.util.logging.Logger;
  * User class, in real system it would be annotated would be an entity
  * @author Michal Partyka
  */
-@Entity
 public class User extends AbstractPlayer {
-    @GeneratedValue
-    @Id
-    private Integer Id;
+    private final UserModel userModel;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private GlobalStatistics globalStatistics;
-
-    @Transient
     private static final Logger LOGGER = Logger.getLogger(User.class.getName());
 
-    @Transient
-    @Autowired
-    IFigureManager figureManager;
+    IFigureManager figureManager = (IFigureManager) App.getBeanFactory().getBean("figureManager");
 
 
-    public User(){
-        super();
-    }
-
-    public User(String name) {
-        super(name);
+    public User(UserModel userInfo) {
+        super(userInfo.getName());
+        this.userModel = userInfo;
     }
 
     public void sparePoints(DiceBox diceBox) throws ReadingUserInputException {
@@ -70,11 +57,7 @@ public class User extends AbstractPlayer {
         }
     }
 
-    public GlobalStatistics getGlobalStatistics() {
-        return globalStatistics;
-    }
-
-    public void setGlobalStatistics(GlobalStatistics globalStatistics) {
-        this.globalStatistics = globalStatistics;
+    public UserModel getUserModel() {
+        return userModel;
     }
 }

@@ -1,15 +1,15 @@
 package pl.edu.agh.to1.dice.repository;
 
 import org.springframework.stereotype.Repository;
-import pl.edu.agh.to1.dice.logic.players.User;
+import pl.edu.agh.to1.dice.playermodel.UserModel;
 
 /**
  * @author Michal Partyka
  */
 @Repository
-public class UserDAO extends GenericDAO<User> implements IUserDAO {
+public class UserDAO extends GenericDAO<UserModel> implements IUserDAO {
 
     public UserDAO() {
-        super(User.class);
+        super(UserModel.class);
     }
 }

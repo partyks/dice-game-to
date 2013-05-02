@@ -1,8 +1,10 @@
 package pl.edu.agh.to1.dice.logic.players;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
@@ -15,10 +17,11 @@ import java.util.Map;
  * Score class agregates the points for every figure
  * @author Michal Partyka
  */
+@Component(BeanDefinition.SCOPE_PROTOTYPE)
 public class Score {
     private static final ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationConfig.xml");
-
-    private IFigureManager figureManager = (IFigureManager) applicationContext.getBean("figureManager");
+    @Autowired
+    private IFigureManager figureManager;
 
     private final Map<IFigure, Integer> points = new HashMap<IFigure, Integer>(16);
     private List<IFigure> countForBonus;

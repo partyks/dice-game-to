@@ -1,6 +1,6 @@
 package pl.edu.agh.to1.dice.ranking;
 
-import pl.edu.agh.to1.dice.logic.players.User;
+import pl.edu.agh.to1.dice.playermodel.UserModel;
 
 import java.util.List;
 
@@ -10,5 +10,5 @@ import java.util.List;
  * @author Michal Partyka
  */
 public interface IUserSort {
-    List<UserInfo> sort(List<User> users);
+    List<UserInfo> sort(List<UserModel> users);
 }

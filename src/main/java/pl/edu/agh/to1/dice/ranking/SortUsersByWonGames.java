@@ -1,6 +1,6 @@
 package pl.edu.agh.to1.dice.ranking;
 
-import pl.edu.agh.to1.dice.logic.players.User;
+import pl.edu.agh.to1.dice.playermodel.UserModel;
 
 import java.util.Comparator;
 
@@ -11,16 +11,16 @@ import java.util.Comparator;
 public class SortUsersByWonGames extends GenericSort implements IUserSort {
 
     public SortUsersByWonGames() {
-        super(new Comparator<User>() {
+        super(new Comparator<UserModel>() {
             @Override
-            public int compare(User o1, User o2) {
+            public int compare(UserModel o1, UserModel o2) {
                 return o1.getGlobalStatistics().getAmountOfWinGames().
                         compareTo(o2.getGlobalStatistics().getAmountOfWinGames());
             }
         },
         new IExtractUserInfo() {
             @Override
-            public UserInfo extractUserInfo(User user) {
+            public UserInfo extractUserInfo(UserModel user) {
                 return new UserInfo(user,
                         user.getGlobalStatistics().getAmountOfWinGames().toString());
             }

@@ -3,6 +3,7 @@ package pl.edu.agh.to1.dice;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
+import pl.edu.agh.to1.dice.StatisticsModel.GlobalStatistics;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 import pl.edu.agh.to1.dice.logic.figures.FigureManager;
@@ -10,6 +11,7 @@ import pl.edu.agh.to1.dice.logic.figures.SingleDiceConfigurationFactory;
 import pl.edu.agh.to1.dice.logic.flow.DiceGame;
 import pl.edu.agh.to1.dice.logic.players.Player;
 import pl.edu.agh.to1.dice.logic.players.User;
+import pl.edu.agh.to1.dice.playermodel.UserModel;
 import pl.edu.agh.to1.dice.ranking.Ranking;
 import pl.edu.agh.to1.dice.ranking.SortUsersByWonGames;
 
@@ -20,7 +22,6 @@ import java.util.logging.Logger;
 
 @Component
 public class App {
-
     private static final BeanFactory beanFactory = new ClassPathXmlApplicationContext("applicationConfig.xml");
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
@@ -65,7 +66,8 @@ public class App {
 
     public static List<Player> getPlayersConfiguration() {
         //TODO: asking user for the player configuration goes here
-        return Arrays.asList((Player) new User("asdf"), (Player) new User("asdqas"));
+        return Arrays.asList((Player) new User(new UserModel("asdf", new GlobalStatistics(0,0,0))),
+                            (Player) new User(new UserModel("asdqas", new GlobalStatistics(0,0,0))));
     }
 
     public static BeanFactory getBeanFactory() {

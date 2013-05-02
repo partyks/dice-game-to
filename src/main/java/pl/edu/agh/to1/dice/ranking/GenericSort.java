@@ -1,6 +1,6 @@
 package pl.edu.agh.to1.dice.ranking;
 
-import pl.edu.agh.to1.dice.logic.players.User;
+import pl.edu.agh.to1.dice.playermodel.UserModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,29 +13,29 @@ import java.util.List;
  * @author Michal Partyka
  */
 public class GenericSort implements IUserSort {
-    private final Comparator<User> userComparator;
+    private final Comparator<UserModel> userComparator;
     private final IExtractUserInfo extractUserInfo;
 
-    public GenericSort(Comparator<User> userComparator) {
+    public GenericSort(Comparator<UserModel> userComparator) {
         this.userComparator = userComparator;
         extractUserInfo = new IExtractUserInfo() {
             @Override
-            public UserInfo extractUserInfo(User user) {
+            public UserInfo extractUserInfo(UserModel user) {
                return new UserInfo(user, "");
             }
         };
     }
 
-    public GenericSort(Comparator<User> userComparator, IExtractUserInfo extractUserInfo) {
+    public GenericSort(Comparator<UserModel> userComparator, IExtractUserInfo extractUserInfo) {
         this.userComparator = userComparator;
         this.extractUserInfo = extractUserInfo;
     }
 
     @Override
-    public List<UserInfo> sort(List<User> users) {
+    public List<UserInfo> sort(List<UserModel> users) {
         Collections.sort(users, userComparator);
         final List<UserInfo> userInfos = new ArrayList<UserInfo>();
-        for (User user : users) {
+        for (UserModel user : users) {
             userInfos.add(extractUserInfo.extractUserInfo(user));
         }
         return userInfos;
