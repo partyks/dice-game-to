@@ -8,7 +8,7 @@ import java.util.Random;
  */
 public class Dice implements Comparable<Dice> {
     private static Random random = new Random();
-    private Integer score = 0;
+    protected Integer score = 0;
 
     /**
      * random next dice score

@@ -26,7 +26,7 @@ public enum Figure implements IFigure {
         public Integer getScore(DiceBox diceBox) {
             return diceBox.sum(4);
         }
-    }, FITHS {
+    }, FIVES {
         public Integer getScore(DiceBox diceBox) {
             return diceBox.sum(5);
         }
@@ -137,6 +137,6 @@ public enum Figure implements IFigure {
 
     //TODO: this cant be a static list
     public static List<Figure> countForBonus() {
-        return Arrays.asList(ONES, TWOES, THREES, FOURS, FITHS, SIXES);
+        return Arrays.asList(ONES, TWOES, THREES, FOURS, FIVES, SIXES);
     }
 }

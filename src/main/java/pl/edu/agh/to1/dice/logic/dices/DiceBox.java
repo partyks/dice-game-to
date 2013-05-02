@@ -2,6 +2,7 @@ package pl.edu.agh.to1.dice.logic.dices;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -9,9 +10,9 @@ import java.util.List;
  * methods...
  * @author Michal Partyka
  */
-public class DiceBox {
-    private final List<Dice> dices = new ArrayList<Dice>(5);
-    private final List<Dice> frozenDices = new ArrayList<Dice>(5);
+public class DiceBox implements Iterable<Dice> {
+    protected final List<Dice> dices = new ArrayList<Dice>(5);
+    protected final List<Dice> frozenDices = new ArrayList<Dice>(5);
 
     public DiceBox(int amount) {
         for (int i = 0; i < amount; i++) {
@@ -154,5 +155,10 @@ public class DiceBox {
      */
     public Integer size() {
         return dices.size();
+    }
+
+    @Override
+    public Iterator<Dice> iterator() {
+        return dices.iterator();
     }
 }
