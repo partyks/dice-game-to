@@ -2,6 +2,9 @@ package pl.edu.agh.to1.dice.logic.players;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
 
@@ -15,11 +18,15 @@ public abstract class AbstractPlayer implements Player {
     @Transient
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractPlayer.class);
 
+    @Transient
+    private static final BeanFactory beanFactory = new ClassPathXmlApplicationContext("applicationConfig.xml");
+
+
     @Column(unique = true)
     private String name;
 
     @Transient
-    protected final Score score = new Score();
+    protected Score score = new Score();
 
     protected AbstractPlayer() {
     }

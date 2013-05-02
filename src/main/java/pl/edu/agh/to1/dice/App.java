@@ -1,16 +1,19 @@
 package pl.edu.agh.to1.dice;
 
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
+import pl.edu.agh.to1.dice.logic.figures.FigureManager;
+import pl.edu.agh.to1.dice.logic.figures.SingleDiceConfigurationFactory;
 import pl.edu.agh.to1.dice.logic.flow.DiceGame;
 import pl.edu.agh.to1.dice.logic.players.Player;
 import pl.edu.agh.to1.dice.logic.players.User;
+import pl.edu.agh.to1.dice.ranking.Ranking;
+import pl.edu.agh.to1.dice.ranking.SortUsersByWonGames;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,34 +21,54 @@ import java.util.logging.Logger;
 @Component
 public class App {
 
-    @Autowired
-    static DiceGame diceGame;
-
+    private static final BeanFactory beanFactory = new ClassPathXmlApplicationContext("applicationConfig.xml");
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     public static void main(String[] args) {
-        BeanFactory beanFactory = new ClassPathXmlApplicationContext("applicationConfig.xml");
-        String amountOfPlayers;
-        final List<Player> players = new ArrayList<Player>();
-        try {
-            amountOfPlayers = LineInputReader.readSingleLine("Amount of players");
-            for (int i = 0; i < Integer.valueOf(amountOfPlayers); i++) {
-                players.add(new User(LineInputReader.readSingleLine(i+" . name:")));
+        DiceGame diceGame = (DiceGame) beanFactory.getBean("diceGame");
+        String[] whatToDo = {"Play Game", "View Ranking", "Quit"};
+        int i=-1;
+        while(i != 2) {
+            try {
+                i = LineInputReader.chooseCase("What to do", whatToDo);
+            } catch (ReadingUserInputException e) {
+                System.out.println("I am so sorry, I didn't catch it, could you repeat?");
             }
-        } catch (ReadingUserInputException e) {
-            System.out.println("Unfortunately some problems with STDIN occured. Application will be closed.");
-            System.exit(1);
+            switch (i) {
+                case 0:
+                    setConfiguration();
+                    List<Player> players = getPlayersConfiguration();
+                    diceGame.setUsers(players);
+                    try {
+                        diceGame.play();
+                    } catch (ReadingUserInputException e) {
+                        LOGGER.log(Level.SEVERE, "Reading input problems, application will exit", e);
+                        System.out.println("Unpredictable problems with input occured, application will exit. " +
+                                "We are sorry");
+                        System.exit(2);
+                    }
+                    break;
+                case 1:
+                    Ranking ranking = (Ranking) beanFactory.getBean("ranking");
+                    ranking.sort(new SortUsersByWonGames());
+                    ranking.displayRanking();
+                    break;
+            }
         }
-        try {
-//            new DiceGame(players).play();
-            DiceGame diceGame1 = (DiceGame) beanFactory.getBean("diceGame");
-            diceGame1.setUsers(players);
-            diceGame1.play();
+    }
 
-        } catch (ReadingUserInputException e) {
-            LOGGER.log(Level.SEVERE, "Reading input problems, application will exit", e);
-            System.out.println("Unpredictable problems with input occured, application will exit. We are sorry");
-            System.exit(2);
-        }
+    private static void setConfiguration() {
+        //TODO: asking for configuration goes here
+        FigureManager figureManager = (FigureManager) beanFactory.getBean("figureManager");
+        figureManager.setConfiguration(new SingleDiceConfigurationFactory());
+    }
+
+    public static List<Player> getPlayersConfiguration() {
+        //TODO: asking user for the player configuration goes here
+        return Arrays.asList((Player) new User("asdf"), (Player) new User("asdqas"));
+    }
+
+    public static BeanFactory getBeanFactory() {
+        return beanFactory;
     }
 }

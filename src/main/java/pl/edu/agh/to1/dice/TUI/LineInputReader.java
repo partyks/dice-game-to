@@ -53,4 +53,38 @@ public class LineInputReader {
         }
         return dicesToFrozeIndexes;
     }
+
+    /**
+     * Gives list of oportunities to the user
+     * @param askFor global question
+     * @param supported list of possible answers
+     * @return number of answer (index of supported array)
+     */
+    public static int chooseCase(String askFor, String[] supported) throws ReadingUserInputException {
+        if (in == null) {
+            in = new BufferedReader( new InputStreamReader( System.in));
+        }
+        System.out.println(askFor);
+        System.out.println("The first (0.) is default and will be set if wrong number will be provided:");
+        for (int i = 0; i < supported.length; i++) {
+            System.out.println(i+". " + supported[i]);
+        }
+        System.out.print("Choosen number: ");
+        int choosen = 0;
+        try {
+            choosen = Integer.valueOf(in.readLine());
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "IOException while reading data from System.in");
+            throw new ReadingUserInputException(e); //catched in TUI, - saving for recovery there
+        } catch (NumberFormatException e) {
+            System.out.println();
+            System.out.println("Provided number doesn't match format, please try again");
+            return chooseCase(askFor, supported);
+        }
+
+        if(choosen >= supported.length || choosen < 0) {
+            return 0;
+        }
+        return choosen;
+    }
 }

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import pl.edu.agh.to1.dice.repository.UserDAO;
+import pl.edu.agh.to1.dice.repository.IUserDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +19,8 @@ public class Ranking {
     private List<UserInfo> list = new ArrayList<UserInfo>();
     private IUserSort comparator;
 
-    @Autowired
-    private UserDAO userDAO;
+    @Autowired(required = true)
+    private IUserDAO userDAO;
 
 
     public void sort(IUserSort comparator) {
