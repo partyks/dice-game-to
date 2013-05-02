@@ -1,4 +1,4 @@
-package pl.edu.agh.to1.dice.logic;
+package pl.edu.agh.to1.dice.logic.players;
 
 /**
  * Class store the Dice Game result of one user, his normal points and bonus

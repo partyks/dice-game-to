@@ -1,6 +1,7 @@
 package pl.edu.agh.to1.dice.logic;
 
 import org.junit.Test;
+import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 
 import java.util.Arrays;
 

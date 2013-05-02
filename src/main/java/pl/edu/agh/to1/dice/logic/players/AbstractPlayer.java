@@ -2,9 +2,7 @@ package pl.edu.agh.to1.dice.logic.players;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.edu.agh.to1.dice.logic.DiceBox;
-import pl.edu.agh.to1.dice.logic.Result;
-import pl.edu.agh.to1.dice.logic.Score;
+import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
 
 import javax.persistence.Column;

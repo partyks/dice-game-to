@@ -1,6 +1,7 @@
 package pl.edu.agh.to1.dice.logic;
 
 import org.junit.Test;
+import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.figures.Figure;
 
 import static org.fest.assertions.Assertions.assertThat;

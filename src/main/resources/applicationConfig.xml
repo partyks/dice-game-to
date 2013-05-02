@@ -10,7 +10,7 @@
     <context:annotation-config />
     <context:component-scan base-package="pl.edu.agh.to1.dice" />
 
-    <bean id="diceBox" class="pl.edu.agh.to1.dice.logic.DiceBox" autowire="byType">
+    <bean id="diceBox" class="pl.edu.agh.to1.dice.logic.dices.DiceBox" autowire="byType">
         <constructor-arg value="5"/>
     </bean>
 

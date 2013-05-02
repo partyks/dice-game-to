@@ -3,7 +3,7 @@ package pl.edu.agh.to1.dice.logic.players.ai.freezing;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import pl.edu.agh.to1.dice.logic.DiceBox;
+import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
 import pl.edu.agh.to1.dice.utils.Pair;
 

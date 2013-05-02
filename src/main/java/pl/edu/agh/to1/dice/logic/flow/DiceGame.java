@@ -1,9 +1,10 @@
-package pl.edu.agh.to1.dice.logic;
+package pl.edu.agh.to1.dice.logic.flow;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.StatisticsModel.GameInfo;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
+import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
 import pl.edu.agh.to1.dice.logic.players.Player;

@@ -1,7 +1,7 @@
 package pl.edu.agh.to1.dice.TUI;
 
-import pl.edu.agh.to1.dice.logic.DiceBox;
-import pl.edu.agh.to1.dice.logic.FreezeIndexesReadingException;
+import pl.edu.agh.to1.dice.logic.dices.DiceBox;
+import pl.edu.agh.to1.dice.logic.dices.FreezeIndexesReadingException;
 
 import java.io.BufferedReader;
 import java.io.IOException;

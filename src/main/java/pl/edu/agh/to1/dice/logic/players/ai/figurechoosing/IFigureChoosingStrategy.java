@@ -1,8 +1,8 @@
 package pl.edu.agh.to1.dice.logic.players.ai.figurechoosing;
 
-import pl.edu.agh.to1.dice.logic.DiceBox;
+import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
-import pl.edu.agh.to1.dice.logic.Score;
+import pl.edu.agh.to1.dice.logic.players.Score;
 
 /**
  * Author: Piotr Turek

@@ -1,4 +1,4 @@
-package pl.edu.agh.to1.dice.logic;
+package pl.edu.agh.to1.dice.logic.dices;
 
 /**
  * Exception thrown when reading freeze indexes...

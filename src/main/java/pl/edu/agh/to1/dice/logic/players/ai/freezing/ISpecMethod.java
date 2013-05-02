@@ -1,6 +1,6 @@
 package pl.edu.agh.to1.dice.logic.players.ai.freezing;
 
-import pl.edu.agh.to1.dice.logic.DiceBox;
+import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
 import pl.edu.agh.to1.dice.utils.Pair;
 

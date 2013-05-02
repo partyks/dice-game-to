@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pl.edu.agh.to1.dice.StatisticsModel.GlobalStatistics;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
-import pl.edu.agh.to1.dice.logic.DiceBox;
-import pl.edu.agh.to1.dice.logic.FreezeIndexesReadingException;
+import pl.edu.agh.to1.dice.logic.dices.DiceBox;
+import pl.edu.agh.to1.dice.logic.dices.FreezeIndexesReadingException;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
 
 import javax.persistence.*;
