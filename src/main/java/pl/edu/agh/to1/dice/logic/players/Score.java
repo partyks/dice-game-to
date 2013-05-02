@@ -1,6 +1,5 @@
 package pl.edu.agh.to1.dice.logic.players;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -19,9 +18,11 @@ import java.util.Map;
  */
 @Component(BeanDefinition.SCOPE_PROTOTYPE)
 public class Score {
-    private static final ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationConfig.xml");
-    @Autowired
-    private IFigureManager figureManager;
+    private static final ApplicationContext applicationContext =
+            new ClassPathXmlApplicationContext("applicationConfig.xml");
+
+    private final IFigureManager figureManager = (IFigureManager) applicationContext.getAutowireCapableBeanFactory().
+                                                                    getBean("figureManager");
 
     private final Map<IFigure, Integer> points = new HashMap<IFigure, Integer>(16);
     private List<IFigure> countForBonus;
