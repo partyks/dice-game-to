@@ -8,6 +8,8 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
+ * Class implements some generic implementation of IUserSort, it needs comparator or/and
+ * IExtractUserInfo for implementing IUserSort. It doesn't provide any defualt implementation
  * @author Michal Partyka
  */
 public class GenericSort implements IUserSort {

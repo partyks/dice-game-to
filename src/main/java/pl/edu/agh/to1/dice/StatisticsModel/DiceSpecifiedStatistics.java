@@ -3,6 +3,7 @@ package pl.edu.agh.to1.dice.StatisticsModel;
 import javax.persistence.Entity;
 
 /**
+ * Statistics which are specific for DiceGame
  * @author Michal Partyka
  */
 @Entity

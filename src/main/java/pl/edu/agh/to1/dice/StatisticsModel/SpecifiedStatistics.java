@@ -3,6 +3,7 @@ package pl.edu.agh.to1.dice.StatisticsModel;
 import javax.persistence.*;
 
 /**
+ * Specific statistic for the GameInfo game
  * @author Michal Partyka
  */
 @Entity

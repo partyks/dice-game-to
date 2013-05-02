@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Class provides implementation for displaying ranking. It uses IUserSort for sorting.
  * @author Michal Partyka
  */
 @Component

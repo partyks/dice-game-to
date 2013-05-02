@@ -9,7 +9,7 @@ import javax.persistence.*;
  * @author Michal Partyka
  */
 @Entity
-abstract class AbstractGame {
+abstract class AbstractGame implements IGameInfo {
     @Id
     @GeneratedValue
     private Integer Id;

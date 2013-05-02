@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
+ * Information about some game
  * @author Michal Partyka
  */
 @Entity

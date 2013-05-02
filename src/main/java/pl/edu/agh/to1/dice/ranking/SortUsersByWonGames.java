@@ -5,6 +5,7 @@ import pl.edu.agh.to1.dice.logic.players.User;
 import java.util.Comparator;
 
 /**
+ * IUserSort implementation for sorting by won games
  * @author Michal Partyka
  */
 public class SortUsersByWonGames extends GenericSort implements IUserSort {
