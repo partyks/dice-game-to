@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import pl.edu.agh.to1.dice.StatisticsModel.GlobalStatistics;
+import pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics;
 import pl.edu.agh.to1.dice.playermodel.UserModel;
 import pl.edu.agh.to1.dice.repository.UserDAO;
 

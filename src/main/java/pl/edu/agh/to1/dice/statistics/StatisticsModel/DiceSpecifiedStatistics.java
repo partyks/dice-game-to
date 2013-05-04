@@ -1,4 +1,4 @@
-package pl.edu.agh.to1.dice.StatisticsModel;
+package pl.edu.agh.to1.dice.statistics.StatisticsModel;
 
 import javax.persistence.Entity;
 

@@ -1,6 +1,6 @@
 package pl.edu.agh.to1.dice.playermodel;
 
-import pl.edu.agh.to1.dice.StatisticsModel.GlobalStatistics;
+import pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics;
 
 import javax.persistence.*;
 

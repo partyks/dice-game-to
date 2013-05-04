@@ -1,6 +1,6 @@
 package pl.edu.agh.to1.dice.logic.flow;
 
-import pl.edu.agh.to1.dice.StatisticsModel.GameInfo;
+import pl.edu.agh.to1.dice.statistics.StatisticsModel.GameInfo;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 import pl.edu.agh.to1.dice.logic.IGameInfo;
 
