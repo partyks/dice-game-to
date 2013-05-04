@@ -7,7 +7,7 @@ import pl.edu.agh.to1.dice.StatisticsModel.GlobalStatistics;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 import pl.edu.agh.to1.dice.logic.figures.FigureManager;
-import pl.edu.agh.to1.dice.logic.figures.SingleDiceConfigurationFactory;
+import pl.edu.agh.to1.dice.logic.figures.TripleDiceConfigurationFactory;
 import pl.edu.agh.to1.dice.logic.flow.DiceGame;
 import pl.edu.agh.to1.dice.logic.players.Player;
 import pl.edu.agh.to1.dice.logic.players.User;
@@ -61,7 +61,7 @@ public class App {
     private static void setConfiguration() {
         //TODO: asking for configuration goes here
         FigureManager figureManager = (FigureManager) beanFactory.getBean("figureManager");
-        figureManager.setConfiguration(new SingleDiceConfigurationFactory());
+        figureManager.setConfiguration(new TripleDiceConfigurationFactory());
     }
 
     public static List<Player> getPlayersConfiguration() {

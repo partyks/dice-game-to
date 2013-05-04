@@ -15,10 +15,13 @@ public interface IFigureManager {
     List<IFigure> values();
 
     /**
+     * TODO: SORRY, wtf:D?
      * Returns IFigures that count for bonus
      * @return List of figures
      */
-    List<IFigure> countForBonus();
-
     IFigure getFigureBySignature(String figureSignature);
+
+    List<Bonus> getBonuses();
+
+    IFigure getFigureByName(String figureSignature);
 }

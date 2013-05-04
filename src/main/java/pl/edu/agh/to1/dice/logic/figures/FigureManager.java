@@ -16,23 +16,19 @@ import java.util.List;
 @Scope(BeanDefinition.SCOPE_SINGLETON)  //TODO: change scope to session once app is web based
 public class FigureManager implements IFigureManager {
     private List<IFigure> figures = new ArrayList<IFigure>();
-    private List<IFigure> figuresCountedIntoBonus = new ArrayList<IFigure>();
+    private List<Bonus> bonuses = new ArrayList<Bonus>();
 
     public void setConfiguration(AbstractConfigurationFactory factory) {
         figures.clear();
         figures.addAll(factory.createFigures());
-        figuresCountedIntoBonus.addAll(factory.countForBonus());
+        bonuses.clear();
+        bonuses.addAll(factory.createBonuses());
     }
 
 
     @Override
     public List<IFigure> values() {
         return figures;
-    }
-
-    @Override
-    public List<IFigure> countForBonus() {
-        return figuresCountedIntoBonus;
     }
 
     @Override
@@ -43,5 +39,24 @@ public class FigureManager implements IFigureManager {
                 return ((IFigure) o).getSignature().equals(figureSignature);
             }
         });
+    }
+
+    @Override
+    public List<Bonus> getBonuses() {
+        return bonuses;
+    }
+
+    @Override
+    public IFigure getFigureByName(final String figureSignature) {
+        IFigure ret = (IFigure) CollectionUtils.find(figures, new Predicate() {
+            @Override
+            public boolean evaluate(Object o) {
+                return ((IFigure) o).toString().equals(figureSignature);
+            }
+        });
+        if (ret == null) {
+            throw new IllegalArgumentException("Unfortunetly there is no provided figure signature");
+        }
+        return ret;
     }
 }

@@ -1,6 +1,8 @@
 package pl.edu.agh.to1.dice.logic.figures;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -9,12 +11,14 @@ import java.util.List;
 public class SingleDiceConfigurationFactory extends AbstractConfigurationFactory {
 
     @Override
-    List<IFigure> createFigures() {
+    public List<IFigure> createFigures() {
         return figures;
     }
 
     @Override
-    List<IFigure> countForBonus() {
-        return figuresCountedForBonus;
+    public Collection<? extends Bonus> createBonuses() {
+        List<Bonus> bonuses = new ArrayList<Bonus>(1);
+        bonuses.add(new Bonus(figuresCountedForBonus, 65, 35, "Bonus"));
+        return bonuses;
     }
 }

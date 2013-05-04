@@ -5,6 +5,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
+import pl.edu.agh.to1.dice.logic.figures.Bonus;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
 
@@ -24,11 +25,11 @@ public class Score {
     private IFigureManager figureManager;
 
     private final Map<IFigure, Integer> points = new HashMap<IFigure, Integer>(16);
-    private List<IFigure> countForBonus;
+    private List<Bonus> bonuses;
 
     @PostConstruct
     public void initialize() {
-        countForBonus = figureManager.countForBonus();
+        bonuses = figureManager.getBonuses();
     }
 
     /**
@@ -51,18 +52,14 @@ public class Score {
      * @return Result
      */
     public Result getResult() {
-        int sum=0, bonusPoints=0, bonus=0;
+        int sum=0, bonusPoints=0;
         for (Map.Entry<IFigure, Integer> figureIntegerEntry : points.entrySet()) {
             sum += figureIntegerEntry.getValue();
-            if (countForBonus.contains(figureIntegerEntry.getKey())) {
-                bonusPoints += figureIntegerEntry.getValue();
-            }
         }
-        if (bonusPoints > 63) {
-            bonus = 35;
+        for (final Bonus bonus : bonuses) {
+            bonus.countBonus(points);
         }
-
-        return new Result(sum, bonus);
+        return new Result(sum, bonuses);
     }
 
     /**

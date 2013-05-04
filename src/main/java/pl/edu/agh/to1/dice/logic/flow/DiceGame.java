@@ -96,10 +96,11 @@ public class DiceGame extends AbstractGame {
             System.out.println();
             System.out.println("--------------------------------------------------");
         }
-        System.out.println("__RESULT:______");
-        System.out.print(defaultStr);
+        System.out.println("___RESULTS___:");
         for (Player user : users) {
-            System.out.print(user.getResult() + defaultStr.substring(user.getResult().toString().length()));
+            System.out.println(user.getName() + "score:");
+            System.out.print(user.getResult());
+            System.out.println();
         }
         System.out.println();
         System.out.println();

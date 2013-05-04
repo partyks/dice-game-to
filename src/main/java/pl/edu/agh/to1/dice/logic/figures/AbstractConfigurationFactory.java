@@ -5,6 +5,7 @@ import org.apache.commons.collections.Predicate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -25,6 +26,6 @@ public abstract class AbstractConfigurationFactory {
         });
     }
 
-    abstract List<IFigure> createFigures();
-    abstract List<IFigure> countForBonus();
+    public abstract List<IFigure> createFigures();
+    public abstract Collection<? extends Bonus> createBonuses();
 }

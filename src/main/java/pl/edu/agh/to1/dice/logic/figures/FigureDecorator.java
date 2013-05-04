@@ -24,4 +24,9 @@ public class FigureDecorator implements IFigure {
     public String getSignature() {
         return figure.getSignature();
     }
+
+    @Override
+    public String toString() {
+        return figure.toString()+"x"+multiplication.toString();
+    }
 }

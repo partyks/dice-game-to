@@ -31,7 +31,7 @@ public class User extends AbstractPlayer {
     public void sparePoints(DiceBox diceBox) throws ReadingUserInputException {
         String figureSignature = LineInputReader.readSingleLine("Choose figure: ");
         try {
-            score.add(figureManager.getFigureBySignature(figureSignature), diceBox);
+            score.add(figureManager.getFigureByName(figureSignature), diceBox);
         } catch (IllegalArgumentException e) {
             LOGGER.log(Level.SEVERE, "Given input is not proper, figure.valueOf :(", e);
             System.out.println("Unfortunetly, given input is not proper, please specify correct figure...");

@@ -1,32 +1,45 @@
 package pl.edu.agh.to1.dice.logic.players;
 
+import pl.edu.agh.to1.dice.logic.figures.Bonus;
+
+import java.util.List;
+
 /**
  * Class store the Dice Game result of one user, his normal points and bonus
  * @author Michal Partyka
  */
 public class Result {
     private final int sum;
-    private final int bonus;
+    private final List<Bonus> bonuses;
 
-    public Result(int sum, int bonus) {
+    public Result(int sum, List<Bonus> bonus) {
         this.sum = sum;
-        this.bonus = bonus;
+        this.bonuses = bonus;
     }
 
     public Integer result() {
-        return sum+bonus;
+        int result = sum;
+        for (Bonus bonuse : bonuses) {
+            result += bonuse.getPoints();
+        }
+        return result;
     }
 
     public int getSum() {
         return sum;
     }
 
-    public int getBonus() {
-        return bonus;
+    public List<Bonus> getBonuses() {
+        return bonuses;
     }
 
     @Override
     public String toString() {
-        return (sum+bonus) + " (with " + bonus + " bonus)";
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Bonus bonuse : bonuses) {
+            stringBuilder.append(bonuse.toString()).append('\n');
+        }
+        stringBuilder.append("Sum: ").append(result()).append('\n');
+        return stringBuilder.toString();
     }
 }
