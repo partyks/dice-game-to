@@ -20,8 +20,8 @@ import java.util.*;
  * freezing certain dices.
  *
  * Note that this class is application context aware and it uses specialized 'method classes' to compute quality
- * coefficient for every figure. Every IFigure implementation must have its SpecMethod bean which name is equal
- * to figureSignature + 'SpecMethod'.
+ * coefficient for every figure. Every IFigure (excluding decorators) implementation must have its SpecMethod bean with
+ * name equal to figureSignature + 'SpecMethod'.
  *
  * Author: Piotr Turek
  */
