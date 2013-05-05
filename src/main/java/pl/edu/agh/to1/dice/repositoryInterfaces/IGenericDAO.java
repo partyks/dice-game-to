@@ -1,6 +1,7 @@
 package pl.edu.agh.to1.dice.repositoryInterfaces;
 
 import org.springframework.transaction.annotation.Transactional;
+import pl.edu.agh.to1.dice.repository.UserAlreadyPersistedInDatabaseException;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface IGenericDAO<T> {
     List<T> getList();
 
     @Transactional
-    void add(T add);
+    void add(T add) throws UserAlreadyPersistedInDatabaseException;
 
     @Transactional
     void remove(T remove);

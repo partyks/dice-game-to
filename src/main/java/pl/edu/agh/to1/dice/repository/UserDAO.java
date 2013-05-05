@@ -17,16 +17,18 @@ public class UserDAO extends GenericDAO<UserModel> implements IUserDAO {
         super(UserModel.class);
     }
 
-    public void add(UserModel userModel) {
-        //TODO: hibernate is not helping here, dono why :(
-//        CriteriaQuery<UserModel> criteriaQuery =
-//                getEntityManager().getCriteriaBuilder().createQuery(UserModel.class);
-//        Root<UserModel> from = criteriaQuery.from(UserModel.class);
-//        criteriaQuery.where(from.get("name").in(userModel.getName()));
-//        criteriaQuery.select(from);
-//        if (getEntityManager().createQuery(criteriaQuery).getResultList().size() > 0) {
-//            throw new IllegalArgumentException("name must be unique");
-//        }
+    // I don't admit that I've written this... URGHH :D (sorry, lack of time)
+    public void add(UserModel userModel) throws UserAlreadyPersistedInDatabaseException {
+        UserModel nullModel = null;
+        try {
+            nullModel = getUserByUsername(userModel.getName());
+        } catch (NoResultException e) {
+            // it's okey ;-)
+        }
+        if (nullModel != null) {
+            throw new UserAlreadyPersistedInDatabaseException("Given username " + userModel.getName() + "  " +
+                    "is already persisted in database");
+        }
         super.add(userModel);
     }
 
