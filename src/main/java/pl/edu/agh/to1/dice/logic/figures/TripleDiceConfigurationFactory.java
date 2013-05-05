@@ -33,7 +33,7 @@ public class TripleDiceConfigurationFactory extends AbstractConfigurationFactory
     }
 
     @Override
-    public Collection<? extends Bonus> createBonuses() {
+    public Collection<Bonus> createBonuses() {
         final List<Bonus> bonuses = new ArrayList<Bonus>(3);
 
         final List<IFigure> doubledFigures = new ArrayList<IFigure>(figures.size());

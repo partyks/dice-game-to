@@ -16,7 +16,7 @@ public class SingleDiceConfigurationFactory extends AbstractConfigurationFactory
     }
 
     @Override
-    public Collection<? extends Bonus> createBonuses() {
+    public Collection<Bonus> createBonuses() {
         List<Bonus> bonuses = new ArrayList<Bonus>(1);
         bonuses.add(new Bonus(figuresCountedForBonus, 65, 35, "Bonus"));
         return bonuses;

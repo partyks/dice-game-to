@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 import pl.edu.agh.to1.dice.logic.figures.FigureManager;
-import pl.edu.agh.to1.dice.logic.figures.RandomFourFigureConfiguration;
+import pl.edu.agh.to1.dice.logic.figures.RandomFigureConfiguration;
 import pl.edu.agh.to1.dice.logic.figures.SingleDiceConfigurationFactory;
 import pl.edu.agh.to1.dice.logic.figures.TripleDiceConfigurationFactory;
 import pl.edu.agh.to1.dice.logic.flow.DiceGame;
@@ -86,7 +86,7 @@ public class App {
                     break;
             case 1: figureManager.setConfiguration(new TripleDiceConfigurationFactory());
                     break;
-            case 2: figureManager.setConfiguration(new RandomFourFigureConfiguration());
+            case 2: figureManager.setConfiguration(new RandomFigureConfiguration());
                     break;
         }
     }
