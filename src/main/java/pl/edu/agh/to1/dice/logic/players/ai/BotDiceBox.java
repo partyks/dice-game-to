@@ -16,6 +16,15 @@ public class BotDiceBox extends DiceBox {
         }
     }
 
+    public BotDiceBox(DiceBox toClone) {
+        super(0);
+        for (Dice d : toClone) {
+            BotDice botDice = new BotDice();
+            botDice.setScore(d.getScore());
+            dices.add(botDice);
+        }
+    }
+
     public List<Dice> getDices() {
         return dices;
     }

@@ -15,27 +15,83 @@
     </bean>
 
     <bean id="ONESSpecMethod" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.KeyValueSpecMethod">
-        <constructor-arg value="1"/>
+        <property name="keyValues">
+            <list>
+                <value type="int">1</value>
+            </list>
+        </property>
     </bean>
 
     <bean id="TWOESSpecMethod" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.KeyValueSpecMethod">
-        <constructor-arg value="2"/>
+        <property name="keyValues">
+            <list>
+                <value type="int">2</value>
+            </list>
+        </property>
     </bean>
 
     <bean id="THREESSpecMethod" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.KeyValueSpecMethod">
-        <constructor-arg value="3"/>
+        <property name="keyValues">
+            <list>
+                <value type="int">3</value>
+            </list>
+        </property>
     </bean>
 
     <bean id="FOURSSpecMethod" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.KeyValueSpecMethod">
-        <constructor-arg value="4"/>
+        <property name="keyValues">
+            <list>
+                <value type="int">4</value>
+            </list>
+        </property>
     </bean>
 
     <bean id="FIVESSpecMethod" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.KeyValueSpecMethod">
-        <constructor-arg value="5"/>
+        <property name="keyValues">
+            <list>
+                <value type="int">5</value>
+            </list>
+        </property>
     </bean>
 
     <bean id="SIXESSpecMethod" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.KeyValueSpecMethod">
-        <constructor-arg value="6"/>
+        <property name="keyValues">
+            <list>
+                <value type="int">6</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="THREE_EQUALS" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.EqualsSpecMethod">
+        <constructor-arg value="3"/>
+    </bean>
+
+    <bean id="FOUR_EQUALS" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.EqualsSpecMethod">
+        <constructor-arg value="4"/>
+    </bean>
+
+    <bean id="GENERAL" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.EqualsSpecMethod">
+        <constructor-arg value="5"/>
+    </bean>
+
+    <bean id="EVEN" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.KeyValueSpecMethod">
+        <property name="keyValues">
+            <list>
+                <value type="int">2</value>
+                <value type="int">4</value>
+                <value type="int">6</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="ODD" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.KeyValueSpecMethod">
+        <property name="keyValues">
+            <list>
+                <value type="int">1</value>
+                <value type="int">3</value>
+                <value type="int">5</value>
+            </list>
+        </property>
     </bean>
 
 

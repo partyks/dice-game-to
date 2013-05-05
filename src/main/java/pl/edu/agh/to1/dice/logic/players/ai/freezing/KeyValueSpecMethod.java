@@ -15,34 +15,25 @@ import java.util.List;
  */
 public class KeyValueSpecMethod extends AbstractSpecMethod {
 
-    private final Integer keyValue;
-
-    public KeyValueSpecMethod(Integer keyValue) {
-        this.keyValue = keyValue;
-    }
+    List<Integer> keyValues = new LinkedList<>();
 
     @Override
     protected Pair<List<Integer>, Double> getValueCountsAndScore(IFigure figure, DiceBox diceBox, List<Integer> toFreeze) {
         List<Integer> valueCounts = new LinkedList<Integer>();
-        int freeToRoll = 5 - toFreeze.size(), i;
-        for (i = 0; i < freeToRoll/2; i++) valueCounts.add(6);
-        for (i = freeToRoll/2; i < freeToRoll; i++) valueCounts.add(1);
-        BotDiceBox probable = new BotDiceBox(5);
+
+        BotDiceBox probable = new BotDiceBox(diceBox.quantity());
+        BotDiceBox curDiceBox = new BotDiceBox(diceBox);
+
+        List<Dice> curDices = curDiceBox.getDices();
         List<Dice> dices = probable.getDices();
+
+        int i;
         for (i = 0; i < toFreeze.size(); i++) {
-            ((BotDice)dices.get(i)).setScore(keyValue);
+            final int toSet = curDices.get(toFreeze.get(i)).getScore();
+            ((BotDice)dices.get(i)).setScore(toSet);
         }
-        int j = 0;
-        while (j < freeToRoll/2) {
-            ((BotDice)dices.get(i++)).setScore(6);
-            j++;
-        }
-        while (i < toFreeze.size()) {
-            ((BotDice)dices.get(i++)).setScore(1);
-        }
-        if (freeToRoll % 2 != 0) {
-            ((BotDice)dices.get(toFreeze.size()-1)).setScore((int)3.5 * freeToRoll - probable.sum() + 1);
-        }
+
+        mostProbableFill(probable, valueCounts, i);
 
         return new Pair<List<Integer>, Double>(valueCounts, (double) figure.getScore(probable));
     }
@@ -52,7 +43,7 @@ public class KeyValueSpecMethod extends AbstractSpecMethod {
         final List<Integer> toFreeze = new LinkedList<Integer>();
         int id = 0;
         for (Dice dice : diceBox) {
-            if (dice.getScore() == keyValue) {
+            if (keyValues.contains(dice.getScore())) {
                 toFreeze.add(id);
             }
             id++;
@@ -60,7 +51,12 @@ public class KeyValueSpecMethod extends AbstractSpecMethod {
         return toFreeze;
     }
 
-    public Integer getKeyValue() {
-        return keyValue;
+    public List<Integer> getKeyValues() {
+        return keyValues;
     }
+
+    public void setKeyValues(List<Integer> keyValues) {
+        this.keyValues = keyValues;
+    }
+
 }
