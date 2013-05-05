@@ -94,7 +94,7 @@
         </property>
     </bean>
 
-    <bean id="SMALL_STRIT" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.RequestMappingSpecMethod">
+    <bean id="SMALL_STRITSpecMethod" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.RequestMappingSpecMethod">
         <property name="requestedMappings">
             <list>
                 <array>
@@ -128,7 +128,7 @@
         </property>
     </bean>
 
-    <bean id="BIG_STRIT" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.RequestMappingSpecMethod">
+    <bean id="BIG_STRITSpecMethod" class="pl.edu.agh.to1.dice.logic.players.ai.freezing.RequestMappingSpecMethod">
         <property name="requestedMappings">
             <list>
                 <array>

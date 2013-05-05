@@ -7,6 +7,7 @@ import pl.edu.agh.to1.dice.logic.players.ai.BotDice;
 import pl.edu.agh.to1.dice.logic.players.ai.BotDiceBox;
 import pl.edu.agh.to1.dice.utils.Pair;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,13 +28,26 @@ public class KeyValueSpecMethod extends AbstractSpecMethod {
         List<Dice> curDices = curDiceBox.getDices();
         List<Dice> dices = probable.getDices();
 
+
         int i;
         for (i = 0; i < toFreeze.size(); i++) {
             final int toSet = curDices.get(toFreeze.get(i)).getScore();
             ((BotDice)dices.get(i)).setScore(toSet);
         }
 
-        mostProbableFill(probable, valueCounts, i);
+        if (i < dices.size()) {
+            BotDice improved = (BotDice) dices.get(i);
+            improved.setScore(Collections.max(keyValues));
+            valueCounts.add(dices.size() - i);
+            i++;
+        }
+
+        int filler = 1;
+        while (filler < 6 && keyValues.contains(filler)) filler++;
+
+        for (; i < dices.size(); i++) {
+            ((BotDice)dices.get(i)).setScore(filler);
+        }
 
         return new Pair<List<Integer>, Double>(valueCounts, (double) figure.getScore(probable));
     }

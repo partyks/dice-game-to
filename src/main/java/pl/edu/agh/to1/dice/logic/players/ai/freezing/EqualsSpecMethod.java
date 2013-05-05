@@ -45,6 +45,7 @@ public class EqualsSpecMethod extends AbstractSpecMethod {
 
         mostProbableFill(probable, valueCounts, i);
 
+
         return new Pair<List<Integer>, Double>(valueCounts, (double) figure.getScore(probable));
     }
 

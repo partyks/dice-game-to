@@ -47,17 +47,23 @@ public abstract class AbstractSpecMethod implements ISpecMethod {
         int freeToRoll = dices.size() - start;
         int j = 0;
         while (j < freeToRoll/2) {
-            ((BotDice)dices.get(i++)).setScore(6);
+            BotDice d = (BotDice) dices.get(i++);
+            d.setScore(6);
+            valueCounts.add(6);
             j++;
         }
         while (i < dices.size()) {
-            ((BotDice)dices.get(i++)).setScore(1);
+            BotDice d = (BotDice) dices.get(i++);
+            d.setScore(1);
+            valueCounts.add(1);
         }
         if (freeToRoll % 2 != 0) {
-            ((BotDice)dices.get(dices.size()-1)).setScore((int)3.5 * freeToRoll - diceBox.sum() + 1);
+            BotDice d = (BotDice) dices.get(dices.size()-1);
+            if (d.getScore() < 3) {
+                d.setScore(3);
+                valueCounts.add(1);
+            }
         }
-        for (i = 0; i < freeToRoll/2; i++) valueCounts.add(6);
-        for (i = freeToRoll/2; i < freeToRoll; i++) valueCounts.add(1);
     }
 
 

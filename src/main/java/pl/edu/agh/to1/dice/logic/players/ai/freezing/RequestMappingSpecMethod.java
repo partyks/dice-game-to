@@ -21,20 +21,28 @@ public class RequestMappingSpecMethod extends AbstractSpecMethod {
     protected Pair<List<Integer>, Double> getValueCountsAndScore(IFigure figure, DiceBox diceBox, List<Integer> toFreeze) {
         final List<Integer> valueCounts = new LinkedList<>();
         int freeToRoll = diceBox.quantity() - toFreeze.size();
-        for (int i = 0; i < freeToRoll; i++) {
-            valueCounts.add(1);
-        }
         BotDiceBox probable = new BotDiceBox(diceBox.quantity());
         final List<Dice> dices = probable.getDices();
 
         final int[] goalMapping = requestedMappings.get(activeChoice);
+        final int[] mapping = diceBox.getMapCount();
         int diceID = 0, value = 0;
         for (int freq : goalMapping) {
+            int mdiff = freq - mapping[value];
+            while (mdiff-- > 0) {
+                valueCounts.add(1);
+            }
             for (int j = 0; j < freq; j++) {
                 ((BotDice)dices.get(diceID)).setScore(value);
                 diceID++;
             }
             value++;
+        }
+
+        while (diceID < dices.size()) {
+            ((BotDice)dices.get(diceID)).setScore(1);
+            valueCounts.add(6);
+            diceID++;
         }
 
         return new Pair<List<Integer>, Double>(valueCounts, (double) figure.getScore(probable));

@@ -9,6 +9,7 @@ import pl.edu.agh.to1.dice.utils.Pair;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -25,9 +26,9 @@ public class ChanceSpecMethod extends AbstractSpecMethod {
 
     @Override
     protected List<Integer> getIndexesToFreeze(IFigure figure, DiceBox diceBox) {
-        List<Integer> toFreeze = new ArrayList<Integer>(5);
-        for (int i = 0; i < 6; i++) {
-            toFreeze.set(i, i);
+        List<Integer> toFreeze = new LinkedList<>();
+        for (int i = 0; i < 5; i++) {
+            toFreeze.add(i);
         }
         return toFreeze;
     }
