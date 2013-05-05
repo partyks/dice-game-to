@@ -63,9 +63,13 @@ public class EqualsSpecMethod extends AbstractSpecMethod {
             public int compare(Pair<Integer, Integer> lhs, Pair<Integer, Integer> rhs) {
                 final int diff = rhs.getRight() - lhs.getRight();
                 if (diff < 0) { //left > right
-                    return lhs.getRight() <= targetFrequency ? diff : -diff;
+                    if (rhs.getRight() >= targetFrequency) {
+                        return rhs.getLeft() * rhs.getRight() - lhs.getLeft() * lhs.getRight();
+                    } else return diff;
                 } else if (diff > 0) { //right >= left
-                    return rhs.getRight() <= targetFrequency ? diff : -diff;
+                    if (lhs.getRight() >= targetFrequency) {
+                        return rhs.getLeft() * rhs.getRight() - lhs.getLeft() * lhs.getRight();
+                    } else return diff;
                 }
                 //both have equal frequency so we compare their values
                 return rhs.getLeft() - lhs.getLeft();
@@ -76,7 +80,8 @@ public class EqualsSpecMethod extends AbstractSpecMethod {
         List<Integer> toFreeze = new LinkedList<>();
         int id = 0;
         for (Dice dice : diceBox) {
-            if (dice.getScore() == id) {
+            final int diceScore = dice.getScore();
+            if (diceScore == bestChoice || diceScore > 4) {
                 toFreeze.add(id);
             }
             id++;
