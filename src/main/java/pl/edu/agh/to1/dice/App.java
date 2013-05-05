@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 import pl.edu.agh.to1.dice.logic.figures.FigureManager;
-import pl.edu.agh.to1.dice.logic.figures.RandomFourFigureConfiguration;
+import pl.edu.agh.to1.dice.logic.figures.RandomFigureConfiguration;
 import pl.edu.agh.to1.dice.logic.figures.SingleDiceConfigurationFactory;
 import pl.edu.agh.to1.dice.logic.figures.TripleDiceConfigurationFactory;
 import pl.edu.agh.to1.dice.logic.flow.DiceGame;
@@ -17,6 +17,7 @@ import pl.edu.agh.to1.dice.playermodel.UserModel;
 import pl.edu.agh.to1.dice.playermodel.UserService;
 import pl.edu.agh.to1.dice.ranking.Ranking;
 import pl.edu.agh.to1.dice.ranking.SortUsersByWonGames;
+import pl.edu.agh.to1.dice.repository.UserAlreadyPersistedInDatabaseException;
 import pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics;
 
 import java.util.ArrayList;
@@ -86,7 +87,7 @@ public class App {
                     break;
             case 1: figureManager.setConfiguration(new TripleDiceConfigurationFactory());
                     break;
-            case 2: figureManager.setConfiguration(new RandomFourFigureConfiguration());
+            case 2: figureManager.setConfiguration(new RandomFigureConfiguration());
                     break;
         }
     }
@@ -117,12 +118,7 @@ public class App {
                 UserModel user = chooseUserFromDb();
                 players.add(new User(user));
             } else {
-                String username = LineInputReader.readSingleLine("Provide username for player: ");
-                UserModel userModel = new UserModel(username, new GlobalStatistics(0,0,0));
-                userService.persist(userModel);
-                //attach object (get ID):
-                UserModel userModel1 = userService.getUserByUsername(username);
-                User user = new User(userModel1);
+                User user = newUser();
                 players.add(user);
             }
             amountOfPlayers--;
@@ -134,6 +130,22 @@ public class App {
         }
 
         return players;
+    }
+
+    private static User newUser() throws ReadingUserInputException {
+        String username = LineInputReader.readSingleLine("Provide username for player: ");
+        UserModel userModel = new UserModel(username, new GlobalStatistics(0,0,0));
+        try {
+            userService.persist(userModel);
+        } catch (UserAlreadyPersistedInDatabaseException e) {
+            LOGGER.log(Level.SEVERE, "Trying to persist user who is already persisted in database", e);
+            System.out.println("Unfortunetly, that username is already used, please try another");
+            userService.displayAvailableUsers();
+            return newUser();
+        }
+        //attach object (get ID):
+        UserModel userModel1 = userService.getUserByUsername(username);
+        return new User(userModel1);
     }
 
     private static double getCoefByBotsLevel(Integer botsLevel) {

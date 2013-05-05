@@ -42,7 +42,7 @@ public class GenericDAO <T> implements IGenericDAO<T> {
 
     @Transactional
     @Override
-    public void add(T add) {
+    public void add(T add) throws UserAlreadyPersistedInDatabaseException {
         if(em.find(type, entityManagerFactory.getPersistenceUnitUtil().getIdentifier(add)) != null) {
             em.merge(add);
             return;

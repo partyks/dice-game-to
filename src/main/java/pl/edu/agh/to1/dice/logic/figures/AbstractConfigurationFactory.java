@@ -27,5 +27,5 @@ public abstract class AbstractConfigurationFactory {
     }
 
     public abstract List<IFigure> createFigures();
-    public abstract Collection<? extends Bonus> createBonuses();
+    public abstract Collection<Bonus> createBonuses();
 }

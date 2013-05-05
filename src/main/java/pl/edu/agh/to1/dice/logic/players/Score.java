@@ -10,6 +10,7 @@ import pl.edu.agh.to1.dice.logic.figures.IFigure;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,11 +26,11 @@ public class Score {
     private IFigureManager figureManager;
 
     private final Map<IFigure, Integer> points = new HashMap<IFigure, Integer>(16);
-    private List<Bonus> bonuses;
+    private List<Bonus> bonuses = new ArrayList<>();
 
     @PostConstruct
     public void initialize() {
-        bonuses = figureManager.getBonuses();
+        bonuses.addAll(figureManager.getBonuses());
     }
 
     /**

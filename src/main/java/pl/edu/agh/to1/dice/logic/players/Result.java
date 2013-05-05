@@ -19,8 +19,8 @@ public class Result {
 
     public Integer result() {
         int result = sum;
-        for (Bonus bonuse : bonuses) {
-            result += bonuse.getPoints();
+        for (Bonus bonus : bonuses) {
+            result += bonus.getPoints();
         }
         return result;
     }

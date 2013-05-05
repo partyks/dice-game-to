@@ -14,8 +14,8 @@ public class SortUsersByWonGames extends GenericSort implements IUserSort {
         super(new Comparator<UserModel>() {
             @Override
             public int compare(UserModel o1, UserModel o2) {
-                return o1.getGlobalStatistics().getAmountOfWinGames().
-                        compareTo(o2.getGlobalStatistics().getAmountOfWinGames());
+                return o2.getGlobalStatistics().getAmountOfWinGames().
+                        compareTo(o1.getGlobalStatistics().getAmountOfWinGames());
             }
         },
         new IExtractUserInfo() {

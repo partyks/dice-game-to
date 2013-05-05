@@ -41,6 +41,8 @@ public class Bonus {
         }
         if (sum>=require) {
             points = bonus;
+        } else {
+            points = 0;
         }
     }
 

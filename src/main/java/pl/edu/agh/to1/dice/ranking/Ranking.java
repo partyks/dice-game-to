@@ -52,9 +52,9 @@ public class Ranking {
             throw new IllegalStateException("Displaying ranking performed before sorting");
         }
         final StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Ranking sorted by ").append(comparator.toString());
+        stringBuilder.append("Ranking sorted by ").append(comparator.toString()).append("\n");
         for (int i = 0; i < n; i++) {
-            stringBuilder.append(i).append(". ").append(list.get(i));
+            stringBuilder.append(i+1).append(". ").append(list.get(i)).append("\n");
         }
         return stringBuilder.toString();
     }
