@@ -37,6 +37,7 @@ public class GreedyFreezingStrategy implements IFreezingStrategy {
     private double willTakeBest;
 
     public GreedyFreezingStrategy() {
+        willTakeBest = 0.85;
     }
 
     /**

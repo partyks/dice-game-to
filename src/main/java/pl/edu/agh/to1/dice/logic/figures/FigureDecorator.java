@@ -29,4 +29,24 @@ public class FigureDecorator implements IFigure {
     public String toString() {
         return figure.toString()+"x"+multiplication.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FigureDecorator)) return false;
+
+        FigureDecorator that = (FigureDecorator) o;
+
+        if (!figure.equals(that.figure)) return false;
+        if (!multiplication.equals(that.multiplication)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = figure.hashCode();
+        result = 31 * result + multiplication.hashCode();
+        return result;
+    }
 }

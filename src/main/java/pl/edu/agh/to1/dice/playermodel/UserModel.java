@@ -12,7 +12,7 @@ public class UserModel {
 
     @GeneratedValue
     @Id
-    private Integer id;
+    private Integer id=0;
 
     @Column(unique = true)
     private String name;
@@ -26,6 +26,11 @@ public class UserModel {
     public UserModel(String name, GlobalStatistics globalStatistics) {
         this.name = name;
         this.globalStatistics = globalStatistics;
+    }
+
+    public UserModel(String name) {
+        this.name = name;
+        this.globalStatistics = new GlobalStatistics(0,0,0);
     }
 
     public Integer getId() {

@@ -61,4 +61,19 @@ public class GlobalStatistics {
     public void setAmountOfEscapes(Integer amountOfEscapes) {
         this.amountOfEscapes = amountOfEscapes;
     }
+
+    public void played() {
+        amountOfPlayedGames++;
+    }
+
+    public void won() {
+        amountOfWinGames++;
+    }
+
+    @Override
+    public String toString() {
+        return "GlobalStatistics{" +
+                "Id=" + Id +
+                '}';
+    }
 }

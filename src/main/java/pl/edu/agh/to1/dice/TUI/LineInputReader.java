@@ -35,6 +35,10 @@ public class LineInputReader {
         return userAnswer;
     }
 
+    public static boolean yesNo(String question) throws ReadingUserInputException {
+        return "Y".equalsIgnoreCase(readSingleLine(question + "? (Y/N)"));
+    }
+
     public static List<Integer> readFreezeIndexes(DiceBox diceBox) throws ReadingUserInputException, FreezeIndexesReadingException {
         String frozeDicesDescription = LineInputReader.readSingleLine("Freeze dices: (Provide number separated with whitespace");
         String[] frozeThatDices = frozeDicesDescription.split("\\s");
