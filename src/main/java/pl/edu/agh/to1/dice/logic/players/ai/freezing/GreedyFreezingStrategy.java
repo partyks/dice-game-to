@@ -54,7 +54,7 @@ public class GreedyFreezingStrategy implements IFreezingStrategy {
     }
 
     @Override
-    public List<Integer> getToFreeze(Score score, DiceBox diceBox) {
+    public Set<Integer> getToFreeze(Score score, DiceBox diceBox) {
         List<Pair<List<Integer>, Double>> choices = new LinkedList<Pair<List<Integer>, Double>>();
 
         for (IFigure figure : figureManager.values()) {
@@ -76,11 +76,11 @@ public class GreedyFreezingStrategy implements IFreezingStrategy {
             }
         });
 
-        List<Integer> ret = null;
+        Set<Integer> ret = null;
         Random rand = new Random();
 
         for (Pair<List<Integer>, Double> choice : choices) {
-            ret = choice.getLeft();
+            ret = new HashSet<>(choice.getLeft());
             if (rand.nextInt(100) < willTakeBest * 100) break;
         }
 

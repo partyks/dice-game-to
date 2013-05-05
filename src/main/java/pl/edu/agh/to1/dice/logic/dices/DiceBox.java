@@ -1,9 +1,6 @@
 package pl.edu.agh.to1.dice.logic.dices;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class which provides implementation for dice box behaviour. It returns some score maps of dices and other helpful
@@ -50,7 +47,7 @@ public class DiceBox implements Iterable<Dice> {
      * freeze dices of provided index
      * @param indexForFreezing list of indexes of dices you want to freeze by invoking this method
      */
-    public void freeze(List<Integer> indexForFreezing) {
+    public void freeze(Set<Integer> indexForFreezing) {
         final List<Dice> newFrozen = new ArrayList<Dice>();
         for (int freeze : indexForFreezing) {
             newFrozen.add(dices.get(freeze));

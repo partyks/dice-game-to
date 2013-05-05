@@ -4,6 +4,7 @@ import org.junit.Test;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -51,12 +52,22 @@ public class DiceBoxTest {
         DiceBox diceBox = new DiceBox(5);
 
         diceBox.roll();
-        diceBox.freeze(Arrays.asList(1,2));
+        diceBox.freeze(new HashSet<Integer>(Arrays.asList(1, 2)));
         int amount = diceBox.size();
         diceBox.roll();
 
         assertThat(amount).isEqualTo(3);
         assertThat(diceBox.size()).isEqualTo(5);
+    }
+
+    @Test
+    public void doubledBug() throws Exception {
+        DiceBox dices = new DiceBox(5);
+
+        dices.freeze(new HashSet<Integer>(Arrays.asList(1,1)));
+        dices.roll();
+
+        assertThat(dices.size()).isEqualTo(5);
     }
 
 }
