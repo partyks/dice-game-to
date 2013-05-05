@@ -6,8 +6,8 @@ import pl.edu.agh.to1.dice.logic.dices.FreezeIndexesReadingException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,20 +39,26 @@ public class LineInputReader {
         return "Y".equalsIgnoreCase(readSingleLine(question + "? (Y/N)"));
     }
 
-    public static List<Integer> readFreezeIndexes(DiceBox diceBox) throws ReadingUserInputException, FreezeIndexesReadingException {
+    public static Set<Integer> readFreezeIndexes(DiceBox diceBox) throws ReadingUserInputException, FreezeIndexesReadingException {
         String frozeDicesDescription = LineInputReader.readSingleLine("Freeze dices: (Provide number separated with whitespace");
         String[] frozeThatDices = frozeDicesDescription.split("\\s");
-        List<Integer> dicesToFrozeIndexes = new ArrayList<Integer>();
+        Set<Integer> dicesToFrozeIndexes = new HashSet<>();
+
+        if ("".equals(frozeDicesDescription)) {
+            return dicesToFrozeIndexes;
+        }
+
         try {
-            for (int i = 0; i < frozeThatDices.length; i++) {
-                dicesToFrozeIndexes.add(Integer.valueOf(frozeThatDices[i]));
-                if (dicesToFrozeIndexes.get(i) < 0 || dicesToFrozeIndexes.get(i) > diceBox.quantity() - 1) {
+            for (String frozeThatDice : frozeThatDices) {
+                Integer valueToFreeze = Integer.valueOf(frozeThatDice);
+                if (valueToFreeze < 0 || valueToFreeze > diceBox.quantity() - 1) {
                     System.out.println("Unfortunetly, number out of range...");
                     throw new FreezeIndexesReadingException("number out of range");
                 }
+                dicesToFrozeIndexes.add(valueToFreeze);
             }
         } catch (NumberFormatException e) {
-            LOGGER.log(Level.SEVERE, "Given input is not proper, numbers [1..5] required", e);
+            LOGGER.log(Level.SEVERE, "Given input is not proper, numbers [0..4] required", e);
             throw new FreezeIndexesReadingException("Not proper input format...");
         }
         return dicesToFrozeIndexes;
