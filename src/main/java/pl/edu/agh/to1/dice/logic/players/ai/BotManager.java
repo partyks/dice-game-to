@@ -29,7 +29,7 @@ public class BotManager {
     public List<Player> createBots(Integer amount, double coef) {
         greedyChoosingStrategy.setWillTakeBest(coef);
         final List<Player> bots = new ArrayList<>();
-        while ( amount > 0 ) {
+        while ( amount --> 0 ) {
             ModularBot modularBot = new ModularBot(amount.toString() + "bot");
             modularBot.setFigureChoosingStrategy(greedyChoosingStrategy);
             modularBot.setFreezingStrategy(greedyFreezingStrategy);
