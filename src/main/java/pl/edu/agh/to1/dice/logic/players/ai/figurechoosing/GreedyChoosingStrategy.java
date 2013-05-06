@@ -1,15 +1,13 @@
 package pl.edu.agh.to1.dice.logic.players.ai.figurechoosing;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
-import pl.edu.agh.to1.dice.logic.players.Score;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
+import pl.edu.agh.to1.dice.logic.players.Score;
 import pl.edu.agh.to1.dice.utils.Pair;
 
 import java.util.*;
@@ -23,8 +21,6 @@ import java.util.*;
 @Service
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class GreedyChoosingStrategy implements IFigureChoosingStrategy {
-    private static final Logger LOGGER = LoggerFactory.getLogger(GreedyChoosingStrategy.class);
-
     @Autowired
     private IFigureManager figureManager;
 

@@ -1,5 +1,6 @@
 package pl.edu.agh.to1.dice.TUI;
 
+import org.apache.log4j.Logger;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.dices.FreezeIndexesReadingException;
 
@@ -8,8 +9,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Pure utility class for reading line from Input (with Spring e.g. could be manage as a bean and
@@ -29,7 +28,7 @@ public class LineInputReader {
         try {
             userAnswer = in.readLine();
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Unfortunetly reading from given stream have proned some errors", e);
+            LOGGER.error("Unfortunetly reading from given stream have proned some errors", e);
             throw new ReadingUserInputException("Obtaining " + question + " from user caused Exception:", e);
         }
         return userAnswer;
@@ -58,7 +57,7 @@ public class LineInputReader {
                 dicesToFrozeIndexes.add(valueToFreeze);
             }
         } catch (NumberFormatException e) {
-            LOGGER.log(Level.SEVERE, "Given input is not proper, numbers [0..4] required", e);
+            LOGGER.error("Given input is not proper, numbers [0..4] required", e);
             throw new FreezeIndexesReadingException("Not proper input format...");
         }
         return dicesToFrozeIndexes;
@@ -84,7 +83,7 @@ public class LineInputReader {
         try {
             choosen = Integer.valueOf(in.readLine());
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "IOException while reading data from System.in");
+            LOGGER.error("IOException while reading data from System.in");
             throw new ReadingUserInputException(e); //catched in TUI, - saving for recovery there
         } catch (NumberFormatException e) {
             System.out.println();

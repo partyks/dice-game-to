@@ -1,21 +1,24 @@
 package pl.edu.agh.to1.dice.repository;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.to1.dice.repositoryInterfaces.IGenericDAO;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * @author Michal Partyka
 */
 public class GenericDAO <T> implements IGenericDAO<T> {
 
-    private static final Logger LOGGER = Logger.getLogger(GenericDAO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(GenericDAO.class);
 
     @PersistenceContext
     private EntityManager em;

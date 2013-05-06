@@ -1,5 +1,6 @@
 package pl.edu.agh.to1.dice.statistics;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.agh.to1.dice.logic.GameResult;
@@ -8,14 +9,12 @@ import pl.edu.agh.to1.dice.logic.players.User;
 import pl.edu.agh.to1.dice.repository.IGlobalStatisticDAO;
 import pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics;
 
-import java.util.logging.Logger;
-
 /**
  * @author Michal Partyka
  */
 @Service
 public class StatisticService implements IStatisticService {
-    private static final Logger LOGGER = Logger.getLogger(StatisticService.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(StatisticService.class);
     @Autowired
     private IGlobalStatisticDAO globalStatisticDAO;
 

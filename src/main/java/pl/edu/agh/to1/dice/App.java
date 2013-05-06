@@ -1,5 +1,6 @@
 package pl.edu.agh.to1.dice;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
@@ -22,8 +23,6 @@ import pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This is some kind of starter class, It could be divided into the class who reads the configuration from user, and
@@ -34,7 +33,7 @@ import java.util.logging.Logger;
 @Component
 public class App {
     private static final BeanFactory beanFactory = new ClassPathXmlApplicationContext("applicationConfig.xml");
-    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(App.class);
     private static final UserService userService = (UserService) beanFactory.getBean("userService");
     private static final BotManager botManager = (BotManager) beanFactory.getBean("botManager");
 
@@ -57,7 +56,7 @@ public class App {
                         try {
                             diceGame.play();
                         } catch (ReadingUserInputException e) {
-                            LOGGER.log(Level.SEVERE, "Reading input problems, application will exit", e);
+                            LOGGER.error("Reading input problems, application will exit", e);
                             System.out.println("Unpredictable problems with input occured, application will exit. " +
                                     "We are sorry");
                             System.exit(2);
@@ -73,7 +72,7 @@ public class App {
         } catch (Exception e) {
             System.out.println("Unfortunetly something bad has happened. Please check if you are in the AGH net or " +
                     "connect via VPN. Unexpected error has occurred, application will be terminated");
-            LOGGER.log(Level.SEVERE, "What happend?", e);
+            LOGGER.error("What happend?", e);
             System.exit(12141);
         }
     }
@@ -106,7 +105,7 @@ public class App {
                         "or bots (" + amountOfBots + ")");
             }
         } catch (NumberFormatException|IllegalStateException e) {
-            LOGGER.log(Level.SEVERE, "Number provided by user is negative", e);
+            LOGGER.error("Number provided by user is negative", e);
             System.out.println("Please provide non-negative number, reading players configuration from the begining..");
             return getPlayersConfiguration();
         }
@@ -138,7 +137,7 @@ public class App {
         try {
             userService.persist(userModel);
         } catch (UserAlreadyPersistedInDatabaseException e) {
-            LOGGER.log(Level.SEVERE, "Trying to persist user who is already persisted in database", e);
+            LOGGER.error("Trying to persist user who is already persisted in database", e);
             System.out.println("Unfortunetly, that username is already used, please try another");
             userService.displayAvailableUsers();
             return newUser();
