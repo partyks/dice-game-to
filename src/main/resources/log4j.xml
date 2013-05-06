@@ -35,23 +35,7 @@
         <level value="off" />
     </logger>
 
-    <logger name="org.springframework.http">
-        <level value="off" />
-    </logger>
-
-    <logger name="org.springframework.web">
-        <level value="off" />
-    </logger>
-
     <logger name="org.springframework.binding">
-        <level value="off" />
-    </logger>
-
-    <logger name="org.springframework.webflow">
-        <level value="off" />
-    </logger>
-
-    <logger name="org.primefaces">
         <level value="off" />
     </logger>
 
