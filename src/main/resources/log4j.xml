@@ -19,7 +19,7 @@
 
     <!-- Application Loggers -->
     <logger name="pl.edu.agh.to1.dice">
-        <level value="debug" />
+        <level value="all" />
     </logger>
 
     <!-- 3rdparty Loggers -->
