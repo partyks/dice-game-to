@@ -1,6 +1,7 @@
 package pl.edu.agh.to1.dice;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,7 @@ import java.util.List;
 @Component
 public class App {
     private static final BeanFactory beanFactory = new ClassPathXmlApplicationContext("applicationConfig.xml");
-    private static final Logger LOGGER = Logger.getLogger(App.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
     private static final UserService userService = (UserService) beanFactory.getBean("userService");
     private static final BotManager botManager = (BotManager) beanFactory.getBean("botManager");
 

@@ -1,6 +1,7 @@
 package pl.edu.agh.to1.dice.repository;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.to1.dice.repositoryInterfaces.IGenericDAO;
@@ -18,7 +19,7 @@ import java.util.List;
 */
 public class GenericDAO <T> implements IGenericDAO<T> {
 
-    private static final Logger LOGGER = Logger.getLogger(GenericDAO.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GenericDAO.class);
 
     @PersistenceContext
     private EntityManager em;

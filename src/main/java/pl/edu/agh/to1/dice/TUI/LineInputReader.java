@@ -1,6 +1,7 @@
 package pl.edu.agh.to1.dice.TUI;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.dices.FreezeIndexesReadingException;
 
@@ -16,7 +17,7 @@ import java.util.Set;
  * @author Michal Partyka
  */
 public class LineInputReader {
-    private static final Logger LOGGER = Logger.getLogger(LineInputReader.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(LineInputReader.class.getName());
     private static BufferedReader in = null;
 
     public static String readSingleLine(String question) throws ReadingUserInputException {
