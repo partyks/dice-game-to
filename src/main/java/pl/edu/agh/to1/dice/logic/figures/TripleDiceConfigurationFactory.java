@@ -39,8 +39,10 @@ public class TripleDiceConfigurationFactory extends AbstractConfigurationFactory
         final List<IFigure> doubledFigures = new ArrayList<IFigure>(figures.size());
         final List<IFigure> tripleFigures = new ArrayList<IFigure>(figures.size());
         for (IFigure figure : figures) {
-            doubledFigures.add(new FigureDecorator(figure, 2));
-            tripleFigures.add(new FigureDecorator(figure, 2));
+            if(figuresCountedForBonus.contains(figure)) {
+                doubledFigures.add(new FigureDecorator(figure, 2));
+                tripleFigures.add(new FigureDecorator(figure, 2));
+            }
         }
 
         bonuses.add(new Bonus(figuresCountedForBonus, requireForBonus, bonus, "Bonus"));
