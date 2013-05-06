@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class RankingTest {
     @Mock private UserDAO userDAO;
-    @InjectMocks private Ranking ranking;
+    @InjectMocks private Ranking ranking = new Ranking();
 
     @Before
     public void init() {
@@ -43,7 +43,11 @@ public class RankingTest {
     @Test
     public void displayTest() {
         ranking.sort(new SortUsersByWonGames());
-        assertThat(ranking.getRanking()).isEqualTo("Ranking sorted by " + new SortUsersByWonGames().toString() +
-                "0. 2 11. 0 22. 1 23. 4 24. 3 8");
+        assertThat(ranking.getRanking()).isEqualTo("Ranking sorted by amount of winning games comparator\n" +
+                "1. 3 8\n" +
+                "2. 0 2\n" +
+                "3. 1 2\n" +
+                "4. 4 2\n" +
+                "5. 2 1\n");
     }
 }

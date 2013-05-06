@@ -24,7 +24,7 @@ public class ScoreTest {
     @Mock
     private FigureManager figureManager;
     @InjectMocks
-    private Score score;
+    private Score score = new Score();
 
     @Test
     public void testGetResult() throws Exception {
