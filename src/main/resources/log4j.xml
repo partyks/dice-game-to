@@ -19,33 +19,33 @@
 
     <!-- Application Loggers -->
     <logger name="pl.edu.agh.to1.dice">
-        <level value="all" />
+        <level value="debug" />
     </logger>
 
     <!-- 3rdparty Loggers -->
     <logger name="org.springframework.core">
-        <level value="off" />
+        <level value="warn" />
     </logger>
 
     <logger name="org.springframework.beans">
-        <level value="off" />
+        <level value="warn" />
     </logger>
 
     <logger name="org.springframework.context">
-        <level value="off" />
+        <level value="warn" />
     </logger>
 
     <logger name="org.springframework.binding">
-        <level value="off" />
+        <level value="error" />
     </logger>
 
     <logger name="org.hibernate">
-        <level value="fatal"/>
+        <level value="info"/>
     </logger>
 
     <!-- Root Logger -->
     <root>
-        <priority value="info" />
+        <priority value="debug" />
         <appender-ref ref="file" />
         
     </root>
