@@ -1,6 +1,7 @@
 package pl.edu.agh.to1.dice.statistics;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.agh.to1.dice.logic.GameResult;
@@ -14,7 +15,7 @@ import pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics;
  */
 @Service
 public class StatisticService implements IStatisticService {
-    private static final Logger LOGGER = Logger.getLogger(StatisticService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StatisticService.class);
     @Autowired
     private IGlobalStatisticDAO globalStatisticDAO;
 
