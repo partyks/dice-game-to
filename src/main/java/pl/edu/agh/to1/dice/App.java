@@ -150,10 +150,10 @@ public class App {
 
     private static double getCoefByBotsLevel(Integer botsLevel) {
         switch (botsLevel) {
-            case 1: return 0.75;
-            case 2: return 0.6;
+            case 1: return 0.78;
+            case 2: return 0.70;
         }
-        return 0.9;
+        return 0.85;
     }
 
     private static UserModel chooseUserFromDb() throws ReadingUserInputException {
