@@ -1,5 +1,8 @@
 package pl.edu.agh.to1.dice.logic.players;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.edu.agh.to1.dice.App;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
@@ -8,8 +11,6 @@ import pl.edu.agh.to1.dice.logic.dices.FreezeIndexesReadingException;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
 import pl.edu.agh.to1.dice.playermodel.UserModel;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * User class, in real system it would be annotated would be an entity
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
 public class User extends AbstractPlayer {
     private final UserModel userModel;
 
-    private static final Logger LOGGER = Logger.getLogger(User.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(User.class);
 
     IFigureManager figureManager = (IFigureManager) App.getBeanFactory().getBean("figureManager");
 
@@ -33,11 +34,11 @@ public class User extends AbstractPlayer {
         try {
             score.add(figureManager.getFigureByName(figureSignature), diceBox);
         } catch (IllegalArgumentException e) {
-            LOGGER.log(Level.SEVERE, "Given input is not proper, figure.valueOf :(", e);
+            LOGGER.error("Given input is not proper, figure.valueOf :(", e);
             System.out.println("Unfortunetly, given input is not proper, please specify correct figure...");
             sparePoints(diceBox);
         } catch (IllegalStateException e) {
-            LOGGER.log(Level.WARNING, "Given figure by user was already filled in score");
+            LOGGER.warn("Given figure by user was already filled in score");
             System.out.println("This figure was filled, please choose another one...");
             sparePoints(diceBox);
         }

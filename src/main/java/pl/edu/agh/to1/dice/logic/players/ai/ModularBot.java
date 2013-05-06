@@ -1,7 +1,5 @@
 package pl.edu.agh.to1.dice.logic.players.ai;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.players.AbstractPlayer;
@@ -15,8 +13,6 @@ import pl.edu.agh.to1.dice.logic.players.ai.freezing.IFreezingStrategy;
  * Author: Piotr Turek
  */
 public class ModularBot extends AbstractPlayer {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ModularBot.class);
-
     private IFreezingStrategy freezingStrategy;
     private IFigureChoosingStrategy figureChoosingStrategy;
 
