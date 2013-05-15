@@ -33,10 +33,10 @@ import java.util.List;
 
 //@Component
 public class App {
-    private static final BeanFactory beanFactory = new ClassPathXmlApplicationContext("applicationConfig.xml");
+    private static final BeanFactory beanFactory = null;// = new ClassPathXmlApplicationContext("applicationConfig.xml");
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
-    private static final UserService userService = (UserService) beanFactory.getBean("userService");
-    private static final BotManager botManager = (BotManager) beanFactory.getBean("botManager");
+    private static final UserService userService = null;//(UserService) beanFactory.getBean("userService");
+    private static final BotManager botManager = null;//(BotManager) beanFactory.getBean("botManager");
 
     public static void main(String[] args) {
         try {
