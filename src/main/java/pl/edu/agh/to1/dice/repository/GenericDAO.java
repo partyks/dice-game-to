@@ -30,10 +30,10 @@ public class GenericDAO <T> implements IGenericDAO<T> {
     private Class<T> type;
 
     public GenericDAO(Class<T> type) {
-        if(type.getAnnotation(Entity.class) == null) {
-            throw new IllegalArgumentException("DAO can be created only with class annotated by Entity. Class " +
-                    type.getName() + " unfortunetly has no Entity annotation");
-        }
+//        if(type.getAnnotation(Entity.class) == null) {
+//            throw new IllegalArgumentException("DAO can be created only with class annotated by Entity. Class " +
+//                    type.getName() + " unfortunetly has no Entity annotation");
+//        }
         this.type = type;
     }
 
