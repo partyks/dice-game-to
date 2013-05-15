@@ -20,18 +20,18 @@
 	</listener>
 
 
-	<!--&lt;!&ndash; -->
-		<!--SPRING SECURITY-->
-	<!--&ndash;&gt;-->
-	<!--<filter>-->
-        <!--<filter-name>springSecurityFilterChain</filter-name>-->
-        <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
-    <!--</filter>-->
-	 <!---->
-    <!--<filter-mapping>-->
-      <!--<filter-name>springSecurityFilterChain</filter-name>-->
-      <!--<servlet-name>Spring MVC Servlet</servlet-name>-->
-    <!--</filter-mapping>-->
+	<!--
+		SPRING SECURITY
+	-->
+	<filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+    <filter-mapping>
+      <filter-name>springSecurityFilterChain</filter-name>
+      <servlet-name>Spring MVC Servlet</servlet-name>
+    </filter-mapping>
 
 	<!-- 
 		JSF 2 IMPLEMENTATION
