@@ -24,7 +24,7 @@ public class GenericDAO <T> implements IGenericDAO<T> {
     @PersistenceContext
     private EntityManager em;
 
-    @Autowired
+//    @Autowired
     private EntityManagerFactory entityManagerFactory;
 
     private Class<T> type;
