@@ -21,7 +21,7 @@ public class GenericDAO <T> implements IGenericDAO<T> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GenericDAO.class);
 
-    @PersistenceContext
+//    @PersistenceContext
     private EntityManager em;
 
 //    @Autowired
