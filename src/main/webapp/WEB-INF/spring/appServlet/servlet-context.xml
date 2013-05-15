@@ -18,7 +18,7 @@
 	<import resource="webflow.xml" />
 
 	<!-- Scan for Spring beans declared via annotations. -->
-	<context:component-scan base-package="pl.agh.enrollme"/>
+	<context:component-scan base-package="pl.edu.agh.to1"/>
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />

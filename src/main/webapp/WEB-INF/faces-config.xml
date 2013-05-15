@@ -9,7 +9,7 @@
 	</application>
 
     <lifecycle>
-        <phase-listener>pl.agh.enrollme.RequestContextPhaseListener</phase-listener>
+        <phase-listener>pl.edu.agh.to1.dice.utils.RequestContextPhaseListener</phase-listener>
     </lifecycle>
 
 </faces-config>

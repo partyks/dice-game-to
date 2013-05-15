@@ -13,10 +13,7 @@
 			Incoming path '/home' is mapped maps to the view name 'home'
 			UrlBasedViewResolver in servlet-context resolves 'home' to /WEB-INF/views/home.xhtml 
 	-->
-	<mvc:view-controller path="/login" />
-
-	<mvc:view-controller path="/home" />
 	
-	<context:component-scan base-package="pl.agh.enrollme" />
+	<context:component-scan base-package="pl.edu.agh.to1" />
 	 
 </beans>
