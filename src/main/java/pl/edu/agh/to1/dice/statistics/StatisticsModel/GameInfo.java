@@ -11,8 +11,8 @@ import javax.persistence.Id;
 //@Entity
 public class GameInfo {
 
-    @Id
-    @GeneratedValue
+//    @Id
+//    @GeneratedValue
     Integer Id;
 
     private String name;

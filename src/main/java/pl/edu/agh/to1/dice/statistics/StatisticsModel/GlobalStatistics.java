@@ -10,11 +10,11 @@ import java.util.List;
  */
 //@Entity
 public class GlobalStatistics {
-    @GeneratedValue
-    @Id
+//    @GeneratedValue
+//    @Id
     private Integer Id;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<SpecifiedStatistics> specifiedStatisticsList = new ArrayList<SpecifiedStatistics>();
 
     private Integer amountOfPlayedGames;

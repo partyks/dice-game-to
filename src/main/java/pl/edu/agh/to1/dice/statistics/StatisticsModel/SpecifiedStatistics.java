@@ -8,11 +8,11 @@ import javax.persistence.*;
  */
 //@Entity
 public class SpecifiedStatistics {
-    @Id
-    @GeneratedValue
+//    @Id
+//    @GeneratedValue
     Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private GameInfo gameInfo;
 
     private Integer amountOfPlayedGames;

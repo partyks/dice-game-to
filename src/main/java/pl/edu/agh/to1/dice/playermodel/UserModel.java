@@ -10,14 +10,14 @@ import javax.persistence.*;
 //@Entity
 public class UserModel {
 
-    @GeneratedValue
-    @Id
+//    @GeneratedValue
+//    @Id
     private Integer id=0;
 
-    @Column(unique = true)
+//    @Column(unique = true)
     private String name;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private GlobalStatistics globalStatistics;
 
     public UserModel() {
