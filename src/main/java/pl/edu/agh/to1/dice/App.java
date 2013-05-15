@@ -31,7 +31,7 @@ import java.util.List;
  * it isn't ;-)
  */
 
-@Component
+//@Component
 public class App {
     private static final BeanFactory beanFactory = new ClassPathXmlApplicationContext("applicationConfig.xml");
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
