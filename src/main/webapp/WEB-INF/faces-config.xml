@@ -8,8 +8,8 @@
 		<message-bundle>JsfMessageResources</message-bundle>
 	</application>
 
-    <lifecycle>
-        <phase-listener>pl.edu.agh.to1.dice.utils.RequestContextPhaseListener</phase-listener>
-    </lifecycle>
+    <!--<lifecycle>-->
+        <!--<phase-listener>pl.edu.agh.to1.dice.utils.RequestContextPhaseListener</phase-listener>-->
+    <!--</lifecycle>-->
 
 </faces-config>

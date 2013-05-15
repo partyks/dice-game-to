@@ -4,7 +4,13 @@
 	    xsi:schemaLocation="http://www.springframework.org/schema/webflow
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-    <view-state id="view"/>
+    <view-state id="view">
+        <transition on="ala" to="ala"/>
+    </view-state>
+
+    <view-state id="ala">
+
+    </view-state>
 
 	<end-state id="flowComplete" view="externalRedirect:servletRelative:/main" />
 
