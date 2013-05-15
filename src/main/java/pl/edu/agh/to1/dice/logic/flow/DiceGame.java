@@ -23,24 +23,24 @@ import java.util.List;
  * Class provides an implementation for the game flow and result displaying
  */
 @Component
-@Entity
+//@Entity
 public class DiceGame extends AbstractGame {
-    @Transient
+//    @Transient
     @Autowired
     private DiceBox diceBox;
 
-    @Transient
+//    @Transient
     @Autowired
     private IFigureManager figureManager;
 
-    @Transient
+//    @Transient
     private List<Player> players;
 
     @Autowired
-    @Transient
+//    @Transient
     private IUserDAO userDAO;
 
-    @Transient
+//    @Transient
     @Autowired
     private IStatisticService statisticService;
 

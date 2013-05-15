@@ -9,13 +9,13 @@ import javax.persistence.*;
 /**
  * @author Michal Partyka
  */
-@Entity
+//@Entity
 abstract class AbstractGame implements IGameInfo {
-    @Id
-    @GeneratedValue
+//    @Id
+//    @GeneratedValue
     private Integer Id;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private GameInfo gameInfo;
 
 
