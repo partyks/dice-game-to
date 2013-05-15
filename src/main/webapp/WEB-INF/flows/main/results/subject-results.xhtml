@@ -1,0 +1,51 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsf/jstl/core"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/WEB-INF/layouts/standard.xhtml">
+
+<ui:define name="title"> Choose subjects you want enroll for and push the Submit button
+</ui:define>
+
+<ui:define name="notes">
+
+</ui:define>
+
+<ui:define name="content">
+
+    <h:form id="form">
+        <p:messages id="messages"/>
+
+        <p:dataTable id="termsTable" var="term" value="#{terms}" emptyMessage="No terms found">
+
+            <f:facet name="header">
+                <h:outputText value="#{currentSubject.name}" style="font-size: 14pt" />
+            </f:facet>
+
+            <p:subTable id="termsSubTable" var="studentPoints" value="#{studentPointsPerTermDAO.getStudentsAssignedToTerm(term)}"
+                    rendered="#{!term.certain}">
+
+                <f:facet name="header">
+                    #{term.teacher.degree} #{term.teacher.firstName} #{term.teacher.secondName} -
+                    #{term.timespanAsString}
+                </f:facet>
+
+                <p:column>
+                    <h:outputText value="#{studentPoints.person.lastName} #{studentPoints.person.firstName}"/>
+                </p:column>
+
+            </p:subTable>
+
+        </p:dataTable>
+
+        <p:commandButton value="Back" action="done"/>
+
+    </h:form>
+
+
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+      http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <secured attributes="ROLE_ADMIN" match="any"/>
+
+    <input name="currentEnrollment" type="pl.agh.enrollme.model.Enroll" required="true"/>
+
+    <view-state id="generate-files">
+        <on-render>
+            <evaluate expression="enrollmentDAO.getByPK(currentEnrollment.enrollID)" result="flowScope.obtainedEnrollment"/>
+            <evaluate expression="antTermFileController.setEnrollment(obtainedEnrollment)"/>
+            <evaluate expression="antPreferencesFileController.setEnrollment(obtainedEnrollment)"/>
+            <evaluate expression="antGroupFileController.setEnrollment(obtainedEnrollment)"/>
+        </on-render>
+        <transition on="Back" to="downloaded"/>
+        <transition on="End" to="skipFurtherConfiguration"/>
+    </view-state>
+
+    <end-state id="downloaded"/>
+    <end-state id="skipFurtherConfiguration"/>
+
+</flow>

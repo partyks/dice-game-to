@@ -186,6 +186,29 @@
                     </descriptorRefs>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <artifactSet>
+                        <includes>
+                            <include>net.sf.jgrapht</include>
+                        </includes>
+                    </artifactSet>
+                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                    <shadedClassifierName>combined</shadedClassifierName>
+                    <finalName>jgrapht-${project.version}-combined</finalName>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

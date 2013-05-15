@@ -1,0 +1,70 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/WEB-INF/layouts/standard.xhtml">
+
+<ui:define name="title"> Join existing groups and create new ones
+</ui:define>
+
+<ui:define name="notes">
+
+</ui:define>
+
+<ui:define name="content">
+    <h:form>
+
+         <h:outputLabel value="# {currentEnrollmentID ? -3456 : currentEnrollmentID}"/>
+        <p:dataTable id="subjects" var="subject" value="${subjectsWithGroupsList}" style="text-align:center;width:40%">
+
+            <p:column headerText="Enrollment ID" style="width:30%    ">
+                <h:outputLabel value="#{currentEnrollmentID}"/>
+            </p:column>
+
+            <p:column headerText="ID" style="width:30%    ">
+                <h:outputFormat value="#{subject.subjectID}"/>
+            </p:column>
+
+            <p:column headerText="Name" style="width:30%    ">
+                <h:outputFormat value="#{subject.name}"/>
+            </p:column>
+
+            <p:column headerText="Team's capacity" style="width:10%    ">
+                <h:outputFormat value="#{subject.teamsCapacity}"/>
+            </p:column>
+
+            <p:column headerText="Available groups" style="width:30%    ">
+                <p:selectOneListbox value="${selectedGroup}" style="height:100px">
+
+                    <f:selectItems value="${groupDAO.getGroups(subject)}" var="group"
+                                   itemLabel="#{group.id}"
+                                   itemValue="#{group}"/>
+
+                    <!-- # {subject.teamsCapacity == group.persons.size() ? '(full)' : group.persons.size()} -->
+
+                </p:selectOneListbox>
+            </p:column>
+
+            <p:column headerText="Actions" style="width:30%    ">
+                <p:commandButton action="join" value="Join selected group" />
+
+                <p:commandButton action="create" value="Create new group">
+                    <f:param name="subjectID" value="#{subject.subjectID}"/>
+                </p:commandButton>
+            </p:column>
+            <p:column style="width:10%">
+                <p:commandButton id="selectEnrollmen" icon="ui-icon-arrowreturnthick-1-e" action="eventChosen"
+                                 ajax="false">
+                    <f:setPropertyActionListener value="# {enrollment}" target="# {currentEnrollment}"/>
+                </p:commandButton>
+            </p:column>
+
+        </p:dataTable>
+
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

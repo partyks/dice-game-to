@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+      http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <secured attributes="ROLE_ADMIN" match="any"/>
+
+    <input name="currentEnrollment" type="pl.agh.enrollme.model.Enroll" required="true"/>
+
+    <view-state id="people-management">
+        <!-- Object to be filled with new person details when creating new user using form -->
+        <var name="newPerson" class="pl.agh.enrollme.model.Person"/>
+        <!-- Stores new password when using "Reset password" feature -->
+        <var name="newPassword" class="java.lang.String"/>
+        <!-- Stores person to be deleted -->
+        <var name="deletePerson" class="pl.agh.enrollme.model.Person"/>
+        <!-- Stores person whose password is to be deleted -->
+        <var name="passwordResetPerson" class="pl.agh.enrollme.model.Person"/>
+
+        <on-entry>
+            <evaluate expression="personEnrollPermissionService.prepareForEnroll(currentEnrollment)"/>
+        </on-entry>
+
+        <transition on="add">
+            <evaluate expression="personService.setEncodedPassword(newPerson, newPerson.password)"/>
+            <evaluate expression="personEnrollPermissionService.addAndSelectPerson(newPerson)"/>
+            <set name="newPerson" value="new pl.agh.enrollme.model.Person()"/>
+        </transition>
+
+        <!-- Resetting password -->
+
+        <transition on="reset-password">
+            <set name="newPassword" value="new java.lang.String()"/>
+        </transition>
+
+        <transition on="reset-password-accept">
+            <evaluate expression="personService.setEncodedPassword(passwordResetPerson, newPassword)"/>
+            <evaluate expression="personDAO.update(passwordResetPerson)"/>
+        </transition>
+
+        <transition on="reset-password-cancel">
+        </transition>
+
+        <!-- Deleting people -->
+        <transition on="delete">
+        </transition>
+
+        <transition on="delete-accept">
+            <evaluate expression="personEnrollPermissionService.delete(deletePerson)"/>
+        </transition>
+
+        <transition on="delete-cancel">
+        </transition>
+
+        <transition on="submitAndNext" to="peopleAssigned">
+            <evaluate expression="personEnrollPermissionService.saveSelection(currentEnrollment)"/>
+        </transition>
+        <transition on="skip" to="skipFurtherConfiguration"/>
+    </view-state>
+
+    <end-state id="peopleAssigned"/>
+    <end-state id="skipFurtherConfiguration"/>
+
+</flow>

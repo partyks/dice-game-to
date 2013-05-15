@@ -1,0 +1,37 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/WEB-INF/layouts/standard.xhtml">
+
+<ui:define name="title">basic-configuration</ui:define>
+
+<ui:define name="notes">
+</ui:define>
+
+<ui:define name="content">
+<h:form>
+    <p:messages/>
+    <p:fieldset>
+        Name <p:inputText value="#{createdEnrollment.name}"/>
+        <br/>
+        Maximum amount of pts per termin: <p:inputText id="termPoints" value="#{enrollmentConfiguration.pointsPerTerm}"/>
+        <br/>
+        Maximum amount of pts per subject:<p:inputText id="subjectPoints" value="#{enrollmentConfiguration.pointsPerSubject}"/>
+        <br/>
+        Minimum amount of pts per subject:<p:inputText id="minimumSubject" value="#{enrollmentConfiguration.minimumPointsPerSubject}"/>
+        <br/>
+        Additional points for whichever subject:<p:inputText id="additional" value="#{enrollmentConfiguration.additionalPoints}"/>
+        <br/>
+        Week view width:<p:inputText id="weekWidth" value="#{enrollmentConfiguration.weekViewWidth}"/>
+        <br/>
+        Is periodic (usually it is):<p:selectBooleanCheckbox id="periodic" value="#{enrollmentConfiguration.periodic}"/>
+    </p:fieldset>
+    <p:commandButton value="---> next" action="setData" ajax="false"/>
+</h:form>
+
+</ui:define>
+
+</ui:composition>

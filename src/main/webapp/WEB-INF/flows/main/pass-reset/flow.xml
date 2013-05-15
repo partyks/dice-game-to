@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+   <secured attributes="ROLE_USER, ROLE_ADMIN" match="any"/>
+
+   <view-state id="view">
+       <on-entry>
+           <evaluate expression="passResetService.createController()" result="viewScope.passResetController"
+                     result-type="pl.agh.enrollme.controller.PassResetController"/>
+       </on-entry>
+       <transition on="save">
+           <evaluate expression="passResetService.resetPassword(passResetController)"/>
+       </transition>
+       <transition on="exit" to="done"/>
+       <transition on="logout" to="logout"/>
+
+   </view-state>
+
+   <end-state id="done"/>
+   <end-state id="logout"/>
+
+</flow>

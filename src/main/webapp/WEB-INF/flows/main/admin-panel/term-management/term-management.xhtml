@@ -1,0 +1,141 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/layouts/standard.xhtml">
+
+    <ui:define name="title">Term Management
+    </ui:define>
+
+    <ui:define name="notes">
+
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="form">
+
+            <p:growl id="messages" showDetail="true" />
+
+            <p:menubar>
+                <p:menuitem value="Save" action="save" icon="ui-icon-disc" ajax="false" update="messages"/>
+                <p:menuitem value="Submit" icon="ui-icon-next" onclick="submitConfirmation.show()"/>
+                <p:menuitem value="End" icon="ui-icon-refresh" onclick="endConfirmation.show()"/>
+                <!--<p:menuitem value="Save" action="save" icon="ui-icon-disc" ajax="false"/>-->
+                <!--<p:menuitem value="Submit" action="submitAndNext" icon="ui-icon-next" ajax="false"/>-->
+                <!--<p:menuitem value="End" action="skip" icon="ui-icon-refresh" ajax="false"/>-->
+            </p:menubar>
+
+            <p:spacer width="100%" height="10"/>
+
+            <!-- Custom schedule component based on the Schedule component -->
+            <p:enrollSchedule value="#{scheduleController.eventModel}" widgetVar="myschedule"
+                              allDaySlot="false"
+                              showWeekends="false"
+                              slotMinutes="15"
+                              firstHour="7"
+                              minTime="7"
+                              maxTime="22"
+                              initialDate="${scheduleController.initialDate}"
+                              periodic="${scheduleController.periodic}"
+                              leftHeaderTemplate="${scheduleController.leftHeaderTemplate}"
+                              centerHeaderTemplate="${scheduleController.centerHeaderTemplate}"
+                              rightHeaderTemplate="${scheduleController.rightHeaderTemplate}"
+                              weekViewWidth="${scheduleController.weekViewWidth}"
+                              view="${scheduleController.view}"
+                              autoOpacity="true"
+                              aspectRatio="1"
+                              style="width: 100%;left:0;position: absolute; !important;"
+                    >
+
+                <p:ajax event="dateSelect" listener="#{scheduleController.onDateSelect}"
+                        update="eventDetails messages" oncomplete="eventDialog.show()" />
+                <p:ajax event="eventSelect" listener="#{scheduleController.onEventSelect}"
+                        update="eventDetails" oncomplete="eventDialog.show()" />
+                <p:ajax event="eventMove" listener="#{scheduleController.onEventMove}"
+                        update="messages" />
+                <p:ajax event="eventResize" listener="#{scheduleController.onEventResize}"
+                        update="messages" />
+
+            </p:enrollSchedule>
+
+            <!-- Dialog shown when user edits an event -->
+            <p:dialog widgetVar="eventDialog" header="Term Details" showEffect="clip" hideEffect="clip" modal="true">
+                <h:panelGrid id="eventDetails" columns="2">
+                    <p:outputLabel value="Start time: " for="startTime"/>
+                    <h:outputText id="startTime" value="#{scheduleController.event.startDate}">
+                        <f:convertDateTime pattern="dd/MM/yyyy hh:mm a"/>
+                    </h:outputText>
+
+                    <p:outputLabel value="End time: " for="endTime"/>
+                    <h:outputText id="endTime" value="#{scheduleController.event.endDate}">
+                        <f:convertDateTime pattern="dd/MM/yyyy hh:mm a"/>
+                    </h:outputText>
+
+                    <p:outputLabel value="Subject: " for="subjectChoice"/>
+                    <p:selectOneMenu id="subjectChoice" value="#{scheduleController.subject}" converter="#{subjectConverter}">
+                        <f:selectItems value="#{scheduleController.subjects}"
+                                       var="subject"
+                                       itemLabel="#{subject.name}"
+                                       itemValue="#{subject}"
+                        />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Teacher: " for="teacherChoice"/>
+                    <p:selectOneMenu id="teacherChoice" value="#{scheduleController.teacher}" converter="#{teacherConverter}">
+                        <f:selectItems value="#{scheduleController.teachers}"
+                                       var="teacher"
+                                       itemLabel="#{teacher.degree} #{teacher.firstName} #{teacher.secondName}"
+                                       itemValue="#{teacher}"
+                        />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Room: " for="place"/>
+                    <p:inputText id="place" value="#{scheduleController.event.place}"/>
+
+                    <p:outputLabel value="Type: " for="type"/>
+                    <p:inputText id="type" value="#{scheduleController.event.activityType}"/>
+
+                    <p:outputLabel value="Is certain: " for="certain"/>
+                    <p:selectBooleanCheckbox id="certain" value="#{scheduleController.certain}"/>
+
+                    <p:outputLabel value="Capacity: " for="capacity"/>
+                    <p:inputText id="capacity" value="#{scheduleController.capacity}"/>
+
+                    <p:commandButton type="reset" value="Discard" />
+                    <p:column>
+                        <p:commandButton value="OK" actionListener="#{scheduleController.updateEvent}"
+                                         oncomplete="myschedule.update();eventDialog.hide();"/>
+                        <p:commandButton value="Remove" actionListener="#{scheduleController.removeEvent}"
+                                         oncomplete="myschedule.update();eventDialog.hide();"/>
+                    </p:column>
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+
+        <!--Additional form for confirmation dialogs-->
+        <h:form id="dialogForm1">
+             <!--Submit confirmation dialog-->
+            <p:confirmDialog id="submitConfirmDialog" message="Are you sure you want to submit and proceed to next page? All unsaved data will be lost!"
+                             severity="alert" widgetVar="submitConfirmation" showEffect="clip" hideEffect="clip">
+
+                <p:commandButton id="confirm" value="Yes" oncomplete="submitConfirmation.hide()" action="submitAndNext" ajax="false"/>
+                <p:commandButton id="decline" value="No" oncomplete="submitConfirmation.hide()"/>
+            </p:confirmDialog>
+        </h:form>
+
+        <!--Additional form for confirmation dialogs-->
+        <h:form id="dialogForm2">
+            <!--End confirmation dialog-->
+            <p:confirmDialog id="endConfirmDialog" message="Are you sure you want to end enroll configuration? All unsaved data will be lost!"
+                severity="alert" widgetVar="endConfirmation" showEffect="clip" hideEffect="clip">
+
+                <p:commandButton id="confirm" value="Yes" oncomplete="endConfirmation.hide()" action="skip" ajax="false"/>
+                <p:commandButton id="decline" value="No" oncomplete="endConfirmation.hide()"/>
+            </p:confirmDialog>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

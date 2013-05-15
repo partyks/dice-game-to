@@ -1,0 +1,66 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+				template="/WEB-INF/layouts/standard.xhtml">
+
+<ui:define name="title"> Choose subjects you want enroll for and push the Submit button
+</ui:define>
+
+<ui:define name="notes">
+
+</ui:define>
+
+<ui:define name="content">
+
+    <h:form id="form">
+        <p:messages id="messages"/>
+
+        <h:outputText style="font-size:20pt"
+                value="#{currentTeacher.degree} #{currentTeacher.firstName} #{currentTeacher.secondName}"/>
+
+        <p:dataTable id="termsTable" var="sp" value="#{studentPointsList}" sortBy="#{sp.term.startTime}" emptyMessage="Nobody enrolled yet">
+
+            <f:facet name="header">
+                <h:outputText value="#{currentSubject.name}" style="font-size: 14pt"/>
+            </f:facet>
+
+            <p:column style="width: 30%" >
+                <f:facet name="header">
+                    Time
+                </f:facet>
+
+                <h:outputText value="#{sp.term.timespanAsString}"/>
+            </p:column>
+
+            <p:column style="width: 70%" >
+                <f:facet name="header">
+                    Student
+                </f:facet>
+
+                <h:outputText value="#{sp.person.lastName} #{sp.person.firstName}"/>
+            </p:column>
+
+        </p:dataTable>
+
+
+        <!-- <h:commandLink>
+            <p:button value="Export result as pdf" />
+            <p:dataExporter type="pdf" target="termsTable" fileName="terms"/>
+        </h:commandLink> -->
+
+        <h:commandLink>
+            <p:button value="Export result as xls" />
+            <p:dataExporter type="xls" target="termsTable" fileName="terms"/>
+        </h:commandLink>
+
+        <p:commandButton value="Back" action="done"/>
+
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

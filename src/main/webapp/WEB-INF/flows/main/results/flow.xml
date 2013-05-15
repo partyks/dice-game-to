@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <secured attributes="ROLE_USER, ROLE_ADMIN" match="any"/>
+
+    <!-- FIXME: use of ArrayList instead of generic list is not desirable
+    (no guarantee that the actual type of List provided by DAO is ArrayList),
+    any ideas? -->
+    <var name="terms" class="java.util.ArrayList"/>
+
+    <var name="studentPointsList" class="java.util.ArrayList"/>
+    <var name="currentTeacher" class="pl.agh.enrollme.model.Teacher"/>
+    <var name="currentSubject" class="pl.agh.enrollme.model.Subject"/>
+
+    <input name="currentEnrollment" type="pl.agh.enrollme.model.Enroll" required="true"/>
+
+    <view-state id="view">
+        <transition on="logout" to="logout"/>
+
+        <transition on="subjectResults" to="subject-results"/>
+        <transition on="teacherResults" to="teacher-results"/>
+        <transition on="done" to="resultsDone"/>
+    </view-state>
+    
+    <view-state id="subject-results">
+        <transition on="logout" to="logout"/>
+
+        <transition on="done" to="view">
+        </transition>
+    </view-state>
+
+    <view-state id="teacher-results">
+        <transition on="logout" to="logout"/>
+
+        <transition on="done" to="view">
+        </transition>
+    </view-state>
+
+    <end-state id="logout"/>
+    <end-state id="theEnd"/>
+    <end-state id="resultsDone"/>
+
+</flow>

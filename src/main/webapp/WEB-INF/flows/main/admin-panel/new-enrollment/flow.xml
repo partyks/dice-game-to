@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+      http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <secured attributes="ROLE_ADMIN" match="any"/>
+
+    <subflow-state id="new-enroll" subflow="main/admin-panel/new-enrollment/basic-configuration">
+        <transition on="setConfiguration" to="people-management">
+            <set value="currentEvent.attributes.createdEnrollment" name="flowScope.currentEnrollment"
+                 type="pl.agh.enrollme.model.Enroll"/>
+        </transition>
+    </subflow-state>
+
+    <subflow-state id="people-management" subflow="main/admin-panel/people-management">
+        <input name="currentEnrollment" value="currentEnrollment" required="true" type="pl.agh.enrollme.model.Enroll"/>
+        <transition on="peopleAssigned" to="subject-management"/>
+    </subflow-state>
+
+    <subflow-state id="subject-management" subflow="main/admin-panel/subject-management">
+        <input name="currentEnrollment" value="currentEnrollment" required="true" type="pl.agh.enrollme.model.Enroll"/>
+        <transition on="subjectsAssigned" to="term-management"/>
+    </subflow-state>
+
+    <subflow-state id="term-management" subflow="main/admin-panel/term-management">
+        <input name="currentEnrollment" value="currentEnrollment" required="true" type="pl.agh.enrollme.model.Enroll"/>
+        <transition on="termsAssigned" to="final-configuration"/>
+    </subflow-state>
+
+    <subflow-state id="final-configuration" subflow="main/admin-panel/new-enrollment/final-configuration">
+        <input name="currentEnrollment" value="currentEnrollment" required="true" type="pl.agh.enrollme.model.Enroll"/>
+        <transition on="completed" to="createdEnrollment"/>
+    </subflow-state>
+
+    <end-state id="createdEnrollment"/>
+
+
+    <global-transitions>
+        <transition on="skipFurtherConfiguration" to="final-configuration">
+        </transition>
+    </global-transitions>
+</flow>

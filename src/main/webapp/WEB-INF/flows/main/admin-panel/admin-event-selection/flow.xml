@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <secured attributes="ROLE_ADMIN"/>
+
+    <view-state id="view">
+        <on-render>
+            <evaluate expression="eventDAO.listEvents()" result="viewScope.eventList"/>
+        </on-render>
+        <transition on="create" to="eventToBeAdded"/>
+    </view-state>
+
+    <end-state id="eventToBeAdded">
+        <output name="eventID" value="eventDAO.createEventAndReturnID()"/>
+    </end-state>
+
+    <end-state id="eventChosen">
+        <output name="eventID" value="1"/>
+    </end-state>
+
+</flow>

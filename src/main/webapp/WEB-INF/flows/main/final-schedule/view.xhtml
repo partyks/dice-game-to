@@ -1,0 +1,50 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/layouts/standard.xhtml">
+
+<ui:define name="title">Preferences Management <br/><br/>
+    <b>Attention!</b> Changes you make to your preferences will not be saved until YOU save them. Save frequently or perish!
+</ui:define>
+
+<ui:define name="notes">
+
+</ui:define>
+
+<ui:define name="content">
+    <h:form id="form">
+
+        <p:growl id="messages" showDetail="true" />
+
+        <p:menubar>
+            <p:menuitem value="Exit" icon="ui-icon-close" action="exit" ajax="false"/>
+        </p:menubar>
+
+        <p:spacer width="100%" height="10"/>
+
+        <!-- Custom schedule component based on the Schedule component -->
+        <p:enrollSchedule value="#{scheduleController.eventModel}" widgetVar="schedule"
+                          allDaySlot="false"
+                          showWeekends="${scheduleController.showWeekends}"
+                          slotMinutes="${scheduleController.slotMinutes}"
+                          firstHour="${scheduleController.firstHour}"
+                          minTime="${scheduleController.minTime}"
+                          maxTime="${scheduleController.maxTime}"
+                          initialDate="${scheduleController.initialDate}"
+                          periodic="${scheduleController.periodic}"
+                          leftHeaderTemplate="${scheduleController.leftHeaderTemplate}"
+                          centerHeaderTemplate="${scheduleController.centerHeaderTemplate}"
+                          rightHeaderTemplate="${scheduleController.rightHeaderTemplate}"
+                          view="${scheduleController.view}"
+                          autoOpacity="true"
+                >
+
+        </p:enrollSchedule>
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

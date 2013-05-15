@@ -1,0 +1,60 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/WEB-INF/layouts/standard.xhtml">
+
+<ui:define name="title">basic-configuration</ui:define>
+
+<ui:define name="notes">
+</ui:define>
+
+<ui:define name="content">
+    <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
+        <p:graphicImage value="/design/ajaxloadingbar.gif" />
+    </p:dialog>
+
+    <h:form id="downloading">
+        <p:messages showDetail="true"/>
+
+        Download terms file:
+            <p:commandButton id="termsListener" actionListener="#{antTermFileController.generateTermsFile}" value="generate terms"/>
+        <p:commandButton id="downloadTerms" value="Download" ajax="false"
+                         onclick="PrimeFaces.monitorDownload(start, stop)" icon="ui-icon-arrowthichk-s">
+            <p:fileDownload value="#{antTermFileController.streamedTerms}" />
+        </p:commandButton>
+        <br/>
+        Download preferences file:
+        <p:commandButton id="preferencesListener" actionListener="#{antPreferencesFileController.generatePreferencesFile}" value="generate prefs"/>
+        <p:commandButton id="downloadPreferences" value="Download" ajax="false"
+                         onclick="PrimeFaces.monitorDownload(start, stop)" icon="ui-icon-arrowthichk-s">
+            <p:fileDownload value="#{antPreferencesFileController.streamedPreferences}" />
+        </p:commandButton>
+        <br/>
+        Download groups file:
+        <p:commandButton id="groupListener" actionListener="#{antGroupFileController.generateGroupsFile}" value="generate groups"/>
+        <p:commandButton id="downloadGroups" value="Download" ajax="false"
+                         onclick="PrimeFaces.monitorDownload(start, stop)" icon="ui-icon-arrowthichk-s">
+            <p:fileDownload value="#{antGroupFileController.streamedGroups}" />
+        </p:commandButton>
+        <br/>
+    </h:form>
+
+
+    <!--Downloading status component script:-->
+    <script type="text/javascript">
+        function start() {
+            statusDialog.show();
+        }
+
+        function stop() {
+            statusDialog.hide();
+        }
+    </script>
+
+
+</ui:define>
+</ui:composition>
+

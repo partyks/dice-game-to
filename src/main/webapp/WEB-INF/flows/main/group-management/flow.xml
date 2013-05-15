@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <secured attributes="ROLE_USER, ROLE_ADMIN" match="any"/>
+
+    <!-- <input name="currentEnrollment" type="pl.agh.enrollme.model.Enroll" required="true"/> -->
+    <input name="currentEnrollment" type="pl.agh.enrollme.model.Enroll" required="true"/>
+
+    <view-state id="list">
+        <var name="controller" class="pl.agh.enrollme.controller.groupmanagement.GroupManagementController"/>
+        <var name="newGroupName" class="java.lang.String"/>
+        <var name="groupToDelete" class="pl.agh.enrollme.model.Group"/>
+        <var name="personToRemove" class="pl.agh.enrollme.model.Person"/>
+
+        <on-entry>
+            <set name="flowScope.newGroupRowId" value="-1" type="java.lang.Integer"/>
+            <set name="flowScope.groupToDeleteRowId" value="-1" type="java.lang.Integer"/>
+            <set name="flowScope.personToRemoveRowId" value="-1" type="java.lang.Integer"/>
+        </on-entry>
+        
+        <on-render>
+            <evaluate expression="groupManagementService.newControllerForEnroll(currentEnrollment)"
+                      result="controller"/>
+        </on-render>
+
+        <transition on="createNewGroup">
+            <set value="new java.lang.String()" name="newGroupName"/>
+        </transition>
+
+        <!-- Any idea how to make refreshing list work without refreshing whole page?-->
+        <transition on="createNewGroupConfirm" to="list">
+            <evaluate expression="groupManagementService.createGroup(newGroupName,
+                        controller.getControllerWithSubjectId(newGroupRowId).subject)"
+                    result="controller.getControllerWithSubjectId(newGroupRowId).selectedGroup"/>
+            <evaluate expression="groupManagementService.saveControllerState(controller)"/>
+        </transition>
+
+        <transition on="deleteGroup">
+        </transition>
+
+        <transition on="deleteGroupConfirm" to="list">
+            <evaluate expression="null"
+                      result="controller.getControllerWithSubjectId(groupToDeleteRowId).selectedGroup"/>
+            <evaluate expression="groupManagementService.deleteGroup(groupToDelete)"/>
+            <evaluate expression="groupManagementService.saveControllerState(controller)"/>
+        </transition>
+
+        <transition on="removePerson">
+            <evaluate expression="controller.getControllerWithSubjectId(personToRemoveRowId).removePersonFromOwnedGroup(
+                    personToRemove)"/>
+            <evaluate expression="groupManagementService.removePersonFromGroup(personToRemove,
+                    controller.getControllerWithSubjectId(personToRemoveRowId).selectedGroup)"/>
+            <evaluate expression="groupManagementService.saveControllerState(controller)"/>
+        </transition>
+
+        <transition on="saveGroups" to="groupsManaged">
+            <!--<evaluate expression="groupManagementService.saveControllerState(controller)"/>-->
+        </transition>
+
+        <transition on="logout" to="logout"/>
+    </view-state>
+
+    <end-state id="logout"/>
+    <end-state id="groupsManaged"/>
+
+</flow>

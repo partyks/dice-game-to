@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+      http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <secured attributes="ROLE_ADMIN" match="any"/>
+
+    <var name="newTeacher" class="pl.agh.enrollme.model.Teacher"/>
+
+    <view-state id="teacher-management">
+        <on-render>
+            <evaluate expression="teacherDAO.getList()" result="viewScope.teacherList"/>
+        </on-render>
+        <transition on="add">
+            <evaluate expression="teacherDAO.add(newTeacher)"/>
+            <set name="newTeacher" value="new pl.agh.enrollme.model.Teacher()"/>
+        </transition>
+        <transition on="submit" to="teachersEdited"/>
+    </view-state>
+
+    <end-state id="teachersEdited"/>
+</flow>

@@ -1,0 +1,124 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/WEB-INF/layouts/standard.xhtml">
+
+<ui:define name="title">subject-management</ui:define>
+
+<ui:define name="notes">
+</ui:define>
+
+<ui:define name="content">
+    <h:form id="subjectManagement">
+        <p:messages id="messages"/>
+
+        <p:panelGrid id="addSubject">
+            <f:facet name="header">
+                <p:row>
+                    <p:column colspan="5">Add new subject</p:column>
+                </p:row>
+                <p:row>
+                    <p:column>Name</p:column>
+                    <p:column>Teams capacity</p:column>
+                    <p:column>Teacher</p:column>
+                    <p:column>Color</p:column>
+                </p:row>
+            </f:facet>
+
+            <p:row>
+                <p:column>
+                    <p:inputText value="#{newSubject.name}"/>
+                </p:column>
+                <p:column>
+                    <p:inputText value="#{newSubject.teamsCapacity}"/>
+                </p:column>
+                <p:column>
+                    <p:selectOneMenu value="#{selectedTeacher}" converter="#{teacherConverter}">
+                        <f:selectItems value="#{teacherList}"
+                                       var="teacher"
+                                       itemLabel="#{teacher.degree} #{teacher.firstName} #{teacher.secondName}"
+                                       itemValue="#{teacher}" />
+                    </p:selectOneMenu>
+                </p:column>
+                <p:column>
+                    <p:colorPicker id="coolorChooser" value="#{newSubject.color}" widgetVar="picker" />
+                </p:column>
+            </p:row>
+
+            <f:facet name="footer">
+                <p:row>
+                    <p:column colspan="5">
+                        <p:commandButton action="add" value="Add" update=":subjectManagement:subjects
+                        :subjectManagement:addSubject :subjectManagement:messages"/>
+                    </p:column>
+                </p:row>
+            </f:facet>
+        </p:panelGrid>
+
+        <p:dataTable value="${subjectManagementService.subjects}" var="subject"  id="subjects"
+                     emptyMessage="No subjects to show" editable="true">
+
+            <p:ajax event="rowEdit" listener="#{subjectService.onEdit}" update="subjects"/>
+
+            <p:column headerText="Name">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{subject.name}"/>
+                    </f:facet>
+                    <f:facet name="input">
+                        <p:inputText value="#{subject.name}" style="width:95%"/>
+                    </f:facet>
+                </p:cellEditor>
+            </p:column>
+            <p:column headerText="Teams Capacity">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{subject.teamsCapacity}"/>
+                    </f:facet>
+                    <f:facet name="input">
+                        <p:inputText value="#{subject.teamsCapacity}"/>
+                    </f:facet>
+                </p:cellEditor>
+            </p:column>
+            <p:column headerText="Teacher">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{subject.teacher.degree} #{subject.teacher.firstName}
+                        #{subject.teacher.secondName}"/>
+                    </f:facet>
+                    <f:facet name="input">
+                        <p:selectOneMenu value="#{subject.teacher}" converter="#{teacherConverter}">
+                            <f:selectItems value="#{teacherList}"
+                                           var="teacher"
+                                           itemLabel="#{teacher.degree} #{teacher.firstName} #{teacher.secondName}"
+                                           itemValue="#{teacher}" />
+                        </p:selectOneMenu>
+
+                    </f:facet>
+                </p:cellEditor>
+            </p:column>
+            <p:column headerText="Color">
+                <!--<p:cellEditor>-->
+                    <!--<f:facet name="output">-->
+                        <!--<h:outputText value="#{subject.color}"/>-->
+                    <!--</f:facet>-->
+                    <!--<f:facet name="input">-->
+                        <p:colorPicker value="#{subject.color}"/>
+                    <!--</f:facet>-->
+                <!--</p:cellEditor>-->
+            </p:column>
+            <p:column>
+                <p:rowEditor/>
+            </p:column>
+        </p:dataTable>
+        <p:commandButton value="Teachers" action="teachers" ajax="false"/>
+        <p:commandButton value="Submit" action="submitAndNext" ajax="false"/>
+        <p:commandButton value="End" action="skip" ajax="false"/>
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

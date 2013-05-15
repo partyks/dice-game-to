@@ -1,0 +1,43 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/layouts/standard.xhtml">
+
+    <ui:define name="title">Password reset</ui:define>
+
+    <ui:define name="notes">
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <p:growl id="growl"/>
+
+            <p:panel>
+                <p:messages id="messages" showDetail="true" autoUpdate="true"/>
+
+                <p:panelGrid columns="1" style="border-style: hidden">
+
+                    <p:row style="border-style: hidden"><p:column style="border-style: hidden"><p:outputLabel id="nLabel" value="Old Password: *" for="oldPass"/></p:column></p:row>
+                    <p:row style="border-style: hidden"><p:column style="border-style: hidden"><p:password id="oldPass" value="#{passResetController.oldPass}" label="Old Password"/></p:column></p:row>
+                    <p:row style="border-style: hidden"><p:column style="border-style: hidden"><p:outputLabel id="nLabel2" value="New Password: *" for="newPass1"/></p:column></p:row>
+                    <p:row style="border-style: hidden"><p:column style="border-style: hidden"><p:password id="newPass1" value="#{passResetController.newPass}" label="New Password"
+                        feedback="true" match="newPass2" /></p:column></p:row>
+                    <p:row style="border-style: hidden"><p:column style="border-style: hidden"><p:outputLabel id="nLabel3" value="Confirm Password: *" for="newPass2"/></p:column></p:row>
+                    <p:row style="border-style: hidden"><p:column style="border-style: hidden"><p:password id="newPass2" value="#{passResetController.newPassConfirm}" label="Confirmation"
+                            />
+                    </p:column></p:row>
+                    <p:row style="border-style: hidden"><p:column style="border-style: hidden">
+                        <p:commandButton id="save" value="Save" update="growl" action="save" ajax="false"/>
+                        <p:commandButton id="exit" value="Done" action="exit" ajax="false"/>
+                    </p:column></p:row>
+                </p:panelGrid>
+            </p:panel>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

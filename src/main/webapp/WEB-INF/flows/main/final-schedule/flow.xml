@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <secured attributes="ROLE_USER, ROLE_ADMIN" match="any"/>
+
+    <input name="currentEnrollment" type="pl.agh.enrollme.model.Enroll" required="true"/>
+
+    <!--<on-start>
+        <evaluate expression="preferencesManagementService.createScheduleController(currentEnrollment)"
+                  result="flowScope.preferencesController"
+                  result-type="pl.agh.enrollme.controller.preferencesmanagement.PreferencesManagementController"/>
+    </on-start>-->
+
+    <view-state id="view">
+        <on-entry>
+            <evaluate expression="finalScheduleService.createScheduleController(currentEnrollment)"
+                      result="viewScope.scheduleController"
+                      result-type="pl.agh.enrollme.controller.finalschedule.FinalScheduleController"/>
+        </on-entry>
+        <transition on="logout" to="logout"/>
+    </view-state>
+
+    <end-state id="logout"/>
+    <end-state id="exit" />
+
+    <global-transitions>
+        <transition on="exit" to="exit"/>
+    </global-transitions>
+
+</flow>
