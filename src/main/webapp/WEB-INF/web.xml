@@ -10,9 +10,9 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:applicationConfig.xml
-			/WEB-INF/spring/root-context.xml
-		</param-value>
+            classpath:applicationContext.xml
+            /WEB-INF/spring/root-context.xml
+        </param-value>
 	</context-param>
 
 	<listener>
@@ -82,9 +82,9 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				classpath:applicationConfig.xml
-				/WEB-INF/spring/appServlet/servlet-context.xml
-			</param-value>
+                classpath:applicationContext.xml
+                /WEB-INF/spring/appServlet/servlet-context.xml
+            </param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

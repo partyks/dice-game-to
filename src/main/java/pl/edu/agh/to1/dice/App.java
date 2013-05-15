@@ -33,7 +33,7 @@ import java.util.List;
 
 //@Component
 public class App {
-    private static final BeanFactory beanFactory = null;// = new ClassPathXmlApplicationContext("applicationConfig.xml");
+    private static final BeanFactory beanFactory = null;// = new ClassPathXmlApplicationContext("applicationContext.xml");
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
     private static final UserService userService = null;//(UserService) beanFactory.getBean("userService");
     private static final BotManager botManager = null;//(BotManager) beanFactory.getBean("botManager");
