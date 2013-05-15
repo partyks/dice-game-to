@@ -6,7 +6,7 @@ import javax.persistence.Entity;
  * Statistics which are specific for DiceGame
  * @author Michal Partyka
  */
-@Entity
+//@Entity
 public class DiceSpecifiedStatistics extends SpecifiedStatistics {
     private Integer sumOfPoints;
     private Integer sumOfBonusPoints;

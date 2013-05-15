@@ -8,7 +8,7 @@ import javax.persistence.Id;
  * Information about some game
  * @author Michal Partyka
  */
-@Entity
+//@Entity
 public class GameInfo {
 
     @Id

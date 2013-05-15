@@ -8,7 +8,7 @@ import java.util.List;
  * Global statistics of all games, aggregates specific statistics for every game
  * @author Michal Partyka
  */
-@Entity
+//@Entity
 public class GlobalStatistics {
     @GeneratedValue
     @Id

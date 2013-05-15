@@ -7,7 +7,7 @@ import javax.persistence.*;
 /**
  * @author Michal Partyka
  */
-@Entity
+//@Entity
 public class UserModel {
 
     @GeneratedValue

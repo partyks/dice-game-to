@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Specific statistic for the GameInfo game
  * @author Michal Partyka
  */
-@Entity
+//@Entity
 public class SpecifiedStatistics {
     @Id
     @GeneratedValue
