@@ -4,80 +4,11 @@
 	    xsi:schemaLocation="http://www.springframework.org/schema/webflow
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-	<secured attributes="ROLE_USER, ROLE_ADMIN" match="any"/>
+    <view-state id="view"/>
 
-    <var name="currentEnrollment" class="pl.agh.enrollme.model.Enroll"/>
-
-    <subflow-state id="manageAccount" subflow="main/account-management">
-        <transition on="eventChoiceRequested" to="chooseEvent">
-        </transition>
-        <transition on="adminPanelRequested" to="administer">
-        </transition>
-        <transition on="passReset" to="passReset"/>
-    </subflow-state>
-
-    <subflow-state id="passReset" subflow="main/pass-reset">
-        <transition to="manageAccount"/>
-    </subflow-state>
-
-    <subflow-state id="administer" subflow="main/admin-panel">
-
-    </subflow-state>
-
-
-    <subflow-state id="chooseEvent" subflow="main/event-selection">
-		<transition on="eventComplete" to="seeResults">
-            <set value="currentEvent.attributes.currentEnrollment" name="flowScope.currentEnrollment"
-                 type="pl.agh.enrollme.model.Enroll"/>
-        </transition>
-		<transition on="activeChosen" to="chooseSubjects">
-            <set value="currentEvent.attributes.currentEnrollment" name="flowScope.currentEnrollment"
-                 type="pl.agh.enrollme.model.Enroll"/>
-        </transition>
-        <transition on="seeSchedule" to="seeFinalSchedule">
-            <set value="currentEvent.attributes.currentEnrollment" name="flowScope.currentEnrollment"
-                 type="pl.agh.enrollme.model.Enroll"/>
-        </transition>
-        <transition on="leaving" to="manageAccount"/>
-	</subflow-state>
-	
-	<subflow-state id="chooseSubjects" subflow="main/subject-selection">
-        <input name="currentEnrollment" value="currentEnrollment" required="true" type="pl.agh.enrollme.model.Enroll"/>
-		<transition on="subjectsChosen" to="managePreferences"/>
-        <transition on="groupsManagementRequested" to="manageUserGroups"/>
-    </subflow-state>
-
-    <subflow-state id="manageUserGroups" subflow="main/group-management">
-        <!-- TODO pass proper enroll -->
-        <input name="currentEnrollment" value="currentEnrollment" required="true" type="pl.agh.enrollme.model.Enroll"/>
-        <transition on="groupsManaged" to="managePreferences"/>
-    </subflow-state>
-	
-	<subflow-state id="managePreferences" subflow="main/preferences-management">
-        <input name="currentEnrollment" value="currentEnrollment" required="true"
-               type="pl.agh.enrollme.model.Enroll"/>
-        <transition on="preferencesApplied" to="flowComplete"/>
-        <transition on="groupManagement" to="manageUserGroups"/>
-	</subflow-state>
-
-    <subflow-state id="seeFinalSchedule" subflow="main/final-schedule">
-        <input name="currentEnrollment" value="currentEnrollment" required="true"
-               type="pl.agh.enrollme.model.Enroll"/>
-        <transition to="flowComplete"/>
-    </subflow-state>
-
-	<subflow-state id="seeResults" subflow="main/results">
-        <input name="currentEnrollment" value="currentEnrollment" required="true"
-               type="pl.agh.enrollme.model.Enroll"/>
-        <transition on="resultsDone" to="flowComplete"/>
-	</subflow-state>
-	
 	<end-state id="flowComplete" view="externalRedirect:servletRelative:/main" />
 
-    <end-state id="logout" view="externalRedirect:servletRelative:/logout"/>
-	
 	<global-transitions>
-        <transition on="logout" to="logout"/>
         <transition on="exit" to="flowComplete">
 		</transition>
 	</global-transitions>
