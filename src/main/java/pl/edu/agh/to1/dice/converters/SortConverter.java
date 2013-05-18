@@ -10,6 +10,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import java.util.List;
 
 /**
  * Author: Piotr Turek
@@ -28,13 +29,15 @@ public class SortConverter implements Converter {
             return null;
         }
 
-        for (IUserSort us : rankingController.getSorts()) {
+        final List<IUserSort> sorts = rankingController.getSorts();
+
+        for (IUserSort us : sorts) {
             if (us.toString().equals(value)) {
                 return us;
             }
         }
 
-        return rankingController.getSorts().get(0);
+        return sorts.get(0);
     }
 
     @Override
