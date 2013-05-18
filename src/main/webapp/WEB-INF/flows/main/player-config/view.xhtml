@@ -17,16 +17,14 @@
             <p:panel header="Amout of players">
                 <p:messages/>
                 <p:fieldset>
-                    <h:panelGrid columns="3">
+                    <h:panelGrid columns="2">
                         <h:outputLabel value="Number of users"/>
                         <p:inputText id="users" required="true" value="#{playerConfiguration.amountOfUsers}">
                             <f:validateDoubleRange maximum="100" minimum="0"/>
                         </p:inputText>
-                        <p:message for="users"/>
 
                         <h:outputLabel value="Number of bots"/>
                         <p:inputText id="bots" required="true" value="#{playerConfiguration.amountOfBots}"/>
-                        <p:message for="bots"/>
                     </h:panelGrid>
                     <p:commandButton value="Update" update="userForm"/>
                 </p:fieldset>
