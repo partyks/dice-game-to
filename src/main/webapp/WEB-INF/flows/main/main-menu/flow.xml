@@ -3,4 +3,13 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
+    <view-state id="view">
+        <transition on="play" to="play"/>
+        <transition on="ranking" to="ranking"/>
+    </view-state>
+
+    <end-state id="play"/>
+
+    <end-state id="ranking"/>
+
 </flow>
