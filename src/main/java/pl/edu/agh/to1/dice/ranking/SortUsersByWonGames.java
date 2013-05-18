@@ -30,6 +30,6 @@ public class SortUsersByWonGames extends GenericSort implements IUserSort {
 
     @Override
     public String toString() {
-        return "amount of winning games comparator";
+        return "Most wins";
     }
 }

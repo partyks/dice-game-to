@@ -17,30 +17,16 @@ import java.util.List;
  * Author: Piotr Turek
  */
 @Service
-@FacesConverter(value="sortConverter")
 public class SortConverter implements Converter {
 
     @Autowired
-    RankingController rankingController;
-
-    @Autowired
-    ApplicationContext appCont;
-
-    @PostConstruct
-    public void dupa() {
-        rankingController = (RankingController) appCont.getBean("rankingController");
-        rankingController.getSorts();
-        System.out.println("KURWAMAC");
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + rankingController);
-    }
+    private RankingController rankingController;
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         if (value.equals("")) {
             return null;
         }
-
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + rankingController);
 
         final List<IUserSort> sorts = rankingController.getSorts();
 
