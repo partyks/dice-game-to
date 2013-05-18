@@ -7,7 +7,6 @@ import pl.edu.agh.to1.dice.gameControllers.RankingController;
 import pl.edu.agh.to1.dice.ranking.IUserSort;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;

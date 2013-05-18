@@ -4,15 +4,27 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
     <view-state id="view">
+        <var name="newUserModel" class="pl.edu.agh.to1.dice.playermodel.UserModel"/>
+
         <transition on="back" to="game-config"/>
         <transition on="main-menu" to="main-menu"/>
-        <transition on="done" to="config-done"/>
+        <transition on="done" to="config-done">
+            <evaluate expression="playerConfiguration.createConfiguredUsers()" result="players"/>
+        </transition>
+        <transition on="add">
+            <evaluate expression="newUserModel.
+                setGlobalStatistics(new pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics(0,0,0))"/>
+            <evaluate expression="playerConfiguration.addAndSelectUser(newUserModel)"/>
+            <set name="newUserModel" value="new pl.edu.agh.to1.dice.playermodel.UserModel()"/>
+        </transition>
     </view-state>
 
     <end-state id="game-config"/>
 
     <end-state id="main-menu"/>
 
-    <end-state id="config-done"/>
+    <end-state id="config-done">
+        <output name="playerList" value="players"/>
+    </end-state>
 
 </flow>

@@ -4,6 +4,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
                 template="/WEB-INF/layouts/standard.xhtml">
 
     <ui:define name="title">Player Configuration</ui:define>
@@ -12,7 +13,69 @@
 
     <ui:define name="content">
 
+        <h:form id="userForm">
+            <p:panel header="Amout of players">
+                <p:messages/>
+                <p:fieldset>
+                    <h:panelGrid columns="3">
+                        <h:outputLabel value="Number of users"/>
+                        <p:inputText id="users" required="true" value="#{playerConfiguration.amountOfUsers}">
+                            <f:validateDoubleRange maximum="100" minimum="0"/>
+                        </p:inputText>
+                        <p:message for="users"/>
 
+                        <h:outputLabel value="Number of bots"/>
+                        <p:inputText id="bots" required="true" value="#{playerConfiguration.amountOfBots}"/>
+                        <p:message for="bots"/>
+                    </h:panelGrid>
+                    <p:commandButton value="Update" update="userForm"/>
+                </p:fieldset>
+            </p:panel>
+
+            <p:panel id="userManagement" rendered="#{playerConfiguration.validAmountsOfPlayers}">
+                <p:panel rendered="#{playerConfiguration.amountOfUsers gt 0}">
+                    <p:panelGrid columns="3">
+                        Name: <p:inputText value="#{newUserModel.name}"/>
+                        <p:commandButton value="Add" action="add" update=":userForm"/>
+                    </p:panelGrid>
+
+                    <p:dataTable id="usersSelection" var="userModel" value="#{playerConfiguration.availableUsers}"
+                            selection="#{playerConfiguration.selectedUsers}" rowKey="#{userModel.id}" >
+                        <p:ajax event="rowSelectCheckbox" update=":userForm:done"/>
+                        <p:ajax event="rowUnselectCheckbox" update=":userForm:done"/>
+                        <p:ajax event="rowSelect" update=":userForm:done"/>
+
+                        <f:facet name="header">
+                            Choose users <br/>
+                        </f:facet>
+
+                        <p:column selectionMode="multiple" style="width:2%" />
+
+                        <p:column headerText="Name" style="width:49%">
+                            #{userModel.name}
+                        </p:column>
+
+                        <p:column headerText="Won Matches" style="width:49%">
+                            #{userModel.globalStatistics.amountOfWinGames}
+                        </p:column>
+                    </p:dataTable>
+
+                </p:panel>
+                <p:panel rendered="#{playerConfiguration.amountOfBots gt 0}">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="Choose the bot strength"/>
+
+                        <p:selectOneMenu value="#{playerConfiguration.botStrength}">
+                            <f:selectItem itemLabel="Hard" itemValue="0.85"/>
+                            <f:selectItem itemLabel="Medium" itemValue="0.78"/>
+                            <f:selectItem itemLabel="Easy" itemValue="0.70"/>
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                </p:panel>
+            </p:panel>
+            <p:commandButton ajax="false" action="done" value="done" id="done"
+                        disabled="#{not playerConfiguration.validConfiguration}"/>
+        </h:form>
     </ui:define>
 
 </ui:composition>

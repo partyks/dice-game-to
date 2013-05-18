@@ -17,12 +17,16 @@ public class UserService {
 
     public UserModel[] displayAvailableUsers() {
         System.out.println("Users obtained from db:");
-        List<UserModel> users = userDAO.getList();
+        List<UserModel> users = getUserModels();
         UserModel[] usersArray = users.toArray(new UserModel[users.size()]);
         for (int i = 0; i < usersArray.length; i++) {
             System.out.println(i + ". " + usersArray[i].getName());
         }
         return usersArray;
+    }
+
+    public List<UserModel> getUserModels() {
+        return userDAO.getList();
     }
 
     public UserModel getUserByUsername(String username) {

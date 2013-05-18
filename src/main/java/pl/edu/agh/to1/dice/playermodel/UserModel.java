@@ -3,12 +3,15 @@ package pl.edu.agh.to1.dice.playermodel;
 import pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author Michal Partyka
  */
 @Entity
-public class UserModel {
+public class UserModel implements Serializable {
+
+    private static final Long serialVersionID = 214219412421L;
 
     @GeneratedValue
     @Id
@@ -55,5 +58,22 @@ public class UserModel {
 
     public void setGlobalStatistics(GlobalStatistics globalStatistics) {
         this.globalStatistics = globalStatistics;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserModel)) return false;
+
+        UserModel userModel = (UserModel) o;
+
+        if (!name.equals(userModel.name)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 }
