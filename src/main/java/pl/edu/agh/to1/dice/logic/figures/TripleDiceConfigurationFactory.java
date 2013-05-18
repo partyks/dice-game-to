@@ -1,5 +1,7 @@
 package pl.edu.agh.to1.dice.logic.figures;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.List;
 /**
  * @author Michal Partyka
  */
+@Component
 public class TripleDiceConfigurationFactory extends AbstractConfigurationFactory {
     private final Integer requireForBonus;
     private final Integer bonus;

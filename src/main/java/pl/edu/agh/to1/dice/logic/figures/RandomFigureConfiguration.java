@@ -1,10 +1,13 @@
 package pl.edu.agh.to1.dice.logic.figures;
 
+import org.springframework.stereotype.Component;
+
 import java.util.*;
 
 /**
  * @author Michal Partyka
  */
+@Component
 public class RandomFigureConfiguration extends TripleDiceConfigurationFactory {
     private static final Random random = new Random();
     private List<IFigure> randomFigures;

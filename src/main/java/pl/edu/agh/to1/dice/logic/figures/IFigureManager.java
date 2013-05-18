@@ -24,4 +24,6 @@ public interface IFigureManager {
     List<Bonus> getBonuses();
 
     IFigure getFigureByName(String figureSignature);
+
+    void setConfiguration(AbstractConfigurationFactory factory);
 }
