@@ -4,9 +4,17 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
     <view-state id="view">
+        <var name="newUserModel" class="pl.edu.agh.to1.dice.playermodel.UserModel"/>
+
         <transition on="back" to="game-config"/>
         <transition on="main-menu" to="main-menu"/>
         <transition on="done" to="config-done"/>
+        <transition on="add">
+            <evaluate expression="newUserModel.
+                setGlobalStatistics(new pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics(0,0,0))"/>
+            <evaluate expression="playerConfiguration.addAndSelectUser(newUserModel)"/>
+            <set name="newUserModel" value="new pl.edu.agh.to1.dice.playermodel.UserModel()"/>
+        </transition>
     </view-state>
 
     <end-state id="game-config"/>

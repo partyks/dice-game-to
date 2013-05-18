@@ -29,6 +29,7 @@ public class UserDAO extends GenericDAO<UserModel> implements IUserDAO {
             throw new UserAlreadyPersistedInDatabaseException("Given username " + userModel.getName() + "  " +
                     "is already persisted in database");
         }
+        System.out.println("Persisting userModel with: " + userModel.getId());
         super.add(userModel);
     }
 

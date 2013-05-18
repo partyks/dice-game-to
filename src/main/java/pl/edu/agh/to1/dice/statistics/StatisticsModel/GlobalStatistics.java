@@ -1,6 +1,7 @@
 package pl.edu.agh.to1.dice.statistics.StatisticsModel;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,10 @@ import java.util.List;
  * @author Michal Partyka
  */
 @Entity
-public class GlobalStatistics {
+public class GlobalStatistics implements Serializable {
+    @Transient
+    private static final Long serialVersionID = 4513454315314L;
+
     @GeneratedValue
     @Id
     private Integer Id;
