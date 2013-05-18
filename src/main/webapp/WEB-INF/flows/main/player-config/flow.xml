@@ -8,7 +8,9 @@
 
         <transition on="back" to="game-config"/>
         <transition on="main-menu" to="main-menu"/>
-        <transition on="done" to="config-done"/>
+        <transition on="done" to="config-done">
+            <evaluate expression="playerConfiguration.createConfiguredUsers()" result="players"/>
+        </transition>
         <transition on="add">
             <evaluate expression="newUserModel.
                 setGlobalStatistics(new pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics(0,0,0))"/>
@@ -21,6 +23,8 @@
 
     <end-state id="main-menu"/>
 
-    <end-state id="config-done"/>
+    <end-state id="config-done">
+        <output name="playerList" value="players"/>
+    </end-state>
 
 </flow>
