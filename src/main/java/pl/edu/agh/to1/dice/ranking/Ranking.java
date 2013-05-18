@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.repository.IUserDAO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Component
 @Scope("session")
-public class Ranking {
+public class Ranking implements Serializable {
     private List<UserInfo> userInfos = new ArrayList<UserInfo>();
     private IUserSort comparator;
 

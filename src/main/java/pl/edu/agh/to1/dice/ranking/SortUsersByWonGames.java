@@ -2,6 +2,7 @@ package pl.edu.agh.to1.dice.ranking;
 
 import pl.edu.agh.to1.dice.playermodel.UserModel;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**

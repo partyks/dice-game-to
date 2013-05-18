@@ -12,27 +12,42 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:form>
+        <h:form id="mainForm">
 
-            <p:panelGrid columns="1" header="Choose sorting method" footer="See the ranking below" >
-                    <p:selectOneMenu value="#{rankingController.selectedSort}" effect="fade" converter="sort">
-                        <f:selectItem itemLabel="Select One" itemValue="" />
+            <p:panel header="Choose sorting method">
+                <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">
+                    <p:selectOneMenu value="#{rankingController.selectedSort}" effect="fade" converter="sortConverter">
+                        <!--<f:selectItem itemLabel="Select One" itemValue="" />-->
                         <f:selectItems value="#{rankingController.sorts}" var="sort" itemLabel="#{sort.toString()}" itemValue="#{sort}"/>
                     </p:selectOneMenu>
 
-                    <p:commandButton label="Refresh" onclick="#{ranking.sort(rankingController.selectedSort)}"/>
-            </p:panelGrid>
+                    <p:commandButton value="Refresh" onclick="#{ranking.sort(rankingController.selectedSort)}" update="rankingPanel"/>
+                </h:panelGrid>
+            </p:panel>
 
-            <p:dataTable var="car" value="#{ranking.userInfos}" rowIndexVar="rowID">
+            <p:spacer height="25"/>
+            <h3>See the ranking below</h3>
+            <p:spacer height="25"/>
 
-                <p:column headerText="No.">
-                    <h:outputText value="#{rowID}" />
-                </p:column>
+            <p:outputPanel id="rankingPanel">
+                <p:dataTable var="userInfo" value="#{ranking.userInfos}" rowIndexVar="rowID">
 
-                <p:column headerText="User Info">
-                    <h:outputText value="#{userInfo.toString()}" />
-                </p:column>
-            </p:dataTable>
+                    <p:column headerText="No." width="30">
+                        <h:outputText value="#{rowID}" />
+                    </p:column>
+
+                    <p:column headerText="User Name"  style="text-align: center">
+                        <h:outputText value="#{userInfo.user.name}" />
+                    </p:column>
+
+                    <p:column headerText="Rank" style="text-align: center">
+                        <h:outputText value="#{userInfo.description}"/>
+                    </p:column>
+
+                </p:dataTable>
+            </p:outputPanel>
+
+            <p:commandButton value="Back" ajax="false" action="done"/>
 
         </h:form>
 

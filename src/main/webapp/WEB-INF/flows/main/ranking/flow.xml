@@ -4,7 +4,7 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
     <view-state id="view">
-        <var name="rankingController" class="pl.edu.agh.to1.dice.gameControllers.RankingController"/>
+        <!--<var name="rankingController" class="pl.edu.agh.to1.dice.gameControllers.RankingController"/>-->
         <transition on="done" to="done"/>
     </view-state>
 

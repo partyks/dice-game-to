@@ -2,6 +2,7 @@ package pl.edu.agh.to1.dice.ranking;
 
 import pl.edu.agh.to1.dice.playermodel.UserModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +14,7 @@ import java.util.List;
  * @author Michal Partyka
  */
 public class GenericSort implements IUserSort {
+
     private final Comparator<UserModel> userComparator;
     private final IExtractUserInfo extractUserInfo;
 
@@ -40,4 +42,13 @@ public class GenericSort implements IUserSort {
         }
         return userInfos;
     }
+
+    public Comparator<UserModel> getUserComparator() {
+        return userComparator;
+    }
+
+    public IExtractUserInfo getExtractUserInfo() {
+        return extractUserInfo;
+    }
+
 }

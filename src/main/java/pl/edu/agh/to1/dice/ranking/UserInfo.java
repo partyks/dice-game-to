@@ -8,6 +8,7 @@ import pl.edu.agh.to1.dice.playermodel.UserModel;
  */
 public class UserInfo {
     private final UserModel user;
+
     private final String description;
 
     public UserInfo(UserModel user, String description) {
@@ -19,4 +20,13 @@ public class UserInfo {
     public String toString() {
         return user.getName() + " " + description;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public UserModel getUser() {
+        return user;
+    }
+
 }
