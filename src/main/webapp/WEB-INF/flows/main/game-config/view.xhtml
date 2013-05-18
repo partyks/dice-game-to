@@ -7,26 +7,24 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/layouts/standard.xhtml">
 
-    <ui:define name="title">Game configuration</ui:define>
+    <ui:define name="title">Game configuration <br/>
+        Fill this form and proceed to the users specification</ui:define>
 
-    <ui:define name="notes">Fil l this form and proceed to the users specification</ui:define>
+    <ui:define name="notes"></ui:define>
 
     <ui:define name="content">
         <h:form>
-            <h3>Game configuration</h3>
-            <h:panelGrid columns="2">
-                <h:outputText value="Select game mode:"/>
-                <p:selectOneMenu value="#{configurationController.gameMode}">
-                    <f:selectItem itemLabel="Tripple dices" itemValue="tripleDiceConfigurationFactory"/>
-                    <f:selectItem itemLabel="Single dices" itemValue="singleDiceConfigurationFactory"/>
-                    <f:selectItem itemLabel="Random dices" itemValue="randomDiceConfiguration"/>
-                </p:selectOneMenu>
-
-                <p:commandButton value="debug" update="disp"/>
-
-                <h:outputLabel id="disp" value="#{configurationController.gameMode}"/>
-
-            </h:panelGrid>
+            <h3>Game Mode</h3>
+            <p:fieldset>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Select game mode:"/>
+                    <p:selectOneMenu value="#{configurationController.gameMode}">
+                        <f:selectItem itemLabel="Tripple dices" itemValue="tripleDiceConfigurationFactory"/>
+                        <f:selectItem itemLabel="Single dices" itemValue="singleDiceConfigurationFactory"/>
+                        <f:selectItem itemLabel="Random dices" itemValue="randomDiceConfiguration"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+            </p:fieldset>
         </h:form>
         <h:form>
             <p:commandButton value="Done" action="done" ajax="false"/>
