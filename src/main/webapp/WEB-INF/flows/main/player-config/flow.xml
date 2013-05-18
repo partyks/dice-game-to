@@ -3,4 +3,16 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
+    <view-state id="view">
+        <transition on="back" to="game-config"/>
+        <transition on="main-menu" to="main-menu"/>
+        <transition on="done" to="config-done"/>
+    </view-state>
+
+    <end-state id="game-config"/>
+
+    <end-state id="main-menu"/>
+
+    <end-state id="config-done"/>
+
 </flow>
