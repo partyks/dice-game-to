@@ -29,6 +29,8 @@ public class SortConverter implements Converter {
             return null;
         }
 
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + rankingController.getSelectedSort());
+
         final List<IUserSort> sorts = rankingController.getSorts();
 
         for (IUserSort us : sorts) {

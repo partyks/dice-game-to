@@ -18,10 +18,12 @@
                 <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">
                     <p:selectOneMenu value="#{rankingController.selectedSort}" effect="fade" converter="sortConverter">
                         <!--<f:selectItem itemLabel="Select One" itemValue="" />-->
-                        <f:selectItems value="#{rankingController.sorts}" var="sort" itemLabel="#{sort.toString()}" itemValue="#{sort}"/>
+                        <f:selectItems value="#{rankingController.sorts}" var="sort" itemLabel="#{sort.toString()}"
+                                       itemValue="#{sort}"/>
                     </p:selectOneMenu>
 
-                    <p:commandButton value="Refresh" onclick="#{ranking.sort(rankingController.selectedSort)}" update="rankingPanel"/>
+                    <p:commandButton value="Refresh" onclick="#{ranking.sort(rankingController.selectedSort)}"
+                                     update="rankingPanel"/>
                 </h:panelGrid>
             </p:panel>
 
@@ -30,7 +32,10 @@
             <p:spacer height="25"/>
 
             <p:outputPanel id="rankingPanel">
-                <p:dataTable var="userInfo" value="#{ranking.userInfos}" rowIndexVar="rowID">
+                <p:dataTable var="userInfo" value="#{ranking.userInfos}" rowIndexVar="rowID"
+                             paginator="true" rows="20" paginatorTemplate="
+                             {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15,20">
 
                     <p:column headerText="No." width="30">
                         <h:outputText value="#{rowID}" />
