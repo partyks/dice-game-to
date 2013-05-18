@@ -16,7 +16,7 @@
 
             <p:panel header="Choose sorting method">
                 <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">
-                    <p:selectOneMenu value="#{rankingController.selectedSort}" effect="fade" converter="sortConverter">
+                    <p:selectOneMenu value="#{rankingController.selectedSort}" effect="fade" converter="#{sortConverter}">
                         <!--<f:selectItem itemLabel="Select One" itemValue="" />-->
                         <f:selectItems value="#{rankingController.sorts}" var="sort" itemLabel="#{sort.toString()}"
                                        itemValue="#{sort}"/>
