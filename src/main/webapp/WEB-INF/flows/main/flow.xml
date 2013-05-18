@@ -4,19 +4,33 @@
 	    xsi:schemaLocation="http://www.springframework.org/schema/webflow
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-    <view-state id="view">
-        <transition on="ala" to="ala"/>
-    </view-state>
+    <subflow-state id="main-menu" subflow="main/main-menu">
+        <transition on="play" to="game-config"/>
+        <transition on="ranking" to="ranking"/>
+    </subflow-state>
+    
+    <subflow-state id="game-config" subflow="main/game-config">
+        <transition on="main-menu" to="main-menu"/>
+        <transition on="config-done" to="player-config"/>
+    </subflow-state>
 
-    <view-state id="ala">
+    <subflow-state id="player-config" subflow="main/player-config">
+        <transition on="back" to="game-config"/>
+        <transition on="main-menu" to="main-menu"/>
+        <transition on="config-done" to="gameplay"/>
+    </subflow-state>
 
-    </view-state>
+    <subflow-state id="gameplay" subflow="main/gameplay">
+        <transition on="exit" to="main-menu"/>
+        <transition on="finished" to="game-results"/>
+    </subflow-state>
 
-	<end-state id="flowComplete" view="externalRedirect:servletRelative:/main" />
+    <subflow-state id="game-results" subflow="main/game-results">
+        <transition on="done" to="main-menu"/>
+    </subflow-state>
 
-	<global-transitions>
-        <transition on="exit" to="flowComplete">
-		</transition>
-	</global-transitions>
+    <subflow-state id="ranking" subflow="main/ranking">
+        <transition on="done" to="main-menu"/>
+    </subflow-state>
 
 </flow>
