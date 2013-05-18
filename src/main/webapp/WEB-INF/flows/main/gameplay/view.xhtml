@@ -14,19 +14,24 @@
     <ui:define name="content">
         <h:form id="mainForm">
 
-            <p:layout style="min-width:100%; min-height:400px;" id="layout">
-                <p:layoutUnit id="diceArea" position="west" style="min-width: 100px; overflow-x: hidden"
+            <p:layout style="min-width:100%; min-height:500px;" id="layout">
+                <p:layoutUnit id="diceArea" position="west" style="min-width: 100px; overflow-x: hidden;
+                text-align: center;"
                               header="Dice Box">
                     <p:panelGrid columns="1" style="overflow-x: hidden; text-align: center;" >
-                        <h:outputText value="Rolls left:" style="text-align: center; font-size: 200" />
+                        <h:outputText value="Rolls left:" style="text-align: center; font-size: 120%" />
                         <h:outputText value="3" id="rollsLeft" style="font-size: 300%; font-style: oblique;
                             font-family: cursive; text-align: center"/>
-                        <p:selectManyButton id="freezingChoice">
-
-                            <f:selectItem itemLabel="B" itemValue="Bold" />
-                            <f:selectItem itemLabel="I" itemValue="Italic" />
-                            <f:selectItem itemLabel="U" itemValue="Underline" />
-                        </p:selectManyButton>
+                        <h:outputLabel for="freezingChoice" value="Check to freeze:" style="font-size: 70%"/>
+                        <p:selectManyCheckbox id="freezingChoice" layout="pageDirection">
+                            <f:selectItem itemLabel="6" itemValue="Bold" />
+                            <f:selectItem itemLabel="2" itemValue="Italic" />
+                            <f:selectItem itemLabel="1" itemValue="Underline" />
+                            <f:selectItem itemLabel="6" itemValue="Bold" />
+                            <f:selectItem itemLabel="2" itemValue="Italic" />
+                            <f:selectItem itemLabel="1" itemValue="Underline" />
+                        </p:selectManyCheckbox>
+                        <p:commandButton value="Roll" id="rollButton"/>
                     </p:panelGrid>
                 </p:layoutUnit>
 
