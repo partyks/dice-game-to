@@ -22,8 +22,8 @@
                                        itemValue="#{sort}"/>
                     </p:selectOneMenu>
 
-                    <p:commandButton value="Refresh" onclick="#{ranking.sort(rankingController.selectedSort)}"
-                                     update="rankingPanel"/>
+                    <p:commandButton value="Refresh" actionListener="#{ranking.sort(rankingController.selectedSort)}"
+                                     update="rankTable" ajax="true"/>
                 </h:panelGrid>
             </p:panel>
 
@@ -31,26 +31,24 @@
             <h3>See the ranking below</h3>
             <p:spacer height="25"/>
 
-            <p:outputPanel id="rankingPanel">
-                <p:dataTable var="userInfo" value="#{ranking.userInfos}" rowIndexVar="rowID"
-                             paginator="true" rows="20" paginatorTemplate="
-                             {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15,20">
+            <p:dataTable id="rankTable" var="userInfo" value="#{ranking.userInfos}" rowIndexVar="rowID"
+                         paginator="true" rows="20" paginatorTemplate="
+                         {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15,20">
 
-                    <p:column headerText="No." width="30">
-                        <h:outputText value="#{rowID}" />
-                    </p:column>
+                <p:column headerText="No." width="30">
+                    <h:outputText value="#{rowID + 1}" />
+                </p:column>
 
-                    <p:column headerText="User Name"  style="text-align: center">
-                        <h:outputText value="#{userInfo.user.name}" />
-                    </p:column>
+                <p:column headerText="User Name"  style="text-align: center">
+                    <h:outputText value="#{userInfo.user.name}" />
+                </p:column>
 
-                    <p:column headerText="Rank" style="text-align: center">
-                        <h:outputText value="#{userInfo.description}"/>
-                    </p:column>
+                <p:column headerText="Rank" style="text-align: center">
+                    <h:outputText value="#{userInfo.description}"/>
+                </p:column>
 
-                </p:dataTable>
-            </p:outputPanel>
+            </p:dataTable>
 
             <p:commandButton value="Back" ajax="false" action="done"/>
 
