@@ -14,9 +14,9 @@ import java.util.List;
  * @author Michal Partyka
  */
 @Component
-@Scope(BeanDefinition.SCOPE_PROTOTYPE)
+@Scope("session")
 public class Ranking {
-    private List<UserInfo> list = new ArrayList<UserInfo>();
+    private List<UserInfo> userInfos = new ArrayList<UserInfo>();
     private IUserSort comparator;
 
     @Autowired(required = true)
@@ -25,14 +25,14 @@ public class Ranking {
 
     public void sort(IUserSort comparator) {
         this.comparator = comparator;
-        list = comparator.sort(userDAO.getList());
+        userInfos = comparator.sort(userDAO.getList());
     }
 
     /**
      * Displays whole ranking
      */
     public void displayRanking() {
-        displayRanking(list.size());
+        displayRanking(userInfos.size());
     }
 
     /**
@@ -44,7 +44,11 @@ public class Ranking {
     }
 
     public String getRanking() {
-        return getRanking(list.size());
+        return getRanking(userInfos.size());
+    }
+
+    public List<UserInfo> getUserInfos() {
+        return userInfos;
     }
 
     private String getRanking(int n) {
@@ -54,7 +58,7 @@ public class Ranking {
         final StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Ranking sorted by ").append(comparator.toString()).append("\n");
         for (int i = 0; i < n; i++) {
-            stringBuilder.append(i+1).append(". ").append(list.get(i)).append("\n");
+            stringBuilder.append(i+1).append(". ").append(userInfos.get(i)).append("\n");
         }
         return stringBuilder.toString();
     }
