@@ -1,5 +1,6 @@
 package pl.edu.agh.to1.dice.gameControllers;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.ranking.GenericSort;
 import pl.edu.agh.to1.dice.ranking.IUserSort;
