@@ -18,6 +18,7 @@ public class FigureManager implements IFigureManager {
     private List<IFigure> figures = new ArrayList<IFigure>();
     private List<Bonus> bonuses = new ArrayList<Bonus>();
 
+    @Override
     public void setConfiguration(AbstractConfigurationFactory factory) {
         figures.clear();
         figures.addAll(factory.createFigures());

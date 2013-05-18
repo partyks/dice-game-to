@@ -5,7 +5,9 @@
 
     <view-state id="view">
         <transition on="back" to="main-menu"/>
-        <transition on="done" to="config-done"/>
+        <transition on="done" to="config-done">
+            <evaluate expression="configurationController.updateConfiguration()"/>
+        </transition>
     </view-state>
 
     <end-state id="main-menu"/>
