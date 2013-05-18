@@ -1,0 +1,46 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/layouts/standard.xhtml">
+
+    <ui:define name="title">It's time to play the game of dice!</ui:define>
+
+    <ui:define name="notes">
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="mainForm">
+
+            <p:layout style="min-width:100%; min-height:400px;" id="layout">
+                <p:layoutUnit id="diceArea" position="west" style="min-width: 100px; overflow-x: hidden"
+                              header="Dice Box">
+                    <p:panelGrid columns="1" style="overflow-x: hidden; text-align: center;" >
+                        <h:outputText value="Rolls left:" style="text-align: center; font-size: 200" />
+                        <h:outputText value="3" id="rollsLeft" style="font-size: 300%; font-style: oblique;
+                            font-family: cursive; text-align: center"/>
+                        <p:selectManyButton id="freezingChoice">
+
+                            <f:selectItem itemLabel="B" itemValue="Bold" />
+                            <f:selectItem itemLabel="I" itemValue="Italic" />
+                            <f:selectItem itemLabel="U" itemValue="Underline" />
+                        </p:selectManyButton>
+                    </p:panelGrid>
+                </p:layoutUnit>
+
+                <p:layoutUnit id="scoreArea" position="center" header="Score Board">
+                    Center
+                </p:layoutUnit>
+                
+                <p:layoutUnit id="statusArea" position="east" style="min-width: 100px" header="Game Status">
+                    East
+                </p:layoutUnit>
+            </p:layout>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
