@@ -14,7 +14,7 @@
     <ui:define name="content">
         <h:form id="mainForm">
 
-            <p:layout style="min-width:100%; min-height:750px;" id="layout">
+            <p:layout style="width: 100%; min-height: 1500px;" id="layout">
                 <p:layoutUnit position="north" id="gameStatus" style="text-align: center; overflow: hidden"
                               header="Game Status">
                     <p:panel>
@@ -27,10 +27,12 @@
                         <p:spacer width="20" height="0"/>
                         <h:outputText id="activePlayer" value="Maciek" style="font-size: 120%; font-style: oblique;
                             font-family: cursive"/>
+                        <p:spacer width="60" height="0"/>
+                        <p:commandButton ajax="false" action="done" value="Exit" immediate="true"/>
                     </p:panel>
                 </p:layoutUnit>
 
-                <p:layoutUnit id="diceArea" position="west" style="min-width: 100px; overflow-x: hidden;
+                <p:layoutUnit id="diceArea" position="west" style="overflow-x: hidden; width: 100%;
                     text-align: center;"
                               header="Dice Box">
                     <p:panelGrid columns="1" style="overflow-x: hidden; text-align: center" >
@@ -49,19 +51,24 @@
                         <p:commandButton value="Roll" id="rollButton"/>
                     </p:panelGrid>
                 </p:layoutUnit>
-                <p:layoutUnit id="scoreArea" position="center" header="Score Board">
-                    <p:dataTable value="#{figureManager.values()}" var="figure">
-                        <p:column>
+                <p:layoutUnit id="scoreArea" position="center" header="Score Board"
+                    style="text-align: center; margin-left: 30px; width: 100%">
+                    <!--<p:panel>-->
+                    <p:dataTable value="#{figureManager.values()}" var="figure"
+                            style="width: #{2*50+200}px !important;">
+                        <p:column headerText="Figures" style="width: 200px">
                             <p:outputLabel value="#{figure.toString()}"/>
                         </p:column>
-                        <p:columns value="#{scoreController.scores}" var="score">
+                        <p:columns value="#{scoreController.scores}" var="score" headerText="dupa"
+                                style="width: 50px">
                             <p:outputLabel value="#{score.getScore(figure)}"/>
                         </p:columns>
                     </p:dataTable>
+                    <!--</p:panel>-->
                 </p:layoutUnit>
 
             </p:layout>
-            <p:commandButton ajax="false" action="done" value="Exit" immediate="true"/>
+
 
         </h:form>
 
