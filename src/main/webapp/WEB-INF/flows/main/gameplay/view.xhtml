@@ -42,9 +42,9 @@
                         <h:outputText value="3" id="rollsLeft" style="font-size: 300%; font-style: oblique;
                             font-family: cursive; text-align: center"/>
                         <h:outputLabel for="freezingChoice" value="Check to freeze:" style="font-size: 70%"/>
-                        <p:selectManyCheckbox id="freezingChoice" layout="pageDirection" value="#{diceBoxController.getFrozenDices()}"
-                                converter="#{diceConverter}">
-                            <f:selectItems value="#{diceBoxController.getDices()}" converter="#{diceConverter}"/>
+                        <p:selectManyCheckbox id="freezingChoice" layout="pageDirection" value="#{diceBoxController.frozenDices}"
+                                >
+                            <f:selectItems value="#{diceBoxController.getDices()}"/>
                         </p:selectManyCheckbox>
                         <p:commandButton value="Roll" id="rollButton"/>
                     </p:panelGrid>

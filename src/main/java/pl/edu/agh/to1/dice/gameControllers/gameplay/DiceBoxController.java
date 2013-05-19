@@ -6,7 +6,9 @@ import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Author: Piotr Turek
@@ -14,6 +16,8 @@ import java.util.List;
 @Component
 public class DiceBoxController {
     private DiceBox diceBox = new DiceBox(5);
+
+    private List<Dice> frozenDices;
 
     @PostConstruct
     public void init() {
@@ -24,8 +28,13 @@ public class DiceBoxController {
         return diceBox;
     }
 
-    public List<Dice> getDices() {
-        return diceBox.getDices();
+    public Map<String, Dice> getDices() {
+        final List<Dice> dices = diceBox.getDices();
+        Map<String, Dice> map = new HashMap<>();
+        for (Dice d : dices) {
+            map.put(String.valueOf(d.getScore()), d);
+        }
+        return map;
     }
 
     public List<Dice> getFrozenDices() {
@@ -37,4 +46,7 @@ public class DiceBoxController {
         diceBox.roll();
     }
 
+    public void setFrozenDices(List<Dice> frozenDices) {
+        this.frozenDices = frozenDices;
+    }
 }
