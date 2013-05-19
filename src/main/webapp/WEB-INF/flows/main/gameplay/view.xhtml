@@ -4,6 +4,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
                 template="/WEB-INF/layouts/standard.xhtml">
 
     <ui:define name="title">It's time to play the game of dice!</ui:define>
@@ -14,7 +15,7 @@
     <ui:define name="content">
         <h:form id="mainForm">
 
-            <p:layout style="width: 100%; min-height: 1500px;" id="layout">
+            <p:layout style="width: 100%;" id="layout">
                 <p:layoutUnit position="north" id="gameStatus" style="text-align: center; overflow: hidden"
                               header="Game Status">
                     <p:panel>
@@ -28,7 +29,7 @@
                         <h:outputText id="activePlayer" value="Maciek" style="font-size: 120%; font-style: oblique;
                             font-family: cursive"/>
                         <p:spacer width="60" height="0"/>
-                        <p:commandButton ajax="false" action="done" value="Exit" immediate="true"/>
+                        <p:commandLink ajax="false" action="done" value="Exit" immediate="true"/>
                     </p:panel>
                 </p:layoutUnit>
 
@@ -53,18 +54,20 @@
                 </p:layoutUnit>
                 <p:layoutUnit id="scoreArea" position="center" header="Score Board"
                     style="text-align: center; margin-left: 30px; width: 100%">
-                    <!--<p:panel>-->
-                    <p:dataTable value="#{figureManager.values()}" var="figure"
-                            style="width: #{2*50+200}px !important;">
-                        <p:column headerText="Figures" style="width: 200px">
-                            <p:outputLabel value="#{figure.toString()}"/>
-                        </p:column>
-                        <p:columns value="#{scoreController.players}" var="player" headerText="dupa"
-                                style="width: 50px">
-                            <p:outputLabel value="#{player.getScore(figure)}"/>
-                        </p:columns>
-                    </p:dataTable>
-                    <!--</p:panel>-->
+                    <p:panel>
+                        <p:dataTable value="#{figureManager.values()}" var="figure" rowIndexVar="rowID"
+                                style="width: #{scoreController.getPlayersCount()*50+200}px !important; border-collapse: separate; border-spacing: 10px;">
+                            <p:column headerText="Figures" style="width: 200px; font-size: 80%">
+                                <p:outputLabel value="#{figure.toString()}"/>
+                            </p:column>
+                            <p:columns value="#{scoreController.players}" var="player" headerText="#{player.getName()}"
+                                    style="width: 50px; font-size: 80%" columnIndexVar="colID">
+                                <!--<p:outputLabel value="#{player.getScore(figure)}"/>-->
+                                    <p:selectBooleanButton onLabel="#{player.getScore(figure)}" disabled="true"
+                                        offLabel="#{player.getScore(figure)}"/>
+                            </p:columns>
+                        </p:dataTable>
+                    </p:panel>
                 </p:layoutUnit>
 
             </p:layout>

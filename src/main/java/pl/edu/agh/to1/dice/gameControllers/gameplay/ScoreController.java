@@ -1,8 +1,10 @@
 package pl.edu.agh.to1.dice.gameControllers.gameplay;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import pl.edu.agh.to1.dice.logic.players.Player;
 import pl.edu.agh.to1.dice.logic.players.Score;
@@ -17,8 +19,10 @@ import java.util.List;
 /**
  * @author Michal Partyka
  */
-@Controller
-public class ScoreController implements ApplicationContextAware {
+@Component
+public class ScoreController {
+
+    @Autowired
     private ApplicationContext applicationContext;
 
     private List<Score> scores;
@@ -45,8 +49,8 @@ public class ScoreController implements ApplicationContextAware {
         this.players = players;
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
+    public int getPlayersCount() {
+        return players.size();
     }
+
 }
