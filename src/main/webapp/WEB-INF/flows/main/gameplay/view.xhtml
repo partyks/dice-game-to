@@ -85,6 +85,12 @@
                                 <p:column headerText="Score:">
                                     <p:outputLabel value="#{bonus.points}"/>
                                 </p:column>
+                                <p:column headerText="Have:">
+                                    <p:outputLabel value="#{bonus.sum}"/>
+                                </p:column>
+                                <p:column headerText="Require:">
+                                    <p:outputLabel value="#{bonus.require}"/>
+                                </p:column>
                                 <f:facet name="footer">
                                     <p:outputLabel value="Total score: #{resultController.result(player)}"/>
                                 </f:facet>

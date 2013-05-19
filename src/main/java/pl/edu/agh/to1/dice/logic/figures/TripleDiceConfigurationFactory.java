@@ -44,7 +44,7 @@ public class TripleDiceConfigurationFactory extends AbstractConfigurationFactory
         for (IFigure figure : figures) {
             if(figuresCountedForBonus.contains(figure)) {
                 doubledFigures.add(new FigureDecorator(figure, 2));
-                tripleFigures.add(new FigureDecorator(figure, 2));
+                tripleFigures.add(new FigureDecorator(figure, 3));
             }
         }
 

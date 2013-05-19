@@ -8,6 +8,7 @@ import java.util.Map;
  */
 public class Bonus {
     private final List<IFigure> countedList;
+    private       Integer sum;
     private final Integer require;
     private final Integer bonus;
     private Integer points=0;
@@ -33,7 +34,7 @@ public class Bonus {
     }
 
     public void countBonus(final Map<IFigure, Integer> map) {
-        Integer sum=0;
+        sum=0;
         for (Map.Entry<IFigure, Integer> point : map.entrySet()) {
             if (countedList.contains(point.getKey())) {
                 sum += point.getValue();
@@ -44,6 +45,10 @@ public class Bonus {
         } else {
             points = 0;
         }
+    }
+
+    public Integer getSum() {
+        return sum;
     }
 
     public Integer getPoints() {
