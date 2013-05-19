@@ -29,19 +29,12 @@ public class ScoreController {
     @Autowired
     private DiceBoxController diceBoxController;
 
-    private List<Score> scores;
     private List<Player> players;
 
     @PostConstruct
     public void init() {
-        this.scores = Arrays.asList((Score) applicationContext.getBean("score"),
-            (Score) applicationContext.getBean("score"));
         this.players = Arrays.asList((Player) UserFactory.newInstance(new UserModel("Player1", new GlobalStatistics(0,0,0)))
             , (Player) UserFactory.newInstance(new UserModel("Player2", new GlobalStatistics(0,0,0))));
-        final DiceBox diceBox = diceBoxController.getDiceBox();
-        diceBox.roll();
-        players.get(0).getScore().add(Figure.ONES,  diceBox);
-        players.get(0).getScore().add(Figure.THREE_EQUALS, diceBox);
     }
 
     public String getStock(IFigure figure) {
@@ -67,8 +60,7 @@ public class ScoreController {
     }
 
     public void submitScore(User user, IFigure figure) {
-        System.out.println("User: " + user.getName());
-        System.out.println("Figure: " + figure.getSignature());
+        user.getScore().add(figure, diceBoxController.getDiceBox());
     }
 
 }

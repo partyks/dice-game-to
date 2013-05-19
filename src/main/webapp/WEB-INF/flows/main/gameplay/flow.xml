@@ -5,8 +5,8 @@
 
     <view-state id="view">
         <on-entry>
-            <evaluate expression="playerConfiguration.createConfiguredUsers()" result="viewScope.players"/>
             <evaluate expression="webFlowController.reset()"/>
+            <evaluate expression="webFlowController.setPlayers(playerConfiguration.createConfiguredUsers())"/>
         </on-entry>
         <transition on="done" to="done"/>
     </view-state>

@@ -42,8 +42,7 @@
                         <h:outputText value="3" id="rollsLeft" style="font-size: 300%; font-style: oblique;
                             font-family: cursive; text-align: center"/>
                         <h:outputLabel for="freezingChoice" value="Check to freeze:" style="font-size: 70%"/>
-                        <p:selectManyCheckbox id="freezingChoice" layout="pageDirection" value="#{diceBoxController.frozenDices}"
-                                converter="#{}">
+                        <p:selectManyCheckbox id="freezingChoice" layout="pageDirection" value="#{diceBoxController.frozenDices}">
                             <f:selectItems value="#{diceBoxController.dices}"/>
                         </p:selectManyCheckbox>
                         <p:commandButton value="Roll" id="rollButton"/>
@@ -53,11 +52,11 @@
                     style="text-align: center; margin-left: 30px; width: 100%">
                     <p:panel>
                         <p:dataTable value="#{figureManager.values()}" var="figure" rowIndexVar="rowID"
-                                style="width: #{scoreController.getPlayersCount()*50+200}px !important; border-collapse: separate; border-spacing: 10px;">
+                                style="width: #{webFlowController.getPlayersCount()*50+200}px !important; border-collapse: separate; border-spacing: 10px;">
                             <p:column headerText="Figures" style="width: 200px; font-size: 80%">
                                 <p:outputLabel value="#{figure.toString()}"/>
                             </p:column>
-                            <p:columns value="#{scoreController.players}" var="player" headerText="#{player.getName()}"
+                            <p:columns value="#{webFlowController.players}" var="player" headerText="#{player.getName()}"
                                     style="width: 50px; font-size: 80%" columnIndexVar="colID">
                                 <p:outputLabel value="#{player.getScore(figure)}" rendered="#{player.score.isUsed(figure)}"/>
                                 <!--here goes controller.getStockForUserAndFigure!-->
