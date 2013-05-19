@@ -67,6 +67,15 @@ public class DiceBox implements Iterable<Dice> {
         frozenDices.add(frozen);
     }
 
+    public boolean setFreeze(Dice dice) {
+        final int id = dices.indexOf(dice);
+        if (id < 0) {
+            return false;
+        }
+        setFreeze(id);
+        return true;
+    }
+
     /**
      * make every dice ready to roll (not frozen)
      */

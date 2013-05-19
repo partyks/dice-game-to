@@ -21,12 +21,13 @@
                     <p:panel>
                         <h:outputText value="Rounds Played: " style="font-size: 120%"/>
                         <p:spacer width="20" height="0"/>
-                        <h:outputText id="roundsPlayed" value="0" style="font-size: 120%; font-style: oblique;
-                            font-family: cursive"/>
+                        <h:outputText id="roundsPlayed" value="#{webFlowController.getRoundsPlayed()}"
+                                      style="font-size: 120%; font-style: oblique; font-family: cursive"/>
                         <p:spacer width="40" height="0"/>
                         <h:outputText value="Active Player: " style="font-size: 120%"/>
                         <p:spacer width="20" height="0"/>
-                        <h:outputText id="activePlayer" value="Maciek" style="font-size: 120%; font-style: oblique;
+                        <h:outputText id="activePlayer" value="#{webFlowController.getActivePlayer().getName()}"
+                                      style="font-size: 120%; font-style: oblique;
                             font-family: cursive"/>
                         <p:spacer width="60" height="0"/>
                         <p:commandLink ajax="false" action="done" value="Exit" immediate="true"/>
@@ -41,13 +42,9 @@
                         <h:outputText value="3" id="rollsLeft" style="font-size: 300%; font-style: oblique;
                             font-family: cursive; text-align: center"/>
                         <h:outputLabel for="freezingChoice" value="Check to freeze:" style="font-size: 70%"/>
-                        <p:selectManyCheckbox id="freezingChoice" layout="pageDirection">
-                            <f:selectItem itemLabel="6" itemValue="Bold" />
-                            <f:selectItem itemLabel="2" itemValue="Italic" />
-                            <f:selectItem itemLabel="1" itemValue="Underline" />
-                            <f:selectItem itemLabel="6" itemValue="Bold" />
-                            <f:selectItem itemLabel="2" itemValue="Italic" />
-                            <f:selectItem itemLabel="1" itemValue="Underline" />
+                        <p:selectManyCheckbox id="freezingChoice" layout="pageDirection" value="#{diceBoxController.frozenDices}"
+                                converter="#{}">
+                            <f:selectItems value="#{diceBoxController.dices}"/>
                         </p:selectManyCheckbox>
                         <p:commandButton value="Roll" id="rollButton"/>
                     </p:panelGrid>
@@ -65,10 +62,10 @@
                                 <p:outputLabel value="#{player.getScore(figure)}" rendered="#{player.score.isUsed(figure)}"/>
                                 <!--here goes controller.getStockForUserAndFigure!-->
                                 <p:commandButton value="#{scoreController.getStock(figure)}"
-                                                 rendered="#{not player.score.isUsed(figure) and scoreController.isPlayerRound(player)}"
+                                                 rendered="#{not player.score.isUsed(figure) and webFlowController.isPlayerRound(player)}"
                                                  actionListener="#{scoreController.submitScore(player, figure)}"/>
                                 <p:outputLabel value="-"
-                                               rendered="#{not scoreController.isPlayerRound(player) and not player.score.isUsed(figure)}"/>
+                                               rendered="#{not webFlowController.isPlayerRound(player) and not player.score.isUsed(figure)}"/>
                             </p:columns>
                         </p:dataTable>
                     </p:panel>

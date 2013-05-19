@@ -1,9 +1,11 @@
-package pl.edu.agh.to1.dice.gameControllers;
+package pl.edu.agh.to1.dice.gameControllers.gameplay;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import pl.edu.agh.to1.dice.gameControllers.gameplay.ScoreController;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
+import pl.edu.agh.to1.dice.logic.players.Player;
 import pl.edu.agh.to1.dice.logic.players.User;
 
 import java.util.List;
@@ -13,41 +15,47 @@ import java.util.List;
  */
 @Controller
 @Scope("session")
-public class WebFlowController implements FlowController {
+public class WebFlowController {
     @Autowired
     private IFigureManager figureManager;
 
-    private List<User> users;
+    @Autowired
+    private ScoreController scoreController;
 
-    @Override
-    public User getCurrentUser() {
+    private Integer roundsPlayed = 0;
+    private int currentPlayerId = 0;
 
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public Player getActivePlayer() {
+        final List<Player> players = scoreController.getPlayers();
+        return players.get(currentPlayerId);
     }
 
-    @Override
     public Boolean mustChooseFigure() {
         //TODO
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
     public Boolean canRoll() {
         //TODO
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
     public Boolean hasFinished() {
         //TODO
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
-    public void play(List<User> userList) {
-        //TODO whatever - it sucks...
-        this.users = userList;
+    public Integer getRoundsPlayed() {
+        return roundsPlayed;
     }
 
+    public boolean isPlayerRound(Player player) {
+        return player.getName().
+                equals(getActivePlayer().getName());
+    }
+
+    public void reset() {
+        roundsPlayed = 0;
+    }
 
 }
