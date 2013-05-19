@@ -70,6 +70,14 @@
                         </p:dataTable>
                     </p:panel>
                 </p:layoutUnit>
+                <p:layoutUnit id="resultArea" position="east" header="Results"
+                              style="text-align: center; width: 100%">
+                    <p:panel>
+                        <p:dataTable value="#{webFlowController.players}" var="player">
+                            <!--<p:dataTable-->
+                        </p:dataTable>
+                    </p:panel>
+                </p:layoutUnit>
 
             </p:layout>
 
