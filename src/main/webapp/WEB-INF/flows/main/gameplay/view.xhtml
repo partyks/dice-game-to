@@ -62,9 +62,13 @@
                             </p:column>
                             <p:columns value="#{scoreController.players}" var="player" headerText="#{player.getName()}"
                                     style="width: 50px; font-size: 80%" columnIndexVar="colID">
-                                <!--<p:outputLabel value="#{player.getScore(figure)}"/>-->
-                                    <p:selectBooleanButton onLabel="#{player.getScore(figure)}" disabled="true"
-                                        offLabel="#{player.getScore(figure)}"/>
+                                <p:outputLabel value="#{player.getScore(figure)}" rendered="#{player.score.isUsed(figure)}"/>
+                                <!--here goes controller.getStockForUserAndFigure!-->
+                                <p:commandButton value="#{scoreController.getStock(figure)}"
+                                                 rendered="#{not player.score.isUsed(figure) and scoreController.isPlayerRound(player)}"
+                                                 actionListener="#{scoreController.submitScore(player, figure)}"/>
+                                <p:outputLabel value="-"
+                                               rendered="#{not scoreController.isPlayerRound(player) and not player.score.isUsed(figure)}"/>
                             </p:columns>
                         </p:dataTable>
                     </p:panel>

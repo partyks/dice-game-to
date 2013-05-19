@@ -49,4 +49,8 @@ public abstract class AbstractPlayer implements Player {
     public Result getResult() {
         return score.getResult();
     }
+
+    public Score getScore() {
+        return score;
+    }
 }

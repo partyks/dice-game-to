@@ -1,13 +1,14 @@
 package pl.edu.agh.to1.dice.gameControllers.gameplay;
 
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
+import pl.edu.agh.to1.dice.logic.dices.DiceBox;
+import pl.edu.agh.to1.dice.logic.figures.Figure;
+import pl.edu.agh.to1.dice.logic.figures.IFigure;
 import pl.edu.agh.to1.dice.logic.players.Player;
 import pl.edu.agh.to1.dice.logic.players.Score;
+import pl.edu.agh.to1.dice.logic.players.User;
 import pl.edu.agh.to1.dice.logic.players.UserFactory;
 import pl.edu.agh.to1.dice.playermodel.UserModel;
 import pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics;
@@ -27,6 +28,7 @@ public class ScoreController {
 
     private List<Score> scores;
     private List<Player> players;
+    private DiceBox diceBox = new DiceBox(5);
 
     @PostConstruct
     public void init() {
@@ -34,6 +36,24 @@ public class ScoreController {
             (Score) applicationContext.getBean("score"));
         this.players = Arrays.asList((Player) UserFactory.newInstance(new UserModel("Player1", new GlobalStatistics(0,0,0)))
             , (Player) UserFactory.newInstance(new UserModel("Player2", new GlobalStatistics(0,0,0))));
+        diceBox.roll();
+        players.get(0).getScore().add(Figure.ONES,  diceBox);
+        players.get(0).getScore().add(Figure.THREE_EQUALS, diceBox);
+    }
+
+    public String getStock(IFigure figure) {
+        return figure.getScore(diceBox).toString();
+    }
+
+    public DiceBox getDiceBox() {
+        return diceBox;
+    }
+
+    public boolean isPlayerRound(Player player) {
+        if (player.getName().equals("Player1")) {
+            return true;
+        }
+        return false;
     }
 
     public Integer getAmountOfPlayers() {
@@ -51,6 +71,11 @@ public class ScoreController {
 
     public int getPlayersCount() {
         return players.size();
+    }
+
+    public void submitScore(User user, IFigure figure) {
+        System.out.println("User: " + user.getName());
+        System.out.println("Figure: " + figure.getSignature());
     }
 
 }

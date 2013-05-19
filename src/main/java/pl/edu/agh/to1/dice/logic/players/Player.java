@@ -13,5 +13,6 @@ public interface Player {
     String getCurrentStock(DiceBox diceBox);
     String getName();
     Integer getScore(IFigure figure);
+    Score getScore();
     Result getResult();
 }
