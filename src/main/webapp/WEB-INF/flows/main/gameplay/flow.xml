@@ -7,6 +7,9 @@
         <on-entry>
             <evaluate expression="playerConfiguration.createConfiguredUsers()" result="viewScope.players"/>
         </on-entry>
+        <transition on="done" to="done"/>
     </view-state>
+    
+    <end-state id="done"/>
 
 </flow>

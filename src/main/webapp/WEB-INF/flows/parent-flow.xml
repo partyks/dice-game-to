@@ -14,8 +14,4 @@
 
 	<end-state id="end" view="externalRedirect:servletRelative:/home?tab=#{tab}" />
 
-	<global-transitions>
-		<transition on="exit" to="end" />
-	</global-transitions>
-
 </flow>

@@ -14,7 +14,22 @@
     <ui:define name="content">
         <h:form id="mainForm">
 
-            <p:layout style="min-width:100%; min-height:500px;" id="layout">
+            <p:layout style="min-width:100%; min-height:750px;" id="layout">
+                <p:layoutUnit position="north" id="gameStatus" style="text-align: center; overflow: hidden"
+                              header="Game Status">
+                    <p:panel>
+                    <h:outputText value="Rounds Played: " style="font-size: 120%"/>
+                    <p:spacer width="20" height="0"/>
+                    <h:outputText id="roundsPlayed" value="0" style="font-size: 120%; font-style: oblique;
+                        font-family: cursive"/>
+                    <p:spacer width="40" height="0"/>
+                    <h:outputText value="Active Player: " style="font-size: 120%"/>
+                    <p:spacer width="20" height="0"/>
+                    <h:outputText id="activePlayer" value="Maciek" style="font-size: 120%; font-style: oblique;
+                        font-family: cursive"/>
+                    </p:panel>
+                </p:layoutUnit>
+
                 <p:layoutUnit id="diceArea" position="west" style="min-width: 100px; overflow-x: hidden;
                 text-align: center;"
                               header="Dice Box">
@@ -38,11 +53,9 @@
                 <p:layoutUnit id="scoreArea" position="center" header="Score Board">
                     Center
                 </p:layoutUnit>
-                
-                <p:layoutUnit id="statusArea" position="east" style="min-width: 100px" header="Game Status">
-                    East
-                </p:layoutUnit>
+
             </p:layout>
+            <p:commandButton ajax="false" action="done" value="Exit" immediate="true"/>
 
         </h:form>
 

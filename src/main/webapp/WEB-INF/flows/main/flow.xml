@@ -21,7 +21,7 @@
     </subflow-state>
 
     <subflow-state id="gameplay" subflow="main/gameplay">
-        <transition on="exit" to="main-menu"/>
+        <transition on="done" to="main-menu"/>
         <transition on="finished" to="game-results"/>
     </subflow-state>
 
