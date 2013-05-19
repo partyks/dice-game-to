@@ -30,7 +30,7 @@
     </subflow-state>
 
     <subflow-state id="ranking" subflow="main/ranking">
-        <transition on="done" to="main-menu"/>
+        <transition on="done"   to="main-menu"/>
     </subflow-state>
 
 </flow>
