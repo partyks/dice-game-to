@@ -46,6 +46,14 @@ public class WebFlowController {
         this.players = players;
     }
 
+    public int getPlayersCount() {
+        return players.size();
+    }
+
+    public Integer getAmountOfPlayers() {
+        return players.size()+1;
+    }
+
     public Boolean mustChooseFigure() {
         //TODO
         return null;  //To change body of implemented methods use File | Settings | File Templates.
