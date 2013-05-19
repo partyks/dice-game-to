@@ -50,24 +50,14 @@
                     </p:panelGrid>
                 </p:layoutUnit>
                 <p:layoutUnit id="scoreArea" position="center" header="Score Board">
-                    <p:panelGrid columns="#{scoreController.amountOfPlayers}">
-                        <h:outputText value="Figures"></h:outputText>
-                        <h:outputText value="Player1"></h:outputText>
-                        <h:outputText value="Player2"></h:outputText>
-
-                        <ui:repeat value="#{figureManager.values()}" var="figure">
-                            <p:row>
-                                <p:column>
-                                    <h:outputText value="#{figure.toString()}"></h:outputText> <br/>
-                                </p:column>
-                            <ui:repeat value="#{scoreController.scores}" var="score">
-                                <p:column>
-                                    <h:outputText value="#{score.getScore(figure)}"></h:outputText> <br/>
-                                </p:column>
-                            </ui:repeat>
-                            </p:row>
-                        </ui:repeat>
-                    </p:panelGrid>
+                    <p:dataTable value="#{figureManager.values()}" var="figure">
+                        <p:column>
+                            <p:outputLabel value="#{figure.toString()}"/>
+                        </p:column>
+                        <p:columns value="#{scoreController.scores}" var="score">
+                            <p:outputLabel value="#{score.getScore(figure)}"/>
+                        </p:columns>
+                    </p:dataTable>
                 </p:layoutUnit>
 
             </p:layout>
