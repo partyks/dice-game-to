@@ -45,11 +45,11 @@ public class PlayerConfiguration {
 
     public List<Player> createConfiguredUsers() {
         List<Player> players = new ArrayList<>(amountOfUsers+amountOfBots);
-        players.addAll(botManager.createBots(amountOfBots, botStrength));
         for (UserModel selectedUser : selectedUsers) {
             players.add(new User(selectedUser, (Score) applicationContext.getBean("score"),
                     (IFigureManager) applicationContext.getBean("figureManager")));
         }
+        players.addAll(botManager.createBots(amountOfBots, botStrength));
 
         return players;
     }
