@@ -54,4 +54,8 @@ public class Bonus {
     public String toString() {
         return name + " " + points;
     }
+
+    public String getName() {
+        return name;
+    }
 }
