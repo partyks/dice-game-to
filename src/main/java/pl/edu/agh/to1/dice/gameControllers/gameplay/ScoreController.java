@@ -4,7 +4,11 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
+import pl.edu.agh.to1.dice.logic.players.Player;
 import pl.edu.agh.to1.dice.logic.players.Score;
+import pl.edu.agh.to1.dice.logic.players.UserFactory;
+import pl.edu.agh.to1.dice.playermodel.UserModel;
+import pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
@@ -18,37 +22,27 @@ public class ScoreController implements ApplicationContextAware {
     private ApplicationContext applicationContext;
 
     private List<Score> scores;
+    private List<Player> players;
 
     @PostConstruct
     public void init() {
-    this.scores = Arrays.asList((Score) applicationContext.getBean("score"),
+        this.scores = Arrays.asList((Score) applicationContext.getBean("score"),
             (Score) applicationContext.getBean("score"));
+        this.players = Arrays.asList((Player) UserFactory.newInstance(new UserModel("Player1", new GlobalStatistics(0,0,0)))
+            , (Player) UserFactory.newInstance(new UserModel("Player2", new GlobalStatistics(0,0,0))));
     }
 
-//    private List<Player> players = Arrays.asList((Player) new User(new UserModel("Player1", new GlobalStatistics(0,0,0))),
-//              new User(new UserModel("Player2", new GlobalStatistics(0,0,0))));
-
-
-//    public List<Player> getPlayers() {
-//        return players;
-//    }
-//
-//    public void setPlayers(List<Player> players) {
-//        this.players = players;
-//    }
-//
     public Integer getAmountOfPlayers() {
-//        return players.size()+1;
-        return scores.size()+1;
+        return players.size()+1;
     }
 
 
-    public List<Score> getScores() {
-        return scores;
+    public List<Player> getPlayers() {
+        return players;
     }
 
-    public void setScores(List<Score> scores) {
-        this.scores = scores;
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
     @Override

@@ -8,13 +8,20 @@ import pl.edu.agh.to1.dice.logic.figures.IFigure;
  * Author: Piotr Turek
  */
 public abstract class AbstractPlayer implements Player {
-    protected Score score = (Score) App.getBeanFactory().getBean("score");
+    protected Score score;
     private String name;
 
     protected AbstractPlayer() {
+        score = (Score) App.getBeanFactory().getBean("score");
     }
 
     protected AbstractPlayer(String name) {
+        this.name = name;
+        score = (Score) App.getBeanFactory().getBean("score");
+    }
+
+    protected AbstractPlayer(Score score, String name) {
+        this.score = score;
         this.name = name;
     }
 

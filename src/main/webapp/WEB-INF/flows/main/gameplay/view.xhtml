@@ -59,9 +59,9 @@
                         <p:column headerText="Figures" style="width: 200px">
                             <p:outputLabel value="#{figure.toString()}"/>
                         </p:column>
-                        <p:columns value="#{scoreController.scores}" var="score" headerText="dupa"
+                        <p:columns value="#{scoreController.players}" var="player" headerText="dupa"
                                 style="width: 50px">
-                            <p:outputLabel value="#{score.getScore(figure)}"/>
+                            <p:outputLabel value="#{player.score.getScore(figure)}"/>
                         </p:columns>
                     </p:dataTable>
                     <!--</p:panel>-->

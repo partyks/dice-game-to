@@ -21,13 +21,22 @@ public class User extends AbstractPlayer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(User.class);
 
-    IFigureManager figureManager = (IFigureManager) App.getBeanFactory().getBean("figureManager");
+    private IFigureManager figureManager;
 
 
     public User(UserModel userInfo) {
         super(userInfo.getName());
         this.userModel = userInfo;
+        figureManager = (IFigureManager) App.getBeanFactory().getBean("figureManager");
     }
+
+    public User(UserModel userModel, Score score1, IFigureManager figureManager) {
+        super(score1, userModel.getName());
+        this.userModel = userModel;
+        this.figureManager = figureManager;
+    }
+
+
 
     public void sparePoints(DiceBox diceBox) throws ReadingUserInputException {
         String figureSignature = LineInputReader.readSingleLine("Choose figure: ");
