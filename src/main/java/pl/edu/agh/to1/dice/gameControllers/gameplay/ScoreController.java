@@ -26,6 +26,9 @@ public class ScoreController {
     @Autowired
     private DiceBoxController diceBoxController;
 
+    @Autowired
+    private WebFlowController webFlowController;
+
     private List<Player> players;
 
     @PostConstruct
@@ -58,6 +61,7 @@ public class ScoreController {
 
     public void submitScore(Player user, IFigure figure) {
         user.getScore().add(figure, diceBoxController.getDiceBox());
+        webFlowController.playerMoved();
     }
 
 }

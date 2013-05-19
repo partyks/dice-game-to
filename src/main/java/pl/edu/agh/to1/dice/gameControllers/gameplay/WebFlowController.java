@@ -3,6 +3,7 @@ package pl.edu.agh.to1.dice.gameControllers.gameplay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.webflow.execution.RequestContext;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
 import pl.edu.agh.to1.dice.logic.players.Player;
 import pl.edu.agh.to1.dice.logic.players.UserFactory;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author Michal Partyka
  */
 @Controller
-@Scope("session")
+//@Scope("ession")
 public class WebFlowController {
     @Autowired
     private IFigureManager figureManager;
@@ -24,8 +25,13 @@ public class WebFlowController {
     @Autowired
     private ScoreController scoreController;
 
+    @Autowired
+    private DiceBoxController diceBoxController;
+
     private Integer roundsPlayed = 0;
     private int currentPlayerId = 0;
+
+    private Boolean finished = false;
 
     private List<Player> players;
 
@@ -54,9 +60,8 @@ public class WebFlowController {
         return players.size()+1;
     }
 
-    public Boolean hasFinished() {
-        //TODO
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public Boolean isFinished() {
+        return finished;
     }
 
     public Integer getRoundsPlayed() {
@@ -70,6 +75,22 @@ public class WebFlowController {
 
     public void reset() {
         roundsPlayed = 0;
+        currentPlayerId = 0;
+        finished = false;
+    }
+
+    public void playerMoved() {
+        currentPlayerId++;
+        diceBoxController.reset();
+        if (currentPlayerId == players.size()) {
+            roundsPlayed++;
+            if (roundsPlayed == figureManager.values().size()) {
+                finished = true;
+                currentPlayerId--;
+            } else {
+                currentPlayerId = 0;
+            }
+        }
     }
 
 }

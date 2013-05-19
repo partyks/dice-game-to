@@ -49,7 +49,6 @@ public class DiceBoxController {
     }
 
     public void reset() {
-        diceBox.prepare();
         diceBox.roll();
         rollsLeft = 2;
     }
@@ -72,8 +71,9 @@ public class DiceBoxController {
 
     public void rollRequested(FacesContext facesContext) {
         rollsLeft--;
+        assert(frozenDices.size() == 3);
         for (Dice fd : frozenDices) {
-            diceBox.setFreeze(fd);
+            assert(diceBox.setFreeze(fd) == true);
         }
         diceBox.roll();
     }
