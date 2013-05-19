@@ -1,14 +1,13 @@
 package pl.edu.agh.to1.dice.gameControllers.gameplay;
 
+import org.primefaces.context.RequestContext;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.logic.dices.Dice;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.faces.context.FacesContext;
+import java.util.*;
 
 /**
  * Author: Piotr Turek
@@ -18,6 +17,8 @@ public class DiceBoxController {
     private DiceBox diceBox = new DiceBox(5);
 
     private List<Dice> frozenDices;
+
+    private Integer rollsLeft = 2;
 
     @PostConstruct
     public void init() {
@@ -30,23 +31,51 @@ public class DiceBoxController {
 
     public Map<String, Dice> getDices() {
         final List<Dice> dices = diceBox.getDices();
-        Map<String, Dice> map = new HashMap<>();
+        final List<Dice> frozenDicesBox = diceBox.getFrozenDices();
+        dices.addAll(frozenDicesBox);
+        frozenDices = new ArrayList<>(5);
+        frozenDices.addAll(frozenDicesBox);
+        Map<String, Dice> map = new TreeMap<>();
+        int id = 1;
         for (Dice d : dices) {
-            map.put(String.valueOf(d.getScore()), d);
+            map.put(id + ": " + String.valueOf(d.getScore()), d);
+            id++;
         }
         return map;
     }
 
     public List<Dice> getFrozenDices() {
-        return diceBox.getFrozenDices();
+        return frozenDices;
     }
 
     public void reset() {
         diceBox.prepare();
         diceBox.roll();
+        rollsLeft = 2;
     }
 
     public void setFrozenDices(List<Dice> frozenDices) {
         this.frozenDices = frozenDices;
     }
+
+    public Boolean canRoll() {
+        return rollsLeft > 0;
+    }
+
+    public Boolean mustChooseFigure() {
+        return !canRoll();
+    }
+
+    public Integer getRollsLeft() {
+        return rollsLeft;
+    }
+
+    public void rollRequested(FacesContext facesContext) {
+        rollsLeft--;
+        for (Dice fd : frozenDices) {
+            diceBox.setFreeze(fd);
+        }
+        diceBox.roll();
+    }
+
 }

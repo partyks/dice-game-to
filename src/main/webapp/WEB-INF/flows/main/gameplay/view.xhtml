@@ -34,23 +34,24 @@
                     </p:panel>
                 </p:layoutUnit>
 
-                <p:layoutUnit id="diceArea" position="west" style="overflow-x: hidden; width: 100%;
+                <p:layoutUnit id="diceArea" position="west" style="overflow-x: hidden; width: 15%;
                     text-align: center;"
                               header="Dice Box">
-                    <p:panelGrid columns="1" style="overflow-x: hidden; text-align: center" >
+                    <p:panelGrid columns="1" style="overflow-x: hidden; text-align: center; width: 100%" >
                         <h:outputText value="Rolls left:" style="text-align: center; font-size: 120%" />
-                        <h:outputText value="3" id="rollsLeft" style="font-size: 300%; font-style: oblique;
+                        <h:outputText value="#{diceBoxController.rollsLeft}" id="rollsLeft" style="font-size: 300%; font-style: oblique;
                             font-family: cursive; text-align: center"/>
                         <h:outputLabel for="freezingChoice" value="Check to freeze:" style="font-size: 70%"/>
                         <p:selectManyCheckbox id="freezingChoice" layout="pageDirection" value="#{diceBoxController.frozenDices}"
-                                >
-                            <f:selectItems value="#{diceBoxController.getDices()}"/>
+                                style="font-size: 80%">
+                            <f:selectItems value="#{diceBoxController.getDices()}" style="font-size: 80%"/>
                         </p:selectManyCheckbox>
-                        <p:commandButton value="Roll" id="rollButton"/>
+                        <p:commandButton value="Roll" id="rollButton" disabled="#{not diceBoxController.canRoll()}"
+                                actionListener="#{diceBoxController.rollRequested(facesContext)}" update="rollsLeft freezingChoice"/>
                     </p:panelGrid>
                 </p:layoutUnit>
                 <p:layoutUnit id="scoreArea" position="center" header="Score Board"
-                    style="text-align: center; margin-left: 30px; width: 100%">
+                    style="text-align: center; width: 85%">
                     <p:panel>
                         <p:dataTable value="#{figureManager.values()}" var="figure" rowIndexVar="rowID"
                                 style="width: #{webFlowController.getPlayersCount()*50+200}px !important; border-collapse: separate; border-spacing: 10px;">
