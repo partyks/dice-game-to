@@ -4,11 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
-import pl.edu.agh.to1.dice.logic.figures.Figure;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
 import pl.edu.agh.to1.dice.logic.players.Player;
-import pl.edu.agh.to1.dice.logic.players.Score;
-import pl.edu.agh.to1.dice.logic.players.User;
 import pl.edu.agh.to1.dice.logic.players.UserFactory;
 import pl.edu.agh.to1.dice.playermodel.UserModel;
 import pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics;
@@ -56,10 +53,10 @@ public class ScoreController {
     }
 
     public int getPlayersCount() {
-        return players.size();
+           return players.size();
     }
 
-    public void submitScore(User user, IFigure figure) {
+    public void submitScore(Player user, IFigure figure) {
         user.getScore().add(figure, diceBoxController.getDiceBox());
     }
 

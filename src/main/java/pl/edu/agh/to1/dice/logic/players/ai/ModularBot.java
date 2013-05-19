@@ -3,6 +3,7 @@ package pl.edu.agh.to1.dice.logic.players.ai;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.players.AbstractPlayer;
+import pl.edu.agh.to1.dice.logic.players.Score;
 import pl.edu.agh.to1.dice.logic.players.ai.figurechoosing.IFigureChoosingStrategy;
 import pl.edu.agh.to1.dice.logic.players.ai.freezing.IFreezingStrategy;
 
@@ -19,6 +20,10 @@ public class ModularBot extends AbstractPlayer {
 
     public ModularBot(String name) {
         super(name);
+    }
+
+    public ModularBot(String name, Score score) {
+        super(score, name);
     }
 
     public void sparePoints(DiceBox diceBox) throws ReadingUserInputException {

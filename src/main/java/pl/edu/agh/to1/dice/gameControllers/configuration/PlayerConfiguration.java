@@ -1,8 +1,11 @@
 package pl.edu.agh.to1.dice.gameControllers.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
+import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
 import pl.edu.agh.to1.dice.logic.players.Player;
+import pl.edu.agh.to1.dice.logic.players.Score;
 import pl.edu.agh.to1.dice.logic.players.User;
 import pl.edu.agh.to1.dice.logic.players.ai.BotManager;
 import pl.edu.agh.to1.dice.playermodel.UserModel;
@@ -25,6 +28,9 @@ public class PlayerConfiguration {
     @Autowired
     private BotManager botManager;
 
+    @Autowired
+    private ApplicationContext applicationContext;
+
     private Integer amountOfUsers = 0;
     private Integer amountOfBots = 0;
 
@@ -41,7 +47,8 @@ public class PlayerConfiguration {
         List<Player> players = new ArrayList<>(amountOfUsers+amountOfBots);
         players.addAll(botManager.createBots(amountOfBots, botStrength));
         for (UserModel selectedUser : selectedUsers) {
-            players.add(new User(selectedUser));
+            players.add(new User(selectedUser, (Score) applicationContext.getBean("score"),
+                    (IFigureManager) applicationContext.getBean("figureManager")));
         }
 
         return players;

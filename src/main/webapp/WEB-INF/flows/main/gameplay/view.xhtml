@@ -64,12 +64,40 @@
                                 <!--here goes controller.getStockForUserAndFigure!-->
                                 <p:commandButton value="#{scoreController.getStock(figure)}"
                                                  rendered="#{not player.score.isUsed(figure) and webFlowController.isPlayerRound(player)}"
-                                                 actionListener="#{scoreController.submitScore(player, figure)}"/>
+                                                 actionListener="#{scoreController.submitScore(player, figure)}"
+                                                 update=":mainForm"/>
                                 <p:outputLabel value="-"
                                                rendered="#{not webFlowController.isPlayerRound(player) and not player.score.isUsed(figure)}"/>
                             </p:columns>
                         </p:dataTable>
                     </p:panel>
+                </p:layoutUnit>
+                <p:layoutUnit id="resultArea" position="east" header="Results"
+                              style="text-align: center; width: 100%">
+                    <p:dataTable value="#{webFlowController.players}" var="player" emptyMessage="shouldn't happend">
+                        <p:column>
+                            <p:dataTable value="#{resultController.getBonuses(player)}" var="bonus">
+                                <f:facet name="header">
+                                    <p:outputLabel value="#{player.name}"/>
+                                </f:facet>
+                                <p:column headerText="Type:">
+                                    <p:outputLabel value="#{bonus.name}"/>
+                                </p:column>
+                                <p:column headerText="Score:">
+                                    <p:outputLabel value="#{bonus.points}"/>
+                                </p:column>
+                                <p:column headerText="Have:">
+                                    <p:outputLabel value="#{bonus.sum}"/>
+                                </p:column>
+                                <p:column headerText="Require:">
+                                    <p:outputLabel value="#{bonus.require}"/>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <p:outputLabel value="Total score: #{resultController.result(player)}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </p:column>
+                    </p:dataTable>
                 </p:layoutUnit>
 
             </p:layout>
