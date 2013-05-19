@@ -34,7 +34,7 @@ public class EqualsSpecMethod extends AbstractSpecMethod {
         List<Dice> dices = probable.getDices();
 
         int i;
-        final int toSet = curDices.get(toFreeze.get(0)).getScore();
+        final int toSet = toFreeze.size() > 0 ? curDices.get(toFreeze.get(0)).getScore() : 3;
         for (i = 0; i < toFreeze.size(); i++) {
             ((BotDice)dices.get(i)).setScore(toSet);
         }

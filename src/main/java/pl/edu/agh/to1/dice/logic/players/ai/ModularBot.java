@@ -17,6 +17,9 @@ public class ModularBot extends AbstractPlayer {
     private IFreezingStrategy freezingStrategy;
     private IFigureChoosingStrategy figureChoosingStrategy;
 
+    public ModularBot() {
+        super();
+    }
 
     public ModularBot(String name) {
         super(name);

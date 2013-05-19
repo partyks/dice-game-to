@@ -1,12 +1,15 @@
 package pl.edu.agh.to1.dice.gameControllers.gameplay;
 
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.webflow.execution.RequestContext;
+import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
+import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
 import pl.edu.agh.to1.dice.logic.players.Player;
 import pl.edu.agh.to1.dice.logic.players.UserFactory;
+import pl.edu.agh.to1.dice.logic.players.ai.ModularBot;
 import pl.edu.agh.to1.dice.playermodel.UserModel;
 import pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics;
 
@@ -79,6 +82,28 @@ public class WebFlowController {
         finished = false;
     }
 
+    public void remoteMove() {
+        Player player = players.get(currentPlayerId);
+        if (!finished && player instanceof ModularBot) {
+            final DiceBox diceBox = diceBoxController.getDiceBox();
+            while (diceBoxController.getRollsLeft() > 0) {
+                diceBox.roll();
+                try {
+                    player.manageDices(diceBox);
+                } catch (ReadingUserInputException e) {
+
+                }
+            }
+            diceBox.roll();
+            try {
+                player.sparePoints(diceBox);
+            } catch (ReadingUserInputException e) {
+            }
+            RequestContext.getCurrentInstance().update(":mainForm :dialogForm");
+            playerMoved();
+        }
+    }
+
     public void playerMoved() {
         currentPlayerId++;
         diceBoxController.reset();
@@ -91,6 +116,8 @@ public class WebFlowController {
                 currentPlayerId = 0;
             }
         }
+
+        remoteMove();
     }
 
 }

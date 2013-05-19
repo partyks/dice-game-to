@@ -7,6 +7,7 @@
         <on-entry>
             <evaluate expression="webFlowController.reset()"/>
             <evaluate expression="webFlowController.setPlayers(playerConfiguration.createConfiguredUsers())"/>
+            <evaluate expression="webFlowController.remoteMove()"/>
         </on-entry>
         <transition on="done" to="done"/>
     </view-state>
