@@ -1,12 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <title></title>
-</head>
-<body>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/layouts/standard.xhtml">
 
-</body>
-</html>
+    <ui:define name="title">Congratsy!</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <h3>Results:</h3>
+            <p:fieldset>
+                <p:dataTable value="#{displayingResultController.players}" var="player" rowIndexVar="rowID">
+                    <p:column>
+                        <p:outputLabel value="#{rowID + 1}"/>
+                    </p:column>
+                    <p:column headerText="username">
+                        <p:outputLabel value="#{player.name}"/>
+                    </p:column>
+                    <p:column headerText="Points">
+                        <p:outputLabel value="#{player.result.result()}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+            <p:commandButton value="Main-menu" action="watched" ajax="false"/>
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>

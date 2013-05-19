@@ -3,4 +3,17 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
+    <view-state id="view">
+        <on-render>
+            <evaluate expression="displayingResultController.setPlayers(webFlowController.players)"/>
+            <evaluate expression="displayingResultController.sortPlayers()"/>
+        </on-render>
+        <transition on="watched" to="done">
+            <evaluate expression="statisticService.
+                    updateStatistics(new pl.edu.agh.to1.dice.logic.GameResult(displayingResultController.players))"/>
+        </transition>
+    </view-state>
+
+    <end-state id="done"/>
+
 </flow>
