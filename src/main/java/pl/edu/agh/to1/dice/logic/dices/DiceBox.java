@@ -17,6 +17,14 @@ public class DiceBox implements Iterable<Dice> {
         }
     }
 
+    public List<Dice> getDices() {
+        return dices;
+    }
+
+    public List<Dice> getFrozenDices() {
+        return frozenDices;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("Dices:\n");
