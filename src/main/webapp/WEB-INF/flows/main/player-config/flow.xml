@@ -9,7 +9,6 @@
         <transition on="back" to="game-config"/>
         <transition on="main-menu" to="main-menu"/>
         <transition on="done" to="config-done">
-            <evaluate expression="playerConfiguration.createConfiguredUsers()" result="players"/>
         </transition>
         <transition on="add">
             <evaluate expression="newUserModel.
@@ -23,8 +22,6 @@
 
     <end-state id="main-menu"/>
 
-    <end-state id="config-done">
-        <output name="playerList" value="players"/>
-    </end-state>
+    <end-state id="config-done"/>
 
 </flow>
