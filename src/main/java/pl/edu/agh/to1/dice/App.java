@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.TUI.LineInputReader;
 import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 import pl.edu.agh.to1.dice.logic.figures.FigureManager;
@@ -31,7 +30,6 @@ import java.util.List;
  * it isn't ;-)
  */
 
-@Component
 public class App {
     private static final BeanFactory beanFactory = new ClassPathXmlApplicationContext("applicationConfig.xml");
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
