@@ -76,7 +76,6 @@ public class PlayerConfiguration {
         if (selectedUsers == null) {
             validConfiguration = isValidAmountsOfPlayers() && amountOfUsers == 0;
         } else {
-            System.out.println("SelectedUsers.size(): " + selectedUsers.size());
             validConfiguration = isValidAmountsOfPlayers() && (amountOfUsers.equals(selectedUsers.size()));
         }
         return validConfiguration;
