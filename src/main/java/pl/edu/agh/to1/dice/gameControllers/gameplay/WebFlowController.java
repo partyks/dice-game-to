@@ -13,6 +13,7 @@ import pl.edu.agh.to1.dice.logic.players.ai.ModularBot;
 import pl.edu.agh.to1.dice.playermodel.UserModel;
 import pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics;
 
+import javax.faces.context.FacesContext;
 import java.util.Arrays;
 import java.util.List;
 
@@ -86,13 +87,14 @@ public class WebFlowController {
         Player player = players.get(currentPlayerId);
         if (!finished && player instanceof ModularBot) {
             final DiceBox diceBox = diceBoxController.getDiceBox();
+            diceBox.roll();
             while (diceBoxController.getRollsLeft() > 0) {
-                diceBox.roll();
                 try {
                     player.manageDices(diceBox);
                 } catch (ReadingUserInputException e) {
 
                 }
+                diceBoxController.rollRequested(FacesContext.getCurrentInstance());
             }
             diceBox.roll();
             try {
