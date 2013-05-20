@@ -1,7 +1,7 @@
 package pl.edu.agh.to1.dice.gameControllers.gameplay;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
@@ -13,10 +13,8 @@ import java.util.List;
  * @author Michal Partyka
  */
 @Component
+@Scope("session")
 public class ScoreController {
-
-    @Autowired
-    private ApplicationContext applicationContext;
 
     @Autowired
     private DiceBoxController diceBoxController;

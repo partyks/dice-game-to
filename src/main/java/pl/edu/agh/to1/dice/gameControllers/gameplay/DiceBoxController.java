@@ -1,5 +1,6 @@
 package pl.edu.agh.to1.dice.gameControllers.gameplay;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.logic.dices.Dice;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
@@ -11,6 +12,7 @@ import java.util.*;
  * Author: Piotr Turek
  */
 @Component
+@Scope("session")
 public class DiceBoxController {
     private DiceBox diceBox = new DiceBox(5);
 

@@ -8,26 +8,18 @@ import pl.edu.agh.to1.dice.TUI.ReadingUserInputException;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
 import pl.edu.agh.to1.dice.logic.players.Player;
-import pl.edu.agh.to1.dice.logic.players.UserFactory;
 import pl.edu.agh.to1.dice.logic.players.ai.ModularBot;
-import pl.edu.agh.to1.dice.playermodel.UserModel;
-import pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics;
 
-import javax.faces.context.FacesContext;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * @author Michal Partyka
  */
 @Controller
-//@Scope("ession")
+@Scope("session")
 public class WebFlowController {
     @Autowired
     private IFigureManager figureManager;
-
-    @Autowired
-    private ScoreController scoreController;
 
     @Autowired
     private DiceBoxController diceBoxController;

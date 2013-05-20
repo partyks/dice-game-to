@@ -1,22 +1,21 @@
 package pl.edu.agh.to1.dice.converters;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import pl.edu.agh.to1.dice.gameControllers.RankingController;
 import pl.edu.agh.to1.dice.ranking.IUserSort;
 
-import javax.annotation.PostConstruct;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
 import java.util.List;
 
 /**
  * Author: Piotr Turek
  */
 @Service
+@Scope("session")
 public class SortConverter implements Converter {
 
     @Autowired

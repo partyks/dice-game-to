@@ -2,6 +2,7 @@ package pl.edu.agh.to1.dice.gameControllers.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
 import pl.edu.agh.to1.dice.logic.players.Player;
@@ -21,6 +22,7 @@ import java.util.List;
  * @author Michal Partyka
  */
 @Controller
+@Scope("session")
 public class PlayerConfiguration {
     @Autowired
     private UserService userService;

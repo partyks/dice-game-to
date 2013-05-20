@@ -1,6 +1,7 @@
 package pl.edu.agh.to1.dice.converters;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.gameControllers.gameplay.DiceBoxController;
 import pl.edu.agh.to1.dice.logic.dices.Dice;
@@ -8,13 +9,13 @@ import pl.edu.agh.to1.dice.logic.dices.Dice;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import java.util.List;
 import java.util.Map;
 
 /**
  * Author: Piotr Turek
  */
 @Component
+@Scope("session")
 public class DiceConverter implements Converter {
     @Autowired
     private DiceBoxController diceBoxController;

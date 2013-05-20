@@ -6,6 +6,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import pl.edu.agh.to1.dice.logic.figures.AbstractConfigurationFactory;
 import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
@@ -14,6 +15,7 @@ import pl.edu.agh.to1.dice.logic.figures.IFigureManager;
  * @author Michal Partyka
  */
 @Controller
+@Scope("session")
 public class ConfigurationController implements ApplicationContextAware {
     private static final Logger LOGGER = LoggerFactory.getLogger(ConfigurationController.class);
     private String gameMode = "tripleDiceConfigurationFactory";

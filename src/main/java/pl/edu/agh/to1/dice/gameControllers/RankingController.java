@@ -1,5 +1,6 @@
 package pl.edu.agh.to1.dice.gameControllers;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.ranking.IUserSort;
 import pl.edu.agh.to1.dice.ranking.SortUsersByAbandonedGames;
@@ -14,6 +15,7 @@ import java.util.List;
  * Author: Piotr Turek
  */
 @Component
+@Scope("session")
 public class RankingController implements Serializable {
 
     private final List<IUserSort> sorts = Arrays.asList((IUserSort) new SortUsersByWonGames(),

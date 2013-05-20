@@ -1,5 +1,6 @@
 package pl.edu.agh.to1.dice.gameControllers;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.logic.players.Player;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @author Michal Partyka
  */
 @Component
+@Scope("session")
 public class DisplayingResultController {
     private List<Player> players;
 
