@@ -32,12 +32,19 @@ public class DiceConverter implements Converter {
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object value) {
         if (value == null) {
-            return "0";
+            return "";
         }
 
         Dice dice = (Dice) value;
+        final Map<String, Dice> dices = diceBoxController.getDices();
+        String ret = "";
+        for (Map.Entry<String, Dice> e : dices.entrySet()) {
+            if (e.getValue().equals(dice)) {
+                return e.getKey();
+            }
+        }
 
-        return String.valueOf(dice.getScore());
+        return "";
     }
 
 }

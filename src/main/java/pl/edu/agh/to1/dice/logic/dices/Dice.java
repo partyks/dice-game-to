@@ -29,4 +29,21 @@ public class Dice implements Comparable<Dice> {
     public int compareTo(Dice o) {
         return score.compareTo(o.getScore());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Dice dice = (Dice) o;
+
+        if (!score.equals(dice.score)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return score.hashCode();
+    }
 }
