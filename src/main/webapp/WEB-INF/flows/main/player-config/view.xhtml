@@ -20,7 +20,7 @@
                     <h:panelGrid columns="2">
                         <h:outputLabel value="Number of users"/>
                         <p:inputText id="users" required="true" value="#{playerConfiguration.amountOfUsers}">
-                            <f:validateDoubleRange maximum="4" minimum="0"/>
+                            <f:validateDoubleRange maximum="4" minimum="1"/>
                         </p:inputText>
 
                         <h:outputLabel value="Number of bots"/>
