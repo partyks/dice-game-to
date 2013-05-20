@@ -33,8 +33,8 @@ public class DiceBoxController {
         final List<Dice> dices = diceBox.getDices();
         final List<Dice> frozenDicesBox = diceBox.getFrozenDices();
         dices.addAll(frozenDicesBox);
-        frozenDices = new ArrayList<>(5);
-        frozenDices.addAll(frozenDicesBox);
+//        frozenDices = new ArrayList<>(5);
+//        frozenDices.addAll(frozenDicesBox);
         Map<String, Dice> map = new TreeMap<>();
         int id = 1;
         for (Dice d : dices) {

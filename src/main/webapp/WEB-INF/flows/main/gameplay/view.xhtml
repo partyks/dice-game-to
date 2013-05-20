@@ -43,7 +43,7 @@
                             font-family: cursive; text-align: center"/>
                         <h:outputLabel for="freezingChoice" value="Check to freeze:" style="font-size: 70%"/>
                         <p:selectManyCheckbox id="freezingChoice" layout="pageDirection" value="#{diceBoxController.frozenDices}"
-                                style="font-size: 80%">
+                                style="font-size: 80%" converter="#{diceConverter}">
                             <f:selectItems value="#{diceBoxController.getDices()}" style="font-size: 80%"/>
                         </p:selectManyCheckbox>
                         <p:commandButton value="Roll" id="rollButton" disabled="#{not diceBoxController.canRoll()}"
