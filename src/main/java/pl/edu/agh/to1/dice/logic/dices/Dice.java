@@ -47,6 +47,6 @@ public class Dice implements Comparable<Dice> {
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return id;
     }
 }

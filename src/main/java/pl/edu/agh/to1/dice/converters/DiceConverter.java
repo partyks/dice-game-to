@@ -37,7 +37,6 @@ public class DiceConverter implements Converter {
 
         Dice dice = (Dice) value;
         final Map<String, Dice> dices = diceBoxController.getDices();
-        String ret = "";
         for (Map.Entry<String, Dice> e : dices.entrySet()) {
             if (e.getValue().equals(dice)) {
                 return e.getKey();
