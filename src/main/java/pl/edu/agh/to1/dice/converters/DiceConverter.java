@@ -25,7 +25,7 @@ public class DiceConverter implements Converter {
             return null;
         }
 
-        final Map<String,Dice> dices = diceBoxController.getDices();
+        final Map<String,Dice> dices = diceBoxController.getPreviousDices();
         return dices.get(value);
     }
 
@@ -36,7 +36,7 @@ public class DiceConverter implements Converter {
         }
 
         Dice dice = (Dice) value;
-        final Map<String, Dice> dices = diceBoxController.getDices();
+        final Map<String, Dice> dices = diceBoxController.getPreviousDices();
         for (Map.Entry<String, Dice> e : dices.entrySet()) {
             if (e.getValue().equals(dice)) {
                 return e.getKey();

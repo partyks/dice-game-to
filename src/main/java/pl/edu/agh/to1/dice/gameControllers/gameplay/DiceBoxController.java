@@ -1,12 +1,10 @@
 package pl.edu.agh.to1.dice.gameControllers.gameplay;
 
-import org.primefaces.context.RequestContext;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.logic.dices.Dice;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 
 import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
 import java.util.*;
 
 /**
@@ -16,9 +14,11 @@ import java.util.*;
 public class DiceBoxController {
     private DiceBox diceBox = new DiceBox(5);
 
-    private List<Dice> frozenDices;
+    private List<Dice> frozenDices = new ArrayList<>();
 
     private Integer rollsLeft = 2;
+
+    private Map<String, Dice> previousDices;
 
     @PostConstruct
     public void init() {
@@ -33,15 +33,18 @@ public class DiceBoxController {
         final List<Dice> dices = diceBox.getDices();
         final List<Dice> frozenDicesBox = diceBox.getFrozenDices();
         dices.addAll(frozenDicesBox);
-//        frozenDices = new ArrayList<>(5);
-//        frozenDices.addAll(frozenDicesBox);
         Map<String, Dice> map = new TreeMap<>();
         int id = 1;
         for (Dice d : dices) {
             map.put(id + ": " + String.valueOf(d.getScore()), d);
             id++;
         }
+        this.previousDices = map;
         return map;
+    }
+
+    public Map<String, Dice> getPreviousDices() {
+        return previousDices;
     }
 
     public List<Dice> getFrozenDices() {
@@ -52,6 +55,7 @@ public class DiceBoxController {
         diceBox.prepare();
         diceBox.roll();
         rollsLeft = 2;
+        frozenDices.clear();
     }
 
     public void setFrozenDices(List<Dice> frozenDices) {
