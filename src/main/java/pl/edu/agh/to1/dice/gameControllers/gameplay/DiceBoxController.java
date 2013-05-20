@@ -70,10 +70,12 @@ public class DiceBoxController {
         return rollsLeft;
     }
 
-    public void rollRequested(FacesContext facesContext) {
+    public void rollRequested() {
         rollsLeft--;
-        for (Dice fd : frozenDices) {
-            diceBox.setFreeze(fd);
+        if (frozenDices != null) {
+            for (Dice fd : frozenDices) {
+                diceBox.setFreeze(fd);
+            }
         }
         diceBox.roll();
     }

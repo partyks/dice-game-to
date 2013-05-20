@@ -47,7 +47,7 @@
                             <f:selectItems value="#{diceBoxController.getDices()}" style="font-size: 80%"/>
                         </p:selectManyCheckbox>
                         <p:commandButton value="Roll" id="rollButton" disabled="#{not diceBoxController.canRoll()}"
-                                actionListener="#{diceBoxController.rollRequested(facesContext)}"
+                                actionListener="#{diceBoxController.rollRequested()}"
                                 update="rollsLeft freezingChoice rollButton :mainForm:scoreTable"/>
                     </p:panelGrid>
                 </p:layoutUnit>

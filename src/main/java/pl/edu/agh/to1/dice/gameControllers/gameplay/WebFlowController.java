@@ -95,7 +95,7 @@ public class WebFlowController {
                 } catch (ReadingUserInputException e) {
 
                 }
-                diceBoxController.rollRequested(FacesContext.getCurrentInstance());
+                diceBoxController.rollRequested();
             }
             diceBox.roll();
             try {
