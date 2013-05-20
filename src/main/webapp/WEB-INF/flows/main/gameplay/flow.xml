@@ -12,8 +12,11 @@
             <evaluate expression="webFlowController.remoteMove()"/>
         </on-render>
         <transition on="done" to="done"/>
+        <transition on="finished" to="finished"/>
     </view-state>
     
     <end-state id="done"/>
+
+    <end-state id="finished"/>
 
 </flow>

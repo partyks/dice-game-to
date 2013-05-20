@@ -112,7 +112,7 @@
                              severity="alert" widgetVar="doneDialog" showEffect="fade" hideEffect="fade"
                              visible="#{webFlowController.isFinished()}">
 
-                <p:commandButton id="confirm" value="Next" oncomplete="doneDialog.hide()" action="done" ajax="false"/>
+                <p:commandButton id="confirm" value="Next" oncomplete="doneDialog.hide()" action="finished" ajax="false"/>
             </p:confirmDialog>
         </h:form>
 
