@@ -84,9 +84,9 @@ public class WebFlowController {
     }
 
     public void remoteMove() {
-        diceBoxController.reset();
         Player player = players.get(currentPlayerId);
         if (!finished && player instanceof ModularBot) {
+            diceBoxController.reset();
             final DiceBox diceBox = diceBoxController.getDiceBox();
             diceBox.roll();
             while (diceBoxController.getRollsLeft() > 0) {
