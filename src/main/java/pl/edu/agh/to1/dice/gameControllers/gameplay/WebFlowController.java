@@ -39,11 +39,6 @@ public class WebFlowController {
 
     private List<Player> players;
 
-    public void init() {
-        this.players = Arrays.asList((Player) UserFactory.newInstance(new UserModel("Player1", new GlobalStatistics(0, 0, 0)))
-                , (Player) UserFactory.newInstance(new UserModel("Player2", new GlobalStatistics(0,0,0))));
-    }
-
     public Player getActivePlayer() {
         return players.get(currentPlayerId);
     }
