@@ -6,12 +6,7 @@ import org.springframework.stereotype.Component;
 import pl.edu.agh.to1.dice.logic.dices.DiceBox;
 import pl.edu.agh.to1.dice.logic.figures.IFigure;
 import pl.edu.agh.to1.dice.logic.players.Player;
-import pl.edu.agh.to1.dice.logic.players.UserFactory;
-import pl.edu.agh.to1.dice.playermodel.UserModel;
-import pl.edu.agh.to1.dice.statistics.StatisticsModel.GlobalStatistics;
 
-import javax.annotation.PostConstruct;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,12 +25,6 @@ public class ScoreController {
     private WebFlowController webFlowController;
 
     private List<Player> players;
-
-    @PostConstruct
-    public void init() {
-        this.players = Arrays.asList((Player) UserFactory.newInstance(new UserModel("Player1", new GlobalStatistics(0,0,0)))
-            , (Player) UserFactory.newInstance(new UserModel("Player2", new GlobalStatistics(0,0,0))));
-    }
 
     public String getStock(IFigure figure) {
         final DiceBox diceBox = diceBoxController.getDiceBox();
