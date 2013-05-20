@@ -8,7 +8,10 @@ import java.util.Random;
  */
 public class Dice implements Comparable<Dice> {
     private static Random random = new Random();
+    private static int DID = 0;
+
     protected Integer score = 0;
+    private Integer id = DID++;
 
     /**
      * random next dice score
@@ -37,13 +40,13 @@ public class Dice implements Comparable<Dice> {
 
         Dice dice = (Dice) o;
 
-        if (!score.equals(dice.score)) return false;
+        if (!id.equals(dice.id)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return score.hashCode();
+        return id.hashCode();
     }
 }
